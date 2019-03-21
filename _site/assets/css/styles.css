@@ -1,0 +1,19 @@
+body { background-color: #333333; font-family: "Overpass Mono", monospace; color: #73ead3; }
+
+.title { font-family: "Inconsolata", monospace; color: #ed5454; text-transform: uppercase; font-size: 48px; }
+
+#container { margin: 0 auto; width: 600px; }
+
+#title-section { padding-top: 50px; height: 150px; }
+
+.section { width: 80%; margin: 0 auto; text-align: center; font-size: 14px; }
+
+#logo { height: 70%; float: left; padding-right: 35px; }
+
+a { color: white; text-decoration-style: none; }
+
+a:hover { color: #ed5454; text-decoration-style: wavy; }
+
+@media only screen and (max-width: 600px) { #container { width: 100%; text-align: center; }
+  #logo { height: 120px; float: none; margin: 0 auto; padding-right: 0px; padding-bottom: 35px; }
+  #title-section { height: auto; padding: 50px; } }
