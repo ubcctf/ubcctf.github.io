@@ -1,0 +1,71 @@
+$red: #ed5454;
+$blue: #73ead3;
+$body-font: 'Overpass Mono', monospace;
+$title-font: 'Inconsolata', monospace;
+$body-font-size: 14px;
+
+body {
+    background-color: #333333;
+    font-family: $body-font;
+    color: $blue;
+}
+
+.title {
+    font-family: $title-font;
+    color: $red;
+    text-transform: uppercase;
+    font-size: 48px;
+}
+
+#container {
+    margin: 0 auto;
+    width: 600px;
+}
+
+#title-section {
+    padding-top: 50px;
+    height: 150px;
+}
+
+.section {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: $body-font-size;
+}
+
+#logo {
+    height: 70%;
+    float: left;
+    padding-right: 35px;
+}
+
+a {
+    color: white;
+    text-decoration-style: none;
+}
+
+a:hover {
+    color: $red;
+    text-decoration-style: wavy;
+}
+
+@media only screen and (max-width: 600px) {
+    #container {
+      width: 100%;
+      text-align: center;
+    }
+
+    #logo {
+        height: 120px;
+        float: none;
+        margin: 0 auto;
+        padding-right: 0px;
+        padding-bottom: 35px;
+    }
+
+    #title-section {
+        height: auto;
+        padding: 50px;
+    }
+  }
