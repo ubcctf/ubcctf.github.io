@@ -5,19 +5,19 @@ title: Resources | CTF @ UBC
 
 # Resources
 
-### General Knowledge
+## General Knowledge
 
 - [https://wiki.skullsecurity.org/](https://wiki.skullsecurity.org/)
 - [http://ctfs.github.io/resources/](http://ctfs.github.io/resources/)
 
-### Starter CTFs
+## Starter CTFs
 
 - [http://captf.com/practice-ctf/](http://captf.com/practice-ctf/) -- list of CTFs
 - [picoCTF](https://picoctf.com/)
 - [pwnable.kr](https://pwnable.kr/)
 
 
-### Reverse Engineering
+## Reverse Engineering
 
 - [Ghidra](https://ghidra-sre.org) -- disassembler and decompiler
 - [Luyten](https://github.com/deathmarine/Luyten) -- Java decompiler GUI
@@ -26,7 +26,7 @@ title: Resources | CTF @ UBC
 - [dotPeek](https://www.jetbrains.com/decompiler) -- .NET decompiler
 
 
-### Forensics
+## Forensics
 
 - [Binwalk](https://github.com/ReFirmLabs/binwalk) -- extract files within files
 - [Hachoir](https://hachoir.readthedocs.io/en/latest/) -- analyze binary files
@@ -34,6 +34,6 @@ title: Resources | CTF @ UBC
 - [Wireshark](https://www.wireshark.org) -- analyze network traffic
 
 
-### Miscellaneous
+## Miscellaneous
 
 - [z3](https://github.com/Z3Prover/z3) -- theorem prover

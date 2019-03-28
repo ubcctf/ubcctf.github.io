@@ -2,7 +2,7 @@ $red: #ed5454;
 $blue: #73ead3;
 $body-font: 'Overpass Mono', monospace;
 $title-font: 'Inconsolata', monospace;
-$body-font-size: 14px;
+$body-font-size: 13px;
 
 body {
     background-color: #333333;
@@ -37,24 +37,31 @@ body {
     padding-top: 50px;
     margin: 0 auto;
     text-align: center;
+    font-size: 15px;
 }
 
 .section {
     font-size: $body-font-size;
 }
 
-h3 {
-    padding-top: 10px;
-}
-
-p {
-    font-size: $body-font-size * 0.9;
-}
-
 #logo {
     height: 100%;
     float: left;
     padding-right: 35px;
+}
+
+footer {
+    margin-bottom: 25px;
+}
+
+h1 {
+    padding-top: 10px;
+    text-align: center;
+}
+
+h2 {
+    padding-top: 10px;
+    font-size: 17px;
 }
 
 footer {
@@ -72,10 +79,6 @@ a:hover {
     text-decoration-style: wavy;
 }
 
-h1 {
-    padding-top: 10px
-}
-
 @media only screen and (max-width: 600px) {
     #container {
       width: 100%;
@@ -83,6 +86,7 @@ h1 {
 
     #title-section {
         text-align: center;
+        height: auto;
     }
 
     #logo {
@@ -93,8 +97,8 @@ h1 {
         padding-bottom: 35px;
     }
 
-    #title-section {
-        height: auto;
-        padding: 50px;
+    .section {
+        margin: 0 auto 25px;
+        width: 95%;
     }
   }
