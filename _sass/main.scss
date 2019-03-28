@@ -79,7 +79,10 @@ h1 {
 @media only screen and (max-width: 600px) {
     #container {
       width: 100%;
-      text-align: center;
+    }
+
+    #title-section {
+        text-align: center;
     }
 
     #logo {
