@@ -37,3 +37,4 @@ title: Resources | CTF @ UBC
 ## Miscellaneous
 
 - [z3](https://github.com/Z3Prover/z3) -- theorem prover
+- [pwntools](https://github.com/Gallopsled/pwntools) -- CTF framework & exploit library
