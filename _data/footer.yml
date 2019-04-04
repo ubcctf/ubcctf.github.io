@@ -1,0 +1,13 @@
+- name: faq
+  link: /faq
+
+- name: resources
+  link: /resources
+
+- name: slack
+  link: https://ubcctf.slack.com
+  external: true
+
+- name: ctftime
+  link: https://ctftime.org/team/73723
+  external: true
