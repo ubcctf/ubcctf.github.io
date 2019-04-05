@@ -1,4 +1,4 @@
-@import "monokai.css";
+@import "gruvbox.css";
 
 $red: #ed5454;
 $blue: #73ead3;
@@ -57,6 +57,7 @@ body {
 }
 
 .highlight {
+    font-family: $body-font;
     overflow-x: scroll;
     padding: 0 5px;
 }
