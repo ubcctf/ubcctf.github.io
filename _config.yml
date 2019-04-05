@@ -1,5 +1,6 @@
 description: UBC's CTF team
 exclude: [.gitignore, Gemfile, Gemfile.lock, README.md]
+permalink: /:categories/:year/:month/:title/
 plugins:
   - jekyll-feed
   - jekyll-seo-tag

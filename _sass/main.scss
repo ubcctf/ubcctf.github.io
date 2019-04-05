@@ -1,3 +1,5 @@
+@import "monokai.css";
+
 $red: #ed5454;
 $blue: #73ead3;
 $body-font: 'Overpass Mono', monospace;
@@ -48,6 +50,22 @@ body {
     height: 100%;
     float: left;
     padding-right: 35px;
+}
+
+.post-info {
+    text-align: center;
+}
+
+.highlight {
+    overflow-x: scroll;
+    padding: 0 5px;
+}
+
+p > code {
+    background: #555;
+    border-radius: 3px;
+    padding: 0 2px 1px;
+    color: #ed5454;
 }
 
 footer {

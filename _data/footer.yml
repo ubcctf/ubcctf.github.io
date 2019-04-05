@@ -1,3 +1,6 @@
+- name: blog
+  link: /blog
+
 - name: faq
   link: /faq
 
