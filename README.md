@@ -17,7 +17,9 @@ Install `bundler`
 sudo gem install bundler -v '< 2.0'
 ```
 
-```
+Install project dependencies locally
+
+```bash
 cd project_root
 bundle install --path ./vendor    # Local install for just this project
 bundle exec jekyll <build|serve>
