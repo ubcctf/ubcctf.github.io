@@ -21,7 +21,7 @@ Install project dependencies locally
 
 ```bash
 cd project_root
-bundle install --path ./vendor    # Local install for just this project
+bundle install --path ./vendor    # install dependencies to ./vendor dir
 bundle exec jekyll <build|serve>
 ```
 
