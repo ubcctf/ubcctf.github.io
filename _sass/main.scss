@@ -12,6 +12,14 @@ body {
     color: $blue;
 }
 
+div.highlight {
+    overflow-x: auto;
+}
+
+pre.highlight {
+    overflow-x: auto;
+}
+
 .title {
     font-family: $title-font;
     color: $red;
