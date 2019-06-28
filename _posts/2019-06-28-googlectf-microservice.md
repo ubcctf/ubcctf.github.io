@@ -27,7 +27,7 @@ Without the ability to rename variables and define structs in Ghidra, this task 
 This function runs **before** main, it's effectively passed into `__libc_start_main`, which then handles running it.
 ```c
   __libc_start_main(main, local1, &local2, run_init_functions, 
-					FUN_001024f0, uParm3, auStack8);
+                    FUN_001024f0, uParm3, auStack8);
 ```
 
 It does a couple weird things. It `malloc`s `0x50,001,000` of memory, which is significantly larger than the heap (`0x21,000`), so the memory gets mapped to a larger region between the heap and dynamic libraries on my system.
