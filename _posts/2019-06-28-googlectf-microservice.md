@@ -34,7 +34,7 @@ It does a couple weird things. It `malloc`s `0x50,001,000` of memory, which is s
 
 It then splits the allocated space up into 10 regions, each of which have `rwx` memory for the first `0x8000` bytes and `rw` for the rest.
 
-![process memory map](https://i.imgur.com/08pQpm7.png)
+![process memory map](/assets/images/googlectf2019/memory_map.png)
 
 #### The commands
 
@@ -110,7 +110,7 @@ Running the exploit against my local binary was fast. Even with `pwntools` defau
 
 The quick solution: run a ping test on their server from several locations around the world to find the place with the shortest latency.
 
-![Latency around the world](https://i.imgur.com/68zSYOj.png) 
+![Latency around the world](/assets/images/googlectf2019/ping_times.png) 
 
 Log into your cloud provider, start up an instance in Paris, and you've got up to a factor of 60 speed up. For me this was enough to bring the run time down to 5-10 minutes.
 
