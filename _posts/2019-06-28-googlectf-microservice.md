@@ -98,8 +98,8 @@ So we can overwrite the other seemingly useless function that comes with type 1 
 With the knowledge of `random_number`, we can now write to precise memory locations, so the rough outline is:
 ```python
 for byte in shellcode:
-	while byte != write_random_byte(byte):
-	    pass
+    while byte != write_random_byte(byte):
+        pass
 ```
 where we write one byte of the shellcode at a time, randomly, with a 1/256 chance of getting it right on each attempt.
 
