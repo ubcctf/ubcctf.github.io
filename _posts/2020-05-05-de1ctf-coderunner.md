@@ -200,8 +200,13 @@ print(sm.found[0].solver.eval(myinput, cast_to=bytes))
 
 That gave me the 64 bytes I needed to get to the second part of the program!
 
+Now I just needed to run it. I first had to configure binfmt and qemu for running dynamically linked
+MIPS binaries. This meant installed libc for MIPS and doing some magic symlinking for binfmt. [Zach
+Riggle's Stackexchange answer](https://reverseengineering.stackexchange.com/a/8917/28379) was a
+great reference here.
+
 This is where I learned how much time I actually had and I was pretty shocked. I had started this
-CTF a bit late, and started working on this question about 20 hours into the competition and at this
+CTF a bit late, and started working on this question about 18 hours into the competition and at this
 point the problem only had 4 solves, so I knew this was going to be really hard, but nevertheless, I
 was shocked that it was even possible.
 
@@ -384,12 +389,11 @@ variables as arguments.
 Here's one of them
 
 ```python
-z3_expr = And(
-    np() ^ np() == nc(),
-    np() == nc(),
-    np() == ( ( ( np() ^ np() ) & 0x7f ) << 1 ),
-    np() == ( np() ^ np() ^ np() )
-)
+z3_expr = Not(Or(
+  np() + np() == nc(),
+  np() + np() == nc(),
+  np() + np() == nc(),
+))
 ```
 
 where `np()` and `nc()` fetch the next buffer byte and next constant.
@@ -492,8 +496,19 @@ nice
 In the end I had about 600 lines of Python to solve this challenge and it took a while to debug. I
 definitely over-engineered some parts of it and the code could've been a lot DRYer.
 
-One of the mistakes I made was not casting my Z3 `BitVec`s up to 32 bits prior to doing
-multiplication between them (as you can see in the decompiled output). 
+The code I used during the CTF definitely didn't make enough use of regex. Originally my template
+variable extraction implementation was about 80 lines of code. I later re-wrote it with pure regex,
+bringing it down to 15 lines. It was signifcantly faster and easier to implement that way. Not only
+was I not writing an extra 65 lines of code, I also wasn't debugging it when it broke :)
+
+Afterall, regex is a super specialized and expressive language for pattern matching, and in this
+case, that was exactly what the problem demanded. So pure regex should've been a natural choice for
+me.
+
+Anyway, I'm definitely going to lean heavily on regex for future challenges like this.
+
+Another mistake I made was not casting my Z3 `BitVec`s up to 32 bits prior to multiplying them, like
+how they were casted in the decompiled output:
 
 ![uint cast](/assets/images/de1ctf2020/multiply.png) 
 
@@ -503,83 +518,18 @@ Here's where I fixed it:
 
 ![zero extend](/assets/images/de1ctf2020/zero_ext.png) 
 
-I definitely didn't make enough use of regex. This was my code to pull out some template variables.
-
-```python
-def addiu_idx(inst):
-    #   (68, 4, 'addiu', '$v0, $v0, 2'),
-    name = inst[2]
-    ops  = inst[3]
-    assert name == "addiu"
-    m = re.search(r"\$v[01], \$v[01], ([123])", ops)
-    assert m
-    return int(m.group(1))
-
-def next_addiu_or_zero(block_iter):
-    found_lw = False
-    count_since_lw = 0
-    for inst in block_iter:
-        name = inst[2]
-        ops  = inst[3]
-        if found_lw is False and name == "lw":
-            found_lw = True
-            count_since_lw += 1
-            continue
-        if found_lw:
-            if name == "lbu":
-                return 0
-            elif name == "addiu" and re.search("\$v[01], \$v[01],", ops):
-                return addiu_idx(inst)
-    assert 0
-```
-
-I used regex only for matching on single instructions, and the rest was kind of state machine like.
-
-I think this code could've been written much faster and been much quicker to debug if I just wrote
-some quick and ugly regex matching across whole functions.
-
-
-
-
-# Setting up qemu-mips
-
-*Note, in order to run it I needed to get a functional qemu-mips setup for dynamically linked
-binaries, [notes on that here](link)*
-
-This meant I needed a working qemu-mips setup, something I had once
-set up on another machine, but didn't have on my current VM.
-
-To get a functional MIPS set up I had to install a few things, make some symlinks and the magic of
-qemu and binfmt covered everything else.
-
-I usually use [Zach Riggle's Stackexchange
-answer](https://reverseengineering.stackexchange.com/a/8917/28379) (author of pwntools) for
-reference when doing anything QEMU related.
-
-Short summary:
-
-- install libc compiled for MIPS little endian and qemu
-  ```
-  apt install qemu qemu-user qemu-user-static
-  apt install libc6-mipsel-cross
-  ```
-- set up symlink for `binfmt` to find libc for MIPS programs 
-  ```
-  ln -s /usr/mipsel-linux-gnu /etc/qemu-binfmt/mipsel
-  ```
-
-And now MIPS programs can be run with just `./code`, no need to prefix with `qemu-mipsel`.
-
 
 
 
 # Code
 
-The solution I built for the contest was about 600 lines of Python and way too over-engineered.
-Here's a rewrite where I tackled some of the mistakes that slowed me down.
+For the CTF I used a 600 line over-engineered monster Python program. After reflecting on it, it
+became clear that most of those lines were extra bulk that didn't need to be there.
 
-By making little helper functions and leaning heavily into regex, this implementation went much
-faster.
+With the benefit of hindsight, I went ahead and implemented a far simpler solution.
+
+By making lots of little helper functions, leaning heavily into regex, and sticking with only basic
+data structures (lists), this implementation was much easier and faster to write.
 
 ```python
 #!/usr/bin/env python
