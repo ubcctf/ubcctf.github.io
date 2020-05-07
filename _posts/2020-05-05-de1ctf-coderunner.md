@@ -20,15 +20,15 @@ me some functional shellcode.
 > Robert: LOTS  
 > Me:     Like more than 256?  
 > Robert: NO NOT THAT MANY
-> Robert: *pastes padded shell code into slack*
+> Robert: *pastes padded shellcode into slack*
 > Robert: RUN THIS  
-> ...  
-> Me:     Holy crap it worked
-> Me:     *tears of joy*  
+
+*suspense*
+
+> Me:     Holy crap it worked *tears of joy*
 </pre>
 
-I had a lot of fun working on this problem and those last few moments are definitely to be
-remembered.
+I had a lot of fun working on this problem and those last few moments were definitely to remember.
 
 As I mentioned at the top, this writeup focuses heavily on my thought process, so it's a lot of
 text. Beware.
@@ -199,10 +199,10 @@ print(sm.found[0].solver.eval(myinput, cast_to=bytes))
 
 That gave me the 64 bytes I needed to get to the second part of the program!
 
-Now I just needed to run it. I first had to configure binfmt and qemu for running dynamically linked
-MIPS binaries. This meant installed libc for MIPS and doing some magic symlinking for binfmt. [Zach
-Riggle's Stackexchange answer](https://reverseengineering.stackexchange.com/a/8917/28379) was a
-great reference here.
+Then I just needed to run it. I first had to configure binfmt and qemu for running dynamically
+linked MIPS binaries. This meant installed libc for MIPS and doing some magic symlinking for binfmt.
+[Zach Riggle's Stackexchange answer](https://reverseengineering.stackexchange.com/a/8917/28379) was
+a great reference here.
 
 This is where I learned how much time I actually had and I was pretty shocked. I had started this
 CTF a bit late, and started working on this question about 18 hours into the competition and at this
@@ -292,12 +292,6 @@ sense. He helped me break down some of the differences between the functions eve
 mentioned that he had solved some challenges like this with regex, although not under such time
 constraints.
 
-<h3>Regex</h3>
-
-Regex was a powerful tool for this part. I definitely didn't use it to it's full potential,
-nevertheless, I used it to identify function boundaries and for extracting the template variables
-from the functions.
-
 # Only the Bare minimum
 
 *ranting*...
@@ -316,8 +310,7 @@ If you fail to find the "simple" solution, or the common patterns, then you end 
 a more general case that's not actually important for the immediate problem at hand.
 
 I am by no means great at identifying the simple solutions. I often default to implementing the more
-general case, subsequently taking longer. But it's something I'm aware of and actively try to work
-on.
+general case, subsequently taking longer. But I'm working on it.
 
 # Finding the patterns
 
@@ -381,7 +374,7 @@ variables with regex.
 
 # Solving the constraints
 
-Now I just needed to use the extracted values to solve for a satisfying solution. There were only 5
+Then I just needed to use the extracted values to solve for a satisfying solution. There were only 5
 function templates, so I wrote a Z3 re-implementation for each one that took the extracted template
 variables as arguments.
 
