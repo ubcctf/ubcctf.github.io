@@ -88,8 +88,6 @@ Faster >
 And that was it, the server just waited for input. If I sent some random text, say `AAAA`, the
 server just closed the connection.
 
-It was pretty unclear just from that what I was supposed to do.
-
 So next step was to take a look at that base64 blob to see what it was.
 
 `b64d(blob)` returned a Gzip file, and `gzip.decompress(b64d(blob))` returned an ELF 32-bit MIPS
@@ -101,14 +99,6 @@ In Ghidra:
 
 The `main` function was pretty straight forward,
 
-- call `gettimeofday`, save the result
-- disable libc IO buffering
-- call some function (highlighted blue) that needs to return non-zero
-- call `gettimeofday` again to measure time taken
-- write your time to a scoreboard
-- if your time was fast enough, call `read` on stdin
-- finally execute the bytes that were just read
-
 Basically it timed you on how long it took to execute the function highlighted in blue and if it
 returned non-zero you got to execute whatever you wanted!
 
@@ -119,7 +109,9 @@ So I needed to figure out
 - how to make the blue function return non-zero
 - how quickly did it need to run
 
-Here's the function:
+# Following the call chain
+
+Here's the blue highlighed function:
 
 ![function](/assets/images/de1ctf2020/unknown_func.png)
 
@@ -200,7 +192,7 @@ print(sm.found[0].solver.eval(myinput, cast_to=bytes))
 That gave me the 64 bytes I needed to get to the second part of the program!
 
 Then I just needed to run it. I first had to configure binfmt and qemu for running dynamically
-linked MIPS binaries. This meant installed libc for MIPS and doing some magic symlinking for binfmt.
+linked MIPS binaries. This meant installing libc for MIPS and doing some magic symlinking for binfmt.
 [Zach Riggle's Stackexchange answer](https://reverseengineering.stackexchange.com/a/8917/28379) was
 a great reference here.
 
@@ -291,26 +283,6 @@ So that was the plan. I got in touch with Robert to get some affirmation that th
 sense. He helped me break down some of the differences between the functions even further. He
 mentioned that he had solved some challenges like this with regex, although not under such time
 constraints.
-
-# Only the Bare minimum
-
-*ranting*...
-
-There's a common pattern in problems like this, where you're trying to code as fast as possible,
-with minimal bugs along the way.
-
-- we don't really care about maintainability/readability, but can be helpful as the code grows
-- we want to avoid over engineering, primarily because it takes longer
-- we don't want to under-engineer either, then suffer while debugging
-
-I think the trick to quickly implementing solutions for problems like this comes down to how well
-you identify the common patterns and simplicities in the problem.
-
-If you fail to find the "simple" solution, or the common patterns, then you end up writing code for
-a more general case that's not actually important for the immediate problem at hand.
-
-I am by no means great at identifying the simple solutions. I often default to implementing the more
-general case, subsequently taking longer. But I'm working on it.
 
 # Finding the patterns
 
@@ -510,6 +482,27 @@ Here's where I fixed it:
 
 ![zero extend](/assets/images/de1ctf2020/zero_ext.png) 
 
+
+
+# Only the Bare minimum
+
+*ranting*...
+
+There's a common pattern in problems like this, where you're trying to code as fast as possible,
+with minimal bugs along the way.
+
+- we don't really care about maintainability/readability, but can be helpful as the code grows
+- we want to avoid over engineering, primarily because it takes longer
+- we don't want to under-engineer either, then suffer while debugging
+
+I think the trick to quickly implementing solutions for problems like this comes down to how well
+you identify the common patterns and simplicities in the problem.
+
+If you fail to find the "simple" solution, or the common patterns, then you end up writing code for
+a more general case that's not actually important for the immediate problem at hand.
+
+I am by no means great at identifying the simple solutions. I often default to implementing the more
+general case, subsequently taking longer. But I'm working on it.
 
 
 
