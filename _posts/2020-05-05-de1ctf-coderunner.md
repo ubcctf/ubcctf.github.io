@@ -7,12 +7,11 @@ author: Filip Kilibarda
 **Heads up** This writeup is mostly focused on my thought process throughout the problem and may
 have some ranting interleaved.
 
-CODE RUNNER
-===========
+# CODE RUNNER
 
 This wound up being an awesome team effort to solve the challenge in the last 6 minutes of the
-competition. The last few minutes were REALLY intense and Robert got fired up while copy pasting
-random shellcode off the internet for me to run.
+competition. The last few minutes were REALLY intense and Robert went into overdrive while getting
+me some functional shellcode.
 
 <pre>
 > Robert: JUST RUN THIS  
@@ -23,16 +22,16 @@ random shellcode off the internet for me to run.
 > Robert: NO NOT THAT MANY
 > Robert: *pastes padded shell code into slack*
 > Robert: RUN THIS  
-> Me:     Ok  
 > ...  
 > Me:     Holy crap it worked
-> Robert: WHAT?  
 > Me:     *tears of joy*  
 </pre>
 
-This was an awesome problem in my opinion. It required serious consideration of both network latency
-and the wall clock runtime of your solution. It's not often that you need to consider from where in
-the world you want to run your solution...
+I had a lot of fun working on this problem and those last few moments are definitely to be
+remembered.
+
+As I mentioned at the top, this writeup focuses heavily on my thought process, so it's a lot of
+text. Beware.
 
 # Wasting time with the POW
 
