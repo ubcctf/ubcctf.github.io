@@ -6,6 +6,13 @@ $body-font: 'Overpass Mono', monospace;
 $title-font: 'Inconsolata', monospace;
 $body-font-size: 13px;
 
+img {
+    max-width: 100%;
+    height: auto;
+    border-style: none;
+    vertical-align: middle;
+}
+
 body {
     background-color: #333333;
     font-family: $body-font;
@@ -30,7 +37,7 @@ pre.highlight {
 
 #container {
     margin: 0 auto;
-    width: 600px;
+    width: 700px;
 }
 
 #title-section {
