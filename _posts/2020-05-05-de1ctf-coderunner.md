@@ -99,7 +99,7 @@ In Ghidra:
 
 ![Ghidra main function](/assets/images/de1ctf2020/ghidra_main_color.png)
 
-The `main` function was pretty straight foward,
+The `main` function was pretty straight forward,
 
 - call `gettimeofday`, save the result
 - disable libc IO buffering
@@ -135,7 +135,7 @@ The next function:
 - otherwise it returned 0
 
 If this function returned 0, then the parent would've also returned 0, and subsequently, execution
-would've never reached the part where it executeed whatever I gave it. So I needed to stay away from
+would've never reached the part where it executed whatever I gave it. So I needed to stay away from
 the `return 0` scenario. This meant going deeper in the call chain.
 
 The next function:
@@ -154,7 +154,7 @@ which returned `0xc001babe`, a non-zero value!
 So I needed to send `16*4` bytes, such that they satisfied the tests in the 16 functions.
 
 So far this problem didn't look too bad, especially since the chunks of 4 bytes were independent of
-one another. I could've easily run this through Angr or constructed Z3 forumlas by hand to solve
+one another. I could've easily run this through Angr or constructed Z3 formulas by hand to solve
 this.
 
 But of course there was catch, on each new connection to the server, you got a **different** binary,
@@ -168,7 +168,7 @@ solution needed to be computed.
 
 Reading Ghidra's decompiled output for the time calculations was pretty confusing to me and I didn't
 feel like trying to understand it. I figured since I'd probably need to run the program at some
-point anyway, I'd just run it and determine the time constraint emperically.
+point anyway, I'd just run it and determine the time constraint empirically.
 
 At this point I had saved a few of the binaries the server had given me and was reusing them for
 testing.
@@ -219,7 +219,7 @@ To understand this madness, we need look at it a bit deeper.
 
 After the server receives your proof of work and verifies that it's correct, it `base64(gzip())`s
 the binary, then writes the data to its TCP socket connected to you. Since `write` or `send` to a
-socket is non-blocking (in the sense that it doesn't wait for a message recevied confirmation from
+socket is non-blocking (in the sense that it doesn't wait for a message received confirmation from
 the receiver), the server immediately continues execution before you've even received the base64
 binary. The server then presumably calls `execve` with the binary it sent you, hooking up its
 stdin/stdout to the socket. Now the binary is executing --- it calls `gettimeofday`, then prompts you
@@ -245,7 +245,7 @@ ping replies in 60ms average with low variance. So that brought down the network
 around 120ms, much better.
 
 That meant I had under 1 second to compute a 64 byte solution, *not including the time it took to
-actually run the code between the two `gettimeofday` calls --- which was suprisingly high on my
+actually run the code between the two `gettimeofday` calls --- which was surprisingly high on my
 machine with qemu-mips*.
 
 Here I sat and thought for a while...
@@ -284,7 +284,7 @@ So all I needed to do was identify which of the 5 templates each function corres
 the template "variables" from the functions, and substitute the variables into a Z3 expression for
 the corresponding template. Then get Z3 to solve the constraints.
 
-Basically I needed to write 5 Z3 reimplentations of the function templates that took the template
+Basically I needed to write 5 Z3 reimplementations of the function templates that took the template
 variables as arguments.
 
 So that was the plan. I got in touch with Robert to get some affirmation that this actually made
@@ -356,7 +356,7 @@ comparisons:
 ![analyze instructions](/assets/images/de1ctf2020/analyze_instructions.png) 
 
 Robert pointed out that the compiler was really kind to us here and used completely predictable
-instrucitons for loading bytes from the stack buffer and for loading constants into registers. The
+instructions for loading bytes from the stack buffer and for loading constants into registers. The
 order in which these operations happened was also always exactly the same for each binary. Once
 again, the problem authors probably turned off compiler optimizations.
 
@@ -375,7 +375,7 @@ variables with regex.
 # Solving the constraints
 
 Then I just needed to use the extracted values to solve for a satisfying solution. There were only 5
-function templates, so I wrote a Z3 re-implementation for each one that took the extracted template
+function templates, so I wrote a Z3 reimplementation for each one that took the extracted template
 variables as arguments.
 
 Here's one of them
@@ -428,7 +428,7 @@ would have 12 bytes. So he designed some code that calls `read` to read in even 
 we would send a full `execve("/bin/sh", NULL, NULL)` payload on the second read.
 
 The trick to calling `read` with only 12 bytes (3 MIPS instructions), was to notice that the binary
-immidiately executed your shellcode after calling `read`.
+immediately executed your shellcode after calling `read`.
 
 ![call shellcode](/assets/images/de1ctf2020/call_shellcode.png) 
 
@@ -453,7 +453,7 @@ At this point there were 6 minutes left.
 
 I had the AWS instance all set up, I had connected to the server, solved the constraints, sent the
 64 bytes, sent the 12 byte read shellcode, and had called `IPython.embed()`, so I just had a Python
-prompt infront of me and didn't actually know if the 12 byte `read` code worked or whether the
+prompt in front of me and didn't actually know if the 12 byte `read` code worked or whether the
 connection was still open.
 
 My next step was to give `asm(shellcraft.sh())` a try myself, in case Robert forgot to set the
@@ -489,11 +489,11 @@ In the end I had about 600 lines of Python to solve this challenge and it took a
 definitely over-engineered some parts of it and the code could've been a lot DRYer.
 
 The code I used during the CTF definitely didn't make enough use of regex. Originally my template
-variable extraction implementation was about 80 lines of code. I later re-wrote it with pure regex,
-bringing it down to 15 lines. It was signifcantly faster and easier to implement that way. Not only
+variable extraction implementation was about 80 lines of code. I later rewrote it with pure regex,
+bringing it down to 15 lines. It was significantly faster and easier to implement that way. Not only
 was I not writing an extra 65 lines of code, I also wasn't debugging it when it broke :)
 
-Afterall, regex is a super specialized and expressive language for pattern matching, and in this
+After all, regex is a super specialized and expressive language for pattern matching, and in this
 case, that was exactly what the problem demanded. So pure regex should've been a natural choice for
 me.
 
