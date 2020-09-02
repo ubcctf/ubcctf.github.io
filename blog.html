@@ -6,7 +6,7 @@ title: Blog
 
 <ul>
   {% for post in site.posts %}
-  {% if post.external == true %}
+  {% if post.external %}
     <li>
       <h3><a href="{{ post.external_url }}">{{ post.title }}</a></h3>
     </li>
