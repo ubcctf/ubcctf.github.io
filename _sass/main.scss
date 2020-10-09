@@ -2,9 +2,16 @@
 
 $red: #ed5454;
 $blue: #73ead3;
+$header-color: #2b2b2b;
 $body-font: 'Overpass Mono', monospace;
 $title-font: 'Inconsolata', monospace;
-$body-font-size: 13px;
+$hover-brightness: 240%;
+$small-screen: 700px;
+
+html {
+    // The root font size. Everything else is relative to this size using the "rem" size unit
+    font-size: 14px;
+}
 
 img {
     max-width: 100%;
@@ -19,6 +26,10 @@ body {
     color: $blue;
 }
 
+strong, h1, h2, h3 {
+    filter: brightness(170%)
+}
+
 div.highlight {
     overflow-x: auto;
 }
@@ -27,44 +38,175 @@ pre.highlight {
     overflow-x: auto;
 }
 
-.title {
-    font-family: $title-font;
-    color: $red;
-    text-transform: uppercase;
-    font-size: 48px;
-    padding-top: 12px;
-}
-
 #container {
-    margin: 0 auto;
-    width: 700px;
+    @media (min-width: $small-screen) {
+        margin: 0 auto;
+        width: $small-screen;
+    }
+    @media (max-width: $small-screen) {
+        width: 100%;
+    }
 }
 
-#title-section {
-    padding-top: 50px;
-    height: 100px;
+header {
+    padding: 20px;
+    margin-bottom: 20px;
+    // background-color: $header-color;
+
+    @media (min-width: $small-screen) {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 20px;
+        grid-row-gap: 0px;
+    }
+
+    @media (max-width: $small-screen) {
+        display: flex;
+        flex-direction: column;
+        * {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+    }
 
     a {
+        color: $red;
         text-decoration: none;
+        &:hover, &.active {
+            filter: brightness($hover-brightness);
+            text-decoration: none;
+        }
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center;
+        grid-column: 1 / 2;
+        grid-row: 1 / 4;
+        @media (max-width: $small-screen) {
+            margin: 10px auto;
+        }
+        img {
+            height: 90px;
+        }
+    }
+    .title-container {
+        grid-column: 2 / 6;
+        grid-row: 2 / 4;
+        .title {
+            color: $red;
+            // grid-column: 2 / 5;
+            // grid-row: 1 / 2;
+            // margin-top: auto;
+            // margin-bottom: auto;
+            font-size: 1.3rem;
+            // .label {
+            //     color: $blue;
+            //     // filter: brightness(80%);
+            //     font-size: 0.7em;
+            // }
+            // .team-name > a {
+            //     color: $red;
+            // }
+        }
+        .subtitle {
+            // grid-column: 2 / 5;
+            // grid-row: 2 / 3;
+            font-size: 1rem;
+        }
+    }
+    nav {
+        @media (min-width: $small-screen) {
+            // text-align: right;
+            grid-column: 2 / 6;
+            grid-row: 1;
+        }
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        // margin-top: auto;
+        // margin-bottom: auto;
+        font-size: 0.9rem;
+        a {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
     }
 }
 
 .description {
     width: 80%;
-    padding-top: 50px;
-    margin: 0 auto;
     text-align: center;
-    font-size: 15px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    grid-column: 1 / 3;
 }
 
-.section {
-    font-size: $body-font-size;
+
+figure {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom-width: 10px;
+    figcaption {
+        text-align: center;
+        font-style: italic;
+        font-size: 0.85em;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    &.img-right {
+        width: 50%;
+        float: right;
+        margin: 10px 0px 10px 20px;
+    }
+    &.img-left {
+        width: 50%;
+        float: left;
+        margin: 10px 20px 10px 0px;
+    }
 }
 
-#logo {
-    height: 100%;
-    float: left;
-    padding-right: 35px;
+
+// .front-page-competitions {
+    // display: grid;
+    // grid-template-columns: repeat(2, 1fr);
+    // grid-template-rows: repeat(1, 1fr);
+    // grid-column-gap: 10px;
+    // grid-row-gap: 0px;
+    // img {
+    //     grid-column: 2;
+    // }
+// }
+// @media only screen and (max-width: 700px) {
+//     #container {
+//       width: 100%;
+//     }
+
+    // TODO
+    // #title-section {
+    //     text-align: center;
+    //     height: auto;
+    // }
+
+    // .logo {
+    //     height: 120px;
+    //     float: none;
+    //     margin: 0 auto;
+    //     padding-right: 0px;
+    //     padding-bottom: 35px;
+    // }
+
+    // .section {
+    //     margin: 0 auto 25px;
+    //     width: 95%;
+    // }
+//   }
+
+.nowrap {
+    white-space: nowrap;
 }
 
 .post-info {
@@ -78,14 +220,11 @@ pre.highlight {
 }
 
 p > code {
-    background: #555;
-    border-radius: 3px;
-    padding: 0 2px 1px;
+    // background: #555;
+    background: #272727;
+    border-radius: 4px;
+    padding: 2px 6px;
     color: #ed5454;
-}
-
-footer {
-    margin-bottom: 25px;
 }
 
 h1 {
@@ -101,38 +240,18 @@ h2 {
 footer {
     padding-top: 30px;
     text-align: center;
+    margin-bottom: 25px;
 }
 
 a {
-    color: white;
-    text-decoration-style: none;
-}
-
-a:hover {
     color: $red;
-    text-decoration-style: wavy;
+    // text-decoration: none;
+    text-decoration: underline;
+    // text-underline-position: 
+    &:hover {
+        // color: $red;
+        // text-decoration: underline;
+        // text-underline-position: under;
+        filter: brightness($hover-brightness);
+    }
 }
-
-@media only screen and (max-width: 600px) {
-    #container {
-      width: 100%;
-    }
-
-    #title-section {
-        text-align: center;
-        height: auto;
-    }
-
-    #logo {
-        height: 120px;
-        float: none;
-        margin: 0 auto;
-        padding-right: 0px;
-        padding-bottom: 35px;
-    }
-
-    .section {
-        margin: 0 auto 25px;
-        width: 95%;
-    }
-  }
