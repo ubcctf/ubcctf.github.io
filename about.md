@@ -147,18 +147,29 @@ It’s common for software companies to purposefully obfuscate the code they sen
  
  
 ## Web Exploitation
-
-
+ 
+ 
 **Web Exploitation** is the act of taking advantage of bugs in web applications, manipulating control flow between server and client, and analyzing numerous issues fundamental to the internet. 
 
 
 Web Exploitation has many real-world examples, and often this category can prove how easy it is to find specific vulnerabilities inherent in an application.
-
-
-The nature of web exploit challenges seen in CTFs can vary widely. Oftentimes, they will follow patterns: abusing bugs to escalate user privileges, manipulating content to steal sensitive data from other users without them knowing, or accessing assumedly-private files from within an online server. The possibilities are endless, and the field of internet security is ever growing and changing. 
-
  
-Each and every challenge present in the Web Exploit category share a fundamental paradigm - they are built upon a framework or foundation that was assumed to work one way, without regard to understanding how they can work in other unintended ways. Many applications are coded with one idea in mind - how a regular user would interact with it. However, what if a user does irregular things? What if they submit some input to an application that’s in a format the developer didn’t foresee? That is at the heart of web exploitation - manipulating programs to operate in ways it wasn’t intended to operate.  
+ 
+The nature of web exploit challenges seen in CTFs can vary widely. Oftentimes, they will follow patterns: abusing bugs to escalate user privileges, manipulating content to steal sensitive data from other users without them knowing, or accessing assumedly-private files from within an online server. The possibilities are endless, and the field of internet security is ever growing and changing. 
+ 
+ 
+Each and every challenge present in the Web Exploit category share a fundamental paradigm - they are built upon a framework or foundation that was assumed to work one way, without regard to understanding how they can work in other unintended ways. Many applications are coded with one idea in mind - how a regular user would interact with it. However, what if a user does irregular things? What if they submit some input to an application that’s in a format the developer didn’t foresee? That is at the heart of web exploitation - manipulating programs to operate in ways it wasn’t intended to operate.
+ 
+ 
+## Cryptography
+todo
+ 
+ 
+## Forensics
+todo
+ 
+## Misc
+todo
  
  
 # FAQ
