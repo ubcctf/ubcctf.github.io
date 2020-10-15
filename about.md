@@ -38,14 +38,14 @@ There's no obligation to keep attending meetings or participating in CTFs after 
  
  
 # CTF competitions
-{% include image.html url="/assets/images/about/tm_finals_2019.jpg" description="Filip, Daniel Tiger and Samson at the 2019 Trendmicro CTF finals in Tokyo, Japan" class="img-right" %}
+{% include image.html url="/assets/images/about/tm_finals_2019.jpg" description="Filip, Daniel, Tiger and Samson at the 2019 Trendmicro CTF finals in Tokyo, Japan" class="img-right" %}
 <!-- ![Tiger, Samson, Daniel and Filip at Trendmicro CTF finals in 2019](/assets/images/about/tm_finals_2019.jpg){:.img-right} -->
  
  
-We regularly participate in CTF competitions all throughout the year. We competed in 20 CTFs in 2019 and 31 as of October 2020. Typically play together in an average of 2-3 CTFs per month.
+We regularly participate in CTF competitions all throughout the year. We competed in 20 CTFs in 2019 and 31 as of October 2020.
  
  
-Once we decide to play in a CTF, there is no obligation to any of our team members that they must play. If something comes up and you can't play, or you just don't feel like it, it doesn't matter and we'll be excited to have you around next time.
+Once we decide to play in a CTF, there is no obligation to any of our team members that they must play.
  
  
 However, *sometimes*, some of us will decide to "try hard" at a particular CTF. This might be because the CTF has a particularly good reputation, or we're trying to qualify for finals. In this case, those that agreed to come out and try hard will usually make time in their schedule and ensure that they can put in a solid effort. However even in that case, it's still totally non-obligatory. First and foremost, **we're all here to learn and enjoy the process**.
@@ -64,6 +64,9 @@ Each challenge will have a "value" that is the number of points your team gets f
 Most CTFs place **no restrictions on team sizes**. This means that our whole club can collaborate together. Often there are far more challenges than we're capable of solving, so at this time we have no issues with too many people.
  
  
+However, some CTFs do have a team size restriction. Those that decide to take a spot on the smaller team might have more expectation upon them to show up and participate. We all make sure to clearly communicate our commitment level in such a situation to avoid disappointing the rest of the team.
+ 
+ 
 There are typically between 300-1000 active teams competing during a reputable CTF.
  
  
@@ -77,10 +80,10 @@ The event will always have some kind of dashboard for teams to view their progre
 <!-- ![Challenge popup](/assets/images/about/ctfchalpopup.png){:.img-right} -->
  
  
-Everyone on the team can see the dashboard from their computer. Everyone can see which challenges we've solved and which we haven't. Typically we each select a problem that most interests us and notify the rest of the team what we're working on (so we don't overlap and accidently solve each other's challenges). If we get bored of a particular problem or get too stuck, we often poke around at other challenges to see if there's something more interesting. Again, we always make sure to check if someone is already working on something before starting on it. Sometimes we decide to collaborate on problems. But often we work solo then ask for help/second opinions from other people if we get stuck.
+Everyone on the team can see the dashboard from their computer. Everyone can see which challenges we've solved and which we haven't. Typically we each select a problem that most interests us and notify the rest of the team what we're working on (so we don't overlap and accidently solve each other's challenges). If we get bored of a particular problem or get too stuck, we often poke around at other challenges to see if there's something more interesting. Again, we always make sure to check if someone is already working on something before starting on it. Sometimes we decide to collaborate on problems. But often we work solo then ask for help and second opinions from others if we get stuck.
  
  
-When you click on a challenge in the dashboard, it will typically popup a window showing a short description of it, the number of teams that have already solved it, the number of points that challenge is worth and a link to download any associated files/materials.
+When you click on a challenge in the dashboard, it will typically display a short description of it, the number of teams that have already solved it, the number of points that challenge is worth and a link to download any associated files/materials. These files and materials will serve to help you work through the specified challenge. 
  
  
 Once you've mastered a challenge, you will be able to extract a "flag" from it, which you can submit into the dashboard and score our team some points!
@@ -95,16 +98,16 @@ A flag is a small bit of text, e.g., `FLAG{ThiSiSaFlAG}`. The specific way in wh
 ## Binary Exploitation
  
  
-**Binary exploitation**, also called "pwn", can often be summarized as this: corrupt the memory of a running system to take control of it's execution to gain access to the machine/server hosting it.
+**Binary exploitation**, also called "pwn", can often be summarized as this: corrupt the memory of a running system to take control of it's execution and gain access to the machine/server hosting it.
  
  
-The typical structure is the CTF organizers would host a vulnerable program in the cloud and have it directly respond to incoming TCP connections. Your goal as the CTF player is to interact with the vulnerable program over the internet and figure out how to trigger a bug that gives you escalated “privileges” on the host machine running the program. Often we want to gain control over the CPU’s instruction pointer and redirect the program into executing something that lets us do stuff we’re not supposed to. Often once you get instruction pointer control, your goal would be to spawn a shell e.g., “/bin/bash” or “/bin/sh” (on linux systems) and direct the input/output of the shell program back to your computer. And with that, you get access to the remote machine, allowing you to retrieve the flag from it. Typically the flag will be stored in a file somewhere on the machine, e.g., `/root/flag.txt`.
+The typical structure is the CTF organizers would host a vulnerable program in the cloud and have it directly respond to incoming TCP connections. Your goal as the CTF player is to interact with the vulnerable program over the internet and figure out how to trigger a bug that gives you escalated privileges on the host machine running the program. Often we want to gain control over the CPU’s instruction pointer and redirect the program into executing something that lets us do stuff we’re not supposed to. Often once you get instruction pointer control, your goal would be to spawn a shell e.g., `/bin/bash` or `/bin/sh` (on linux systems) and direct the input/output of the shell program back to your computer. And with that, you get access to the remote machine, allowing you to retrieve the flag from it. Typically the flag will be stored in a file somewhere on the machine, e.g., `/root/flag.txt`.
  
  
 {% include image.html url="/assets/images/about/gdb.png" description="View of GDB with the pwndbg extension" class="img-left" %}
  
  
-The organizers will *often*, not always, give you a copy of the binary/binaries running on their server in the cloud. This means you can usually analyze and study the system locally on your machine before firing off exploits at the real thing.
+The organizers will *often*, not always, give you a copy of the binary/binaries running on their server. This means you can usually analyze and study the system locally on your machine before firing off exploits at the real thing.
  
  
 The first step with any binary exploitation challenge is to gather information about the system. This will vary significantly from challenge to challenge and depends if the organizers have given you a copy of the vulnerable code. In essence, you need to figure out what part of the system is vulnerable and what it's vulnerable to. This is akin to reverse engineering.
@@ -137,7 +140,25 @@ Reverse engineering is so general that it's hard to provide an all encompassing 
 Now the goal is pretty obvious. You must figure out what the correct input is. Once you get it, you've got yourself a flag!
  
  
-There is an interesting real world analogy to this CTF category. When software companies ship software that must run locally on a customer's machine. E.g,. video games, photoshop, etc., they typically protect the software with an activation key.
+Figuring out what the correct input is can be very challenging. Often the systems are highly obfuscated, cluttered and the important logic is buried amongst a haystack of garbage. The art lies in combining your various dynamic and static analysis techniques to understand the inner workings as fast as possible.
+ 
+ 
+It’s common for software companies to purposefully obfuscate the code they send to their customers in order to deter circumvention of their licensing mechanisms or protect their trade secrets. The reverse engineering CTF category stems from these real world issues.
+ 
+ 
+## Web Exploitation
+
+
+**Web Exploitation** is the act of taking advantage of bugs in web applications, manipulating control flow between server and client, and analyzing numerous issues fundamental to the internet. 
+
+
+Web Exploitation has many real-world examples, and often this category can prove how easy it is to find specific vulnerabilities inherent in an application.
+
+
+The nature of web exploit challenges seen in CTFs can vary widely. Oftentimes, they will follow patterns: abusing bugs to escalate user privileges, manipulating content to steal sensitive data from other users without them knowing, or accessing assumedly-private files from within an online server. The possibilities are endless, and the field of internet security is ever growing and changing. 
+
+ 
+Each and every challenge present in the Web Exploit category share a fundamental paradigm - they are built upon a framework or foundation that was assumed to work one way, without regard to understanding how they can work in other unintended ways. Many applications are coded with one idea in mind - how a regular user would interact with it. However, what if a user does irregular things? What if they submit some input to an application that’s in a format the developer didn’t foresee? That is at the heart of web exploitation - manipulating programs to operate in ways it wasn’t intended to operate.  
  
  
 # FAQ
