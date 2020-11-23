@@ -8,5 +8,6 @@ The full challenge writeup can be found [here](https://rctcwyvrn.github.io/posts
 
 ## TL;DR 
 
-- Quantum Key Distribution
-- Reversing Cellular Automata
+- Quantum key distribution with BB84
+- Reversing a cellular automata
+- Shamir secret sharing with real numbers
