@@ -1,5 +1,5 @@
 ---
-short_name: Robert
+short_name: Robert Xiao
 name: Robert Xiao
 position: Everything
 layout: author
