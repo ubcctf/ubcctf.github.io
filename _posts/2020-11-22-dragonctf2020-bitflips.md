@@ -8,6 +8,7 @@ author: rctcwyvrn
 
 Bit flip was a cryptography challenge with 3 parts, where each part slowly removed information or made the challenge more difficult.
 
+Solution scripts can be found [here](https://github.com/rctcwyvrn/ctf_stuff/tree/master/dragonctf2020)
 ## Bit flip 1
 ```
 Cryptography, 155
@@ -230,6 +231,8 @@ and
 f22 = ..1 0 0 0 0 0 ... 0 0 0
 ```
 
-But look at f11 and f21, they're actually the same thing in the case where the kth bit is 1. So using that information we can save 25% of requests (half of the time we can save half of the requests), and that brings us just below the timeout! I'm pretty sure there's more cases like that to reduce the number of sends, but I let it run while I ate lunch and it got the flag so whatever, good enough!
+But look at f11 and f21, they're actually the same thing in the case where the kth bit is 1. So using that information we can save 25% of requests (half of the time we can save half of the requests), and that brings us just below the timeout! 
+
+I'm pretty sure there's more cases like that to reduce the number of sends, but I let it run while I ate lunch and it got the flag so whatever, good enough!
 
 `DrgnS{C0nst_A3S_K3y_1111111111111!}`
