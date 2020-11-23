@@ -13,7 +13,7 @@
 
       <header>
         <nav>
-          {% assign pages = "about,blog,resources" | split: "," %}
+          {% assign pages = "about,blog,resources,members" | split: "," %}
           {% for p in pages %}
           <a href="/{{ p }}"{% if page.name contains p %} class="active"{% endif %}>{{ p }}</a>
           {% endfor %}
