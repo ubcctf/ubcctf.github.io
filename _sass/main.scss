@@ -214,6 +214,11 @@ figure {
     white-space: nowrap;
 }
 
+.nowrap2 {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
 .post-info {
     text-align: center;
 }
