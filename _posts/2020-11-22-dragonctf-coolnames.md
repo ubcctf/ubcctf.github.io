@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[dragoonctf] coolNAMEs (19 solves)"
+title: "[DragonCTF 2020] coolNAMEs (19 solves)"
 author: Filip Kilibarda
 ---
 
