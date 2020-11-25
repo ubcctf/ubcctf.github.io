@@ -27,7 +27,9 @@ body {
 }
 
 strong, h1, h2, h3 {
-    filter: brightness(170%)
+    :not(a) {
+        filter: brightness(170%)
+    }
 }
 
 div.highlight {
