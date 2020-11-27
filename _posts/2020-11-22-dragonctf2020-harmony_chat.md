@@ -16,7 +16,7 @@ If I told you that the simple act of exchanging messages in a chat app would lea
 
 **Harmony Chat** was the first web challenge released on DragonCTF 2020. It was a chat app a la Discord, with the ability to register a new user, create a new channel, and invite other users to your channel.
 
-![ImTalkingToMyself](/assets/images/dragonctf2020_harmonychat/harmonychatlogexample.png) 
+![ImTalkingToMyself](/assets/images/dragonctf2020/harmonychat/harmonychatlogexample.png) 
 
 You exchange messages just as any other chat app, and afterwards you can request for a log containing all the chat messages in that particular channel via HTTP or FTP. 
 
@@ -33,7 +33,7 @@ vie: how are u today
 
 Let's dive into that ``csp-report`` a bit more. It turns out that insecure-deserialization is possible via the application's use of the npm library ``javascript-serializer``. We could leverage how the serializer parses input to achieve RCE (Thanks to Robert Xiao for helping me get a payload that works :P):
 
-![FTPCommunication](/assets/images/dragonctf2020_harmonychat/harmonyconsolelog.png) 
+![FTPCommunication](/assets/images/dragonctf2020/harmonychat/harmonyconsolelog.png) 
 
 So RCE is achievable through a POST request to ``/csp-report``. We can use this knowledge to have the application deserialize a command to open a reverse-shell for us. One caveat though: 
 
@@ -74,7 +74,7 @@ Content-Type: application/csp-report
 
 And we get 5 "users": ``POST /csp-report?``, ``Host``, ``Content-Length``, ``Content-Type`` and ``{"csp-report"``. They will then each message the chat in order as so... 
 
-![ThisShouldBeAutomated](/assets/images/dragonctf2020_harmonychat/chatlogsPOST.png) 
+![ThisShouldBeAutomated](/assets/images/dragonctf2020/harmonychat/chatlogsPOST.png) 
 
 
 Do you see where I'm getting at with this? Now we need to download the associated chat log file, and we get:
@@ -90,7 +90,7 @@ Content-Type: application/csp-report
 
 EXACTLY the post request that we want (With a quick sidenote - the newline generated to seperate the request headers from the request body was achieved by sending an empty message to the channel via the console. Again, this was probably easier to do in a script). So now all that's left to do is to connect to the FTP server externally, and tell it to connect to the HTTP server in its LAN, then send over the file we just made above. 
 
-![FTPCommunication](/assets/images/dragonctf2020_harmonychat/ftpcommunication.png) 
+![FTPCommunication](/assets/images/dragonctf2020/harmonychat/ftpcommunication.png) 
 
 - The ``user`` command is expecting a uid of any user in the current session. We technically made 5, so any of their uids work.
 
@@ -102,6 +102,6 @@ EXACTLY the post request that we want (With a quick sidenote - the newline gener
 
 And when we check back in our ngrok instance, we see that we have indeed achieved a shell on harmony-chat-app's server :)
 
-![HarmonyShell](/assets/images/dragonctf2020_harmonychat/harmonyshell.png) 
+![HarmonyShell](/assets/images/dragonctf2020/harmonychat/harmonyshell.png) 
 
 For a more comprehensive writeup, click [here](https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/)
