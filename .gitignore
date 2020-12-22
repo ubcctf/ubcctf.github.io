@@ -1,5 +1,6 @@
 .sass-cache
 .jekyll-metadata
+.DS_Store
 otherfiles
 _site/
 

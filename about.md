@@ -16,7 +16,7 @@ That being said, once we're in the competition and racing for flags, we usually 
 Our worldwide ranking and history can be found on [ctftime.org](https://ctftime.org/team/73723).
  
  
-There is no official sign up process. We encourage any fellow **UBC students, faculty or alumni** to join in, no experience required. You can join our weekly meetings, ask questions, and introduce yourself if you wish. You may also join and participate in any CTF that we play together. We announce our plans to participate in upcoming CTFs on [slack](https://ubcctf.slack.com)/discord.
+There is no official sign up process. We encourage any fellow **UBC students, faculty or alumni** to join in, no experience required. You can join our weekly meetings, ask questions, and introduce yourself if you wish. You may also join and participate in any CTF that we play together. We announce our plans to participate in upcoming CTFs on discord.
  
  
 # Weekly Meetings
