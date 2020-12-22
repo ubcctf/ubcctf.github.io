@@ -1,5 +1,5 @@
-- name: slack
-  link: https://ubcctf.slack.com
+- name: discord
+  link: https://discord.gg/keeTZsmfVA
   external: true
 
 - name: ctftime
