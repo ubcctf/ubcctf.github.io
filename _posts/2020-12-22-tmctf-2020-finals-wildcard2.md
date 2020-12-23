@@ -8,10 +8,10 @@ Maple Bacon qualified and participated in the TrendMicro CTF finals and placed a
 
 Note: I almost never touch these sorts of binary problems, but I have some experience with yara so I took a stab at it. Bear with me when I explain obvious things :)
 
-## A quick primer on yara
+# A quick primer on yara
 What is [yara](https://github.com/VirusTotal/yara)? Yara is a tool developed by [VirusTotal](https://www.virustotal.com/gui/), a malware detection service which combines some custom analysis tools with many many third party antivirus tools. 
 
-Yara is a static analysis tool that works sorta like regex, but with the goal of identifying malware in mind. So like regex, yara lets you write rules and will tell you what rules a given file will hit.
+Yara is a static analysis tool that works sorta like regex, but with the goal of identifying malware in mind. So like regex, yara lets you write rules and will tell you if a file matches the given rule.
 
 Here's an example rule, meant for detecting the `silent_banker` malware family
 
@@ -33,7 +33,7 @@ rule silent_banker : banker
 }
 ```
 
-## The challenge
+# The challenge
 
 The challenge is no longer accessible, so some of the details may be a bit wrong, but here are the important details
 - The challenge presents an api where we can submit a rule file. The server then generates a new binary, runs the given rule, and returns the result (hit/no hit)
@@ -146,7 +146,7 @@ At this point it was 2am, so I went to bed thinking this challenge had to be imp
 Here's one of the generated binaries (though I messed with the flag encoding a bit so don't try to actually run the solution on it)
 [tortoise.c](/assets/code/tmctf2020-finals/wildcard2/tortoise.c)
 
-## The solution
+# The solution
 
 My first instinct was to try and figure out a way of guessing the flag and then generating a rule that pattern matches against the gold_dust, but the massive size, randomized data, and the fact that the flag is encrypted made that approach completely impossible.
 
@@ -174,10 +174,11 @@ Well we have a very helpful set of "garbage code" right before the call to decod
 ... <hundreds of nops>
 90 - nop
 90 - nop
-C7 44 24 0C <key len>  - loading the key_size arg
-C7 44 24 08 <key_addr> - loading the key arg
-C7 44 24 04 <flag len> - loading the flag_size arg
-C7 44 24 <flag_addr>   - loading the flag arg
+C7 44 24 0C <key len>    - loading the key_size arg
+C7 44 24 08 <key_addr>   - loading the key arg
+C7 44 24 04 <flag len>   - loading the flag_size arg
+C7 44 24 <flag_addr>     - loading the flag arg
+E8 <relative addr>       - call to decode
 ```
 
 So we can make a yara string `$nops = {90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 C7 44 24 0c}`, which will match this pattern
@@ -234,4 +235,4 @@ for i in range(flag_size):
 And boom, flag!
 `TMCTF{16d1eb767f}`
 
-Yara ends up being used as a simple string lookup tool in alot of CTF challenges, but this one was definitely a lot more complicated and fun to figure out. A cool challenge to be sure and one that shows off more of what yara can do.
+Yara ends up being used as a simple string/hex search tool in the rare CTF challenge where it appears, but this one was definitely a lot more complicated and fun to figure out. A cool challenge for sure and one that shows off more of what yara can do.
