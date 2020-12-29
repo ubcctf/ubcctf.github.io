@@ -42,7 +42,7 @@ There's no obligation to keep attending meetings or participating in CTFs after 
 <!-- ![Tiger, Samson, Daniel and Filip at Trendmicro CTF finals in 2019](/assets/images/about/tm_finals_2019.jpg){:.img-right} -->
  
  
-We regularly participate in CTF competitions all throughout the year. We competed in 20 CTFs in 2019 and 31 as of October 2020.
+We regularly participate in CTF competitions all throughout the year. We competed in 20 CTFs in 2019 and 45 in 2020.
  
  
 Once we decide to play in a CTF, there is no obligation to any of our team members that they must play.
@@ -152,13 +152,13 @@ It’s common for software companies to purposefully obfuscate the code they sen
 **Web Exploitation** is the act of taking advantage of bugs in web applications, manipulating control flow between server and client, and analyzing numerous issues fundamental to the internet. 
 
 
-Web Exploitation has many real-world examples, and often this category can prove how easy it is to find specific vulnerabilities inherent in an application.
+Web exploitation has many real-world examples, and often this category can prove how easy it is to find specific vulnerabilities inherent in an application.
  
  
 The nature of web exploit challenges seen in CTFs can vary widely. Oftentimes, they will follow patterns: abusing bugs to escalate user privileges, manipulating content to steal sensitive data from other users without them knowing, or accessing assumedly-private files from within an online server. The possibilities are endless, and the field of internet security is ever growing and changing. 
  
  
-Each and every challenge present in the Web Exploit category share a fundamental paradigm - they are built upon a framework or foundation that was assumed to work one way, without regard to understanding how they can work in other unintended ways. Many applications are coded with one idea in mind - how a regular user would interact with it. However, what if a user does irregular things? What if they submit some input to an application that’s in a format the developer didn’t foresee? That is at the heart of web exploitation - manipulating programs to operate in ways it wasn’t intended to operate.
+Each and every challenge present in this category share a fundamental paradigm - they are built upon a framework or foundation that was assumed to work one way, without regard to understanding how they can work in other unintended ways. Many applications are coded with one idea in mind - how a regular user would interact with it. However, what if a user does irregular things? What if they submit some input to an application that’s in a format the developer didn’t foresee? That is at the heart of web exploitation - manipulating programs to operate in ways it wasn’t intended to operate.
  
  
 ## Cryptography
