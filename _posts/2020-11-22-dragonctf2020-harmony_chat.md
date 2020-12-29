@@ -103,5 +103,3 @@ EXACTLY the post request that we want (With a quick sidenote - the newline gener
 And when we check back in our ngrok instance, we see that we have indeed achieved a shell on harmony-chat-app's server :)
 
 ![HarmonyShell](/assets/images/dragonctf2020/harmonychat/harmonyshell.png) 
-
-For a more comprehensive writeup, click [here](https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/)
