@@ -169,7 +169,7 @@ Cryptography is an immensely important function to our day-to-day internet lives
  
  
 ## Forensics
-**Forensics** seeks to uncover the digital trail left behind by computer processes. Steganography, network packet capture analysis, and more all fall into this category. Forensics strengthens skills that examine and uncover hidden pieces of information out of data files, uncovering secrets assumedly deleted or unattainable by normal means. 
+**Forensics** seeks to uncover the digital trail left behind by computer processes. Steganography, network packet capture analysis, and more all fall into this category. Forensics strengthens skills that examine and uncover hidden bits of information out of data files, uncovering secrets assumedly deleted or unattainable by normal means. 
 
 Forensics is a unique category involving clever manipulation of static file formats and unraveling hidden information. Think files-within-files, QR code reconstruction, or even reassembling corrupted files. Forensics will teach you where to find incriminating evidence in your filesystem and how to perform metadata analysis on the programs you are given. 
  
