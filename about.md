@@ -152,24 +152,29 @@ It’s common for software companies to purposefully obfuscate the code they sen
 **Web Exploitation** is the act of taking advantage of bugs in web applications, manipulating control flow between server and client, and analyzing numerous issues fundamental to the internet. 
 
 
-Web exploitation has many real-world examples, and often this category can prove how easy it is to find specific vulnerabilities inherent in an application.
+Web exploitation has many real-world examples, and so the nature of web exploit challenges in CTFs can vary widely. Oftentimes, they'll follow patterns: abusing bugs to escalate user privileges, manipulating content to steal sensitive data from other users without them knowing, or accessing assumedly-private files from within an online server. The possibilities are endless, and the field of internet security is ever growing and changing. 
+
+Web exploit problems can encompass everything from XSS bugs to DNS exfiltration to SSL-cert spoofing - its likely that you'll be learning a new type of exploit with each new CTF you participate in.
  
  
-The nature of web exploit challenges seen in CTFs can vary widely. Oftentimes, they will follow patterns: abusing bugs to escalate user privileges, manipulating content to steal sensitive data from other users without them knowing, or accessing assumedly-private files from within an online server. The possibilities are endless, and the field of internet security is ever growing and changing. 
- 
- 
-Each and every challenge present in this category share a fundamental paradigm - they are built upon a framework or foundation that was assumed to work one way, without regard to understanding how they can work in other unintended ways. Many applications are coded with one idea in mind - how a regular user would interact with it. However, what if a user does irregular things? What if they submit some input to an application that’s in a format the developer didn’t foresee? That is at the heart of web exploitation - manipulating programs to operate in ways it wasn’t intended to operate.
+Each and every challenge present in this category share a fundamental paradigm - they are built upon a framework or foundation that was assumed to work one way, without understanding how they can work in other (unintended) ways. Many applications are made with one idea in mind - how a regular user would interact with it. However, what if a user does irregular things? What if they submit some input to an application that’s in a format the developer didn’t foresee? That is at the heart of web exploitation - manipulating programs to operate in ways it wasn’t meant to operate.
  
  
 ## Cryptography
-todo
+**Cryptography** literally translates to the art of writing ciphers and secret codes. It's because of cryptography that we can send senstive data over the web. In many cases, crypto is the brute powerhouse protecting most of our data online - our passwords, our banking information, anything involving the transmission of sensitive information. However, not everything is without its flaws, and cryptographic-related CTF challenges seek to showcase this - involving the breaking of popular encryption schemes that were not properly implemented. 
+
+Cryptography relies on the understanding of its base mathematical principles, which can be rigorous. But don't be daunted by that - many challenges in the crypto category will utilize some piece of flawed logic that you can exploit to crack the encryption scheme wide open. It's a matter of understanding the encryption rules in order to break them.
+
+Cryptography is an immensely important function to our day-to-day internet lives, and this category seeks to ensure that the encryption schemes seeing widespread use are rigorously tested and correctly implemented. 
  
  
 ## Forensics
-todo
+**Forensics** seeks to uncover the digital trail left behind by computer processes. Steganography, network packet capture analysis, and more all fall into this category. Forensics strengthens skills that examine and uncover hidden bits of information out of data files, uncovering secrets assumedly deleted or unattainable by normal means. 
+
+Forensics is a unique category involving clever manipulation of static file formats and unraveling hidden information. Think files-within-files, QR code reconstruction, or even reassembling corrupted files. Forensics will teach you where to find incriminating evidence in your filesystem and how to perform metadata analysis on the programs you are given. 
  
 ## Misc
-todo
+Everything not under the 5 categories above will map to the **Misc** category. As such, the miscellaneous category is broad in scope and can touch on many different topics.
  
  
 # FAQ
@@ -184,3 +189,7 @@ more proficient in different categories.
 [gef]: https://github.com/hugsy/gef
 [pwndbg]: https://github.com/pwndbg/pwndbg
 [ghidra]: https://github.com/NationalSecurityAgency/ghidra
+
+## What category should I focus on? 
+
+Whichever one your heart desires! We don't enforce any policy that would dictate what category you should develop skills in. Some people may find they like cryptography over binary exploits, or reverse engineering over web application security. We encourage everyone to explore and learn what they like, wether that be one or two specific categories, or an overall understanding of all categories. 
