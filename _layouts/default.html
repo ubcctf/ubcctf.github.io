@@ -21,7 +21,7 @@
 
       <header>
         <nav>
-          {% assign pages = "about,getting started,blog,members" | split: "," %}
+          {% assign pages = "about,getting_started,blog,members" | split: "," %}
           {% for p in pages %}
           <a href="/{{ p }}"{% if page.name contains p %} class="active"{% endif %}>{{ p }}</a>
           {% endfor %}
