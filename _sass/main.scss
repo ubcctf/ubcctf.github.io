@@ -2,6 +2,7 @@
 
 $red: #ed5454;
 $blue: #73ead3;
+$azure: #d2ffff; 
 $header-color: #2b2b2b;
 $body-font: 'Overpass Mono', monospace;
 $title-font: 'Inconsolata', monospace;
@@ -23,7 +24,7 @@ img {
 body {
     background-color: #333333;
     font-family: $body-font;
-    color: $blue;
+    color: $azure;
 }
 
 strong, h1, h2, h3 {
@@ -232,6 +233,14 @@ figure {
 }
 
 p > code {
+    // background: #555;
+    background: #272727;
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: #ed5454;
+}
+
+li > code {
     // background: #555;
     background: #272727;
     border-radius: 4px;
