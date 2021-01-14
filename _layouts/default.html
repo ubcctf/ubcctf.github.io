@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ page.title }}</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
+    <meta name="image" property="og:image" content="/favicon.png">
+    <meta name="description" property="og:description" content="CTF Team at the University of British Columbia">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Inconsolata:700|Overpass+Mono" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -21,7 +23,7 @@
 
       <header>
         <nav>
-          {% assign pages = "about,blog,resources,members" | split: "," %}
+          {% assign pages = "about,getting_started,blog,members" | split: "," %}
           {% for p in pages %}
           <a href="/{{ p }}"{% if page.name contains p %} class="active"{% endif %}>{{ p }}</a>
           {% endfor %}
