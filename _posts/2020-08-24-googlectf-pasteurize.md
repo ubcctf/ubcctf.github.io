@@ -12,7 +12,7 @@ author: Vie
 
 # Pasteurize 
 
-The first web challenge from Google CTF 2020. It's a simple website that holds "pastes", or notes, that take your input and store it onto a note webpage. You make a note, and then you can share it with some entity called "TJMike". Pretty cut and clear XSS attack. 
+The first aweb challenge from Google CTF 2020. It's a simple website that holds "pastes", or notes, that take your input and store it onto a note webpage. You make a note, and then you can share it with some entity called "TJMike". Pretty cut and clear XSS attack. 
 
 Unfortunately, it's not that simple: 
 
