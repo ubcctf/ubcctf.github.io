@@ -2,6 +2,8 @@
 short_name: rctcwyvrn
 name: Arctic Wyvern
 position: Cryptography
+website: https://rctcwyvrn.github.io/
+website_title: rctcwyvrn.github.io
 layout: author
 ---
 Resident cryptography hacker. She likes math and her cat, Void.
