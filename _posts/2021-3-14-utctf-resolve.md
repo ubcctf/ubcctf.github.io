@@ -22,6 +22,7 @@ Now the vulnerability is a classic buffer overflow but the problem is that this 
 Now what we could do is write a ret2dlresolve payload by hand such as the one [here]. No thanks. Fortunately, pwntools has a ret2dlsresolve module that will automatically generate the payloads for you. So our payload ends up being something like this:
 
 ```
+from pwntools import *
 context.binary = elf = ELF('resolve')
 rop = ROP(elf)
 
