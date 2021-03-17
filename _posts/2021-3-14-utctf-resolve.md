@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [UTCTF 2021] Resolve
+title: "[UTCTF 2021] Resolve"
 author: Kevin Zhang
 ---
 
