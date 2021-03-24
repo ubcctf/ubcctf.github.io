@@ -24,7 +24,7 @@ Author: TheEmperors
 
 A quick Google search leads us to this blog post: https://ittone.ma/ittone/is-there-any-limit-in-pythons-requirements-txt-during-the-installation/
 
-![Blog Post](assets/images/securinetquals2021/hacktheempire/blog.png?raw=true)
+![Blog Post](/assets/images/securinetquals2021/hacktheempire/blog.png?raw=true)
 
 We can gather that the company is downloading packages from a private repository that match the following regex: `ctf_q21_empire_tmp_[a-z0-9_]{5,10}`
 
