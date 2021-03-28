@@ -22,7 +22,7 @@ Using Wireshark to extract the `.RAR` file we see that the archive is password p
 ## Password
 
 At this point I was lost but then I realized that the USB capture might have captured keyboard activity that might include the password to the archive. Looking at the capture we see that there are four USB devices present at the time.  
-[Devices](/assets/images/volgaquals2021/Stremas/devices.PNG)  
+![Devices](/assets/images/volgaquals2021/Streams/devices.PNG)  
 
 1.1.0: A hub. Not interesting  
 1.2.0: Device  
@@ -31,7 +31,7 @@ At this point I was lost but then I realized that the USB capture might have cap
 
 
 Looking at 1.2.0 we see that it is made by A4Tech. After doing some research I found out that they made HID devices. This is probably our keyboard. We also know that USB keyboards use interrupts and if its a keyboard then the keyboard will be sending the keystrokes to the host. So we'll just filter interrupt traffic that originates from 1.2.x. Which looks something like this.  
-[Packets](/assets/images/volgaquals2021/Stremas/packets.PNG)  
+![Packets](/assets/images/volgaquals2021/Streams/packets.PNG)  
 The HID Data section is the keystrokes being sent over. Essentially, the first 2 bytes are control keys like SHIFT and CTRL and then each byte after that is one key on the keyboard being pressed at time of the interrupt. [Chapter 10](https://usb.org/sites/default/files/hut1_21_0.pdf) of this document shows how to translate each byte to a character. Doing this for each packet yields `wpwhqsdhlp7hx69`.
 
 ## Extraction
