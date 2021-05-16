@@ -6,7 +6,7 @@ author: Kevin Zhang
 
 # TL:DR
 
-Append shellcode to `.text` section using linker scripts and set entry point to shell code.
+Append shellcode to `.text` section using linker scripts and set entry point to the shellcode.
 
 # Premise
 
@@ -31,11 +31,11 @@ ld -T script.ld hello.o -o hello /usr/lib/x86_64-linux-gnu/libc.so -dynamic-link
 ./hello
 ```
 
-Basically, we provide the server with a linker script and it will use it to  link `hello.o` with `libc`. I don't have any experience with linker scripts so initially I thought it could be possible to overload a libc function like printf to run some shellcode. However, I couldn't find anything that suggested that was possible so I used another approach instead.
+Basically, we provide the server with a linker script and it will use it to link `hello.o` with `libc`. I don't have any experience with linker scripts so initially I thought it could be possible to overload a libc function like `printf` to run some shellcode. However, I couldn't find anything that suggested that was possible so I used another approach instead.
 
 # Approach
 
-The key points here are that you can set the entry point to any symbol you want and you insert arbitrary bytes into any section you want. For example, the following code will create a section called `.s` with shellcode and set the entry point to the start of the section.
+The key points here are that you can set the entry point to any symbol you want and you can insert arbitrary bytes into any section you want. For example, the following code will create a section called `.s` with shellcode and set the entry point to the start of the section.
 
 ```
 ENTRY(shell_start)
