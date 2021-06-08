@@ -14,7 +14,7 @@ author: Siri
 
 Downloading and running the executable, I was greeted with the following window:
 
-![Sabloom Text Window](/assets/images/bo1lers2021/zh3r0ctfv2/sabloom_text_window.png)
+![Sabloom Text Window](/assets/images/zh3r0ctfv2/sabloom_text_window.jpg)
 
 ## TL;DR
 
@@ -29,7 +29,7 @@ To start, I played around with most of the text editor functions, but everything
 Under *Help>Register*, I found a project registration form. I tried filling out the form with a random name and serial number, and I was presented with the message:
 > Please visit https://x3ero0.github.io/post/sabloom-license/ after the competition ends to Purchase License
 
-![Sabloom Text Register Window](/assets/images/bo1lers2021/zh3r0ctfv2/sabloom_register_window.png)
+![Sabloom Text Register Window](/assets/images/zh3r0ctfv2/sabloom_register_window.jpg)
 
 This seemed interesting. I developed an initial theory that I needed to enter the **Name** as `X3ero0` and the **Serial** as the flag to register the product.
 
@@ -285,7 +285,7 @@ def get_maze_from_mem():
 
 Here is the maze (`--` is `0` and `XX` is `1` because it's easier to see this way):
 
-![Maze](/assets/images/bo1lers2021/zh3r0ctfv2/sabloom_maze.png)
+![Maze](/assets/images/zh3r0ctfv2/sabloom_maze.jpg)
 
 Next, I wrote an algorithm to solve the maze. The maze was small enought that could probably also be solved by hand, but I didn't want to risk a typo:
 
