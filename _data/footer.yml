@@ -5,3 +5,8 @@
 - name: ctftime
   link: https://ctftime.org/team/73723
   external: true
+
+
+- name: twitter
+  link: https://twitter.com/maplebaconctf
+  external: true
