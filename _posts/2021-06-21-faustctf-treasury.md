@@ -4,8 +4,6 @@ title: "[FAUST CTF 2021] Treasury"
 author: Robert Xiao
 ---
 
-# Treasury
-
 Treasury was a CTF challenge from the Faust CTF 2021 online attack-defense CTF. The Treasury service is a 64-bit Linux binary implementing a simple text-based service, configured to listen on port 6789 on the vulnbox.
 
 ## Initial Reversing
