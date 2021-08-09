@@ -27,7 +27,7 @@ The player can be controlled by the arrow keys.
 
 # Approach
 
-In my initial apparoach I captured the traffic being sent to the server and tried to see if I could spoof the packets so it looked like I was inside the wall. However, the binary uses Protobuf which makes trying to analyze the packet structure a bit difficult.
+In my initial approach I captured the traffic being sent to the server and tried to see if I could spoof the packets so it looked like I was inside the wall. However, the binary uses Protobuf which makes trying to analyze the packet structure a bit difficult.
 
 When we decompile the client we see something quite interesting.
 
@@ -35,7 +35,7 @@ When we decompile the client we see something quite interesting.
 
 If we Google the function we can see that the if statements are checking for the arrow keys. This means that this block controls the player's position. At this point I was stuck for a while before realizing that if the client is the one that is updating the player position then that probably implies that the server trusts whatever position the client reports.
 
-After this realization I patched the client so that everytime I pressed the right arrow key it would shift the player's position by two instead of one. This would allow me to jump past the wall and get the flag.
+After this realization I patched the client so that every time I pressed the right arrow key it would shift the player's position by two instead of one. This would allow me to jump past the wall and get the flag.
 
 ![flag](/assets/images/rarctf2021/rarpg/flag.PNG)
 
