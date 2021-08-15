@@ -28,5 +28,3 @@ Coming soon!
 # Forensics
 
 There's nothing here... or is there?
-
-[comment]: #  (Great job ;) flag{M@pl3Syrup})
