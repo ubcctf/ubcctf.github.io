@@ -9,7 +9,7 @@ author: David Zheng
 ## tl;dr
 
 Beat a chess bot in "Smog of War" a variant of chess (almost?) identical to the
-[https://en.wikipedia.org/wiki/Dark_chess](Fog of War) variation of chess by sending two different moves to the server.
+[Fog of War](https://en.wikipedia.org/wiki/Dark_chess) variation of chess by sending two different moves to the server.
 
 ## Description
 
@@ -57,7 +57,7 @@ Furthermore, it was given 10 seconds to think about each move.
 
 On top of that our worst fears were confirmed when we realized that our move
 `m1` was being sent to the bot (lemonthink), so the bot knew the entire state of the board
-while we were restricted by the 'smog of war'!
+while we were restricted by the fog of war!
 ```python
         self.enemy.lemonthink(m1)
 
