@@ -9,12 +9,12 @@ author: David Zheng
 ## tl;dr
 
 Beat a chess bot in "Smog of War" a variant of chess (almost?) identical to the 
-Fog of War variation of chess by using sending a different move than the played
-move to the bot by sending a custom move to the server.
+Fog of War variation of chess by sending two different moves to the server.
 
 ## Description
 
 misc/smogofwar; strellic ; 7 solves / 497 points
+
 Hey, I made a chess website to play my favorite variant, smog of war! 
 Why don't you check it out and play against my AI. He has some nasty surprises, 
 but if you beat him I'll give you a flag.. good luck :)
@@ -26,8 +26,8 @@ contents of the website and the backend server that handles the chess game.
 
 ## Solving the Challenge
 
-The website contains a variation of chess where you can only see squares where
-either you have pieces, can go to/capture and you play against a bot.
+The website contains a variation of chess against a bot where you can only see 
+squares where either you have pieces, can go to or capture.
 Beating the bot would give you the flag.
 As an added bonus, every time the bot captures your piece, it spits out a
 random piece of trash talk in the chat.
