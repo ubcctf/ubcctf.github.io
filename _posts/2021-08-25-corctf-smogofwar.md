@@ -9,7 +9,7 @@ author: David Zheng
 ## tl;dr
 
 Beat a chess bot in "Smog of War" a variant of chess (almost?) identical to the
-Fog of War variation of chess by sending two different moves to the server.
+[https://en.wikipedia.org/wiki/Dark_chess](Fog of War) variation of chess by sending two different moves to the server.
 
 ## Description
 
@@ -22,7 +22,7 @@ but if you beat him I'll give you a flag.. good luck :)
 <https://smogofwar.be.ax>
 
 You're also given a zip file named `smogofwar.zip` that presumably has the
-contents of the website and the backend server that handles the chess game.
+contents of the website and the server that handles the chess game.
 
 ## Solving the Challenge
 
@@ -113,8 +113,8 @@ of moves where the bot behaved predictably.
 
 ![winning](/assets/images/corctf2021/smogofwar/winning.jpg)
 
-Then we would run this command:
-```
+Then we would run this command in the javascript console:
+```javascript
 socket.emit('move', {'_debug': true, 'move': 'd4e4', 'move2': 'd4f4'})
 ```
 The command meant that we moved our queen to E4, which puts the king in check.
