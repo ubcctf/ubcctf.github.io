@@ -12,6 +12,12 @@ x86 binary
 1a7513c1ef106681ff6167750981fe1c1f165475014b31c040cd8090
 ```
 
+# Pwn
+
+```
+nc 152.67.233.218 6969
+```
+
 # Crypto
 
 Naïve RSA with easily factorable modulus
