@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[corCTF 2021] smogofwar"
-author: David Zheng
+author: zhed
 ---
 
 # [corCTF 2021] smogofwar
