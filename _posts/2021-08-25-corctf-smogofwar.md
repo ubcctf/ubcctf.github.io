@@ -37,10 +37,13 @@ random piece of trash talk in the chat.
 Playing around with the bot, the bot seems really strong, but seemed to move
 deterministically. I'm not good enough at chess for this, so I
 enlisting the help of an amateur chess friend Henry I had on hand.
-He tried to play the bot and realized it was not deterministic and seemed quite strong.
+He tried to play the bot and realized it was not deterministic and seemed quite 
+strong.
 
-Looking at the source code for the bot, it turned out it was running one of the
-best and newest chess bots: Stockfish 14.
+Looking at the source code for the bot, it turned out it was running the newest 
+versions of the best chess bots: 
+[Stockfish 14](https://stockfishchess.org/blog/2021/stockfish-14/).
+
 ```python
 class Enemy:
     def __init__(self, fen, emit):
@@ -56,8 +59,8 @@ Furthermore, it was given 10 seconds to think about each move.
 ```
 
 On top of that our worst fears were confirmed when we realized that our move
-`m1` was being sent to the bot (lemonthink), so the bot knew the entire state of the board
-while we were restricted by the fog of war!
+`m1` was being sent to the bot (lemonthink), so the bot knew the entire state 
+of the board while we were restricted by the fog of war!
 ```python
         self.enemy.lemonthink(m1)
 
@@ -67,8 +70,9 @@ while we were restricted by the fog of war!
 
 Henry informed me that even a professional chess player would struggle to beat
 stockfish, even without fog of war. We considered writing
-another bot running stockfish with more thinking time, but with fog of war and non-deterministic
-moves, it would have been difficult to beat the bot with another bot.
+another bot running stockfish with more thinking time, but with fog of war and 
+non-deterministic moves, it would have been difficult to beat the bot with 
+another bot.
 
 By looking closer at the code for the game, we found the following suspicious lines:
 ```python
@@ -87,9 +91,9 @@ By looking closer at the code for the game, we found the following suspicious li
             self.emit("chat", {"name": "System", "msg": "Invalid move"})
             return
 ```
-It looked like that if we send a move to the server with the `_debug` field,
-the move `m0` would get played on the board but the move `m1` would get sent
-to the bot. With this, we had enough to trick the bot by giving it a fake
+If we sent a dictionary to the bot with the `_debug` field instead of a string
+containing our move, the move `m0` would get played on the board but the move 
+`m1` would get sent to the bot. With this, we had could trick the bot by giving it a fake
 move, when we in fact performed another move!
 
 However, it wasn't that easy because the chess bot had various checks to make
@@ -128,7 +132,8 @@ so this allowed us us to take the king and win!
 corctf{"The opportunity of defeating the enemy is provided by the enemy himself." - Sun Tzu}
 ```
 
-This was a pretty fun and interesting challenge that we solved the way the
-authors intended. The challenge authors speculated whether there were unintended
+This was a pretty fun and interesting challenge.
+This was the intended solution for the challenge.
+The challenge authors speculated whether there were unintended
 solutions involving beating the bot legitimately, but we concluded that even if
 you had a professional chess player handy, it would be difficult.
