@@ -18,6 +18,10 @@ x86 binary
 nc 152.67.233.218 6969
 ```
 
+[Source exe](https://drive.google.com/file/d/15mBjhZ2czhF4d0cTBkW4ZAHd5_lVp4pw/view?usp=sharing)
+
+[Source code](https://drive.google.com/file/d/1op6YplcAflHZzy3bIugVVoJJOachG4fd/view?usp=sharing)
+
 # Crypto
 
 Naïve RSA with easily factorable modulus
@@ -29,7 +33,7 @@ c=72369358377761109471037762181133982768
 ```
 # Web
 
-Coming soon!
+[Steal our secrets](http://152.67.233.218:1337)
 
 # Forensics
 
