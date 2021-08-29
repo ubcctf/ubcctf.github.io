@@ -4,17 +4,9 @@ title: "Maple Bacon Beginner crypto"
 author: rctcwyvrn
 hide: "true"
 ---
-
-Modern cryptography has a few main categories,
-1. Securing messages via encryption
-2. Acquiring keys via key exchange
-3. Ensuring the integrity of messages via signing and hashing
-
 Normally beginner cryptography challenges involve simple alphabetic substituion ciphers, which are fine but also completely irrelevant in the modern day. I think that's a shame because there exist easy beginner challenges that are also _breaking real world cryptography_.
 
-Why is that?
-
-Modern cryptography is excellent and extremely secure, however it it has a major flaw.
+Why is that? Modern cryptography is excellent and extremely secure, however it it has a major flaw.
 
 **Cryptography is extremely brittle and easy to misuse.**
 
