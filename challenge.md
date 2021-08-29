@@ -24,13 +24,13 @@ nc 152.67.233.218 6969
 
 # Crypto
 
-Naïve RSA with easily factorable modulus
+Stack exchange says everyone uses AES-GCM, but I don't need the tag so I'll just use CTR
 
-```
-n=248494868756188358559996769866863829523
-e=3
-c=72369358377761109471037762181133982768
-```
+- [gen.py](/assets/challenges/beginner-crypto/gen_no_comments.py)
+- [secret.enc](/assets/challenges/beginner-crypto/secret.enc)
+
+For complete newcomers, I would recommend giving this [companion guide](/2021/08/beginner-crypto/) a read, it covers some background and gives you the gist of how this challenge is solved
+
 # Web
 
 [Steal our secrets](http://152.67.233.218:1337)
