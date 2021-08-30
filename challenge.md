@@ -38,3 +38,5 @@ For complete newcomers, I would recommend giving this [companion guide](/2021/08
 # Forensics
 
 There's nothing here... or is there?
+
+[//]: # (Nice! flag{M@pl3Syrup} )
