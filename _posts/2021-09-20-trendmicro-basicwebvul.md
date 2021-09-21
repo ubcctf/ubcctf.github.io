@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Trendmicro 2021] OSINTⅡ 400"
+title: "[Trendmicro 2021] OSINTⅡ 400"
 author: aynakeya
 ---
 
