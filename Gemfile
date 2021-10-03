@@ -9,3 +9,4 @@ group :jekyll_plugins do
 end
 
 gem "github-pages", group: :jekyll_plugins
+gem "webrick", "~> 1.7"
