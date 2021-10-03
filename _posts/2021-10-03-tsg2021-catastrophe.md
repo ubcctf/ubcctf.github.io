@@ -4,6 +4,8 @@ title: "[TSG 2021] Catastrophe - OCaml Exploitation"
 author: Robert Xiao
 ---
 
+{% raw %}
+
 Maple Bacon participated in [TSG CTF 2021](https://ctftime.org/event/1431),
 which was organized by the [Theoretical Science Group of the University of
 Tokyo](https://tsg.ne.jp/). We placed 13th overall. During the competition, I
@@ -38,7 +40,7 @@ is as follows:
     - `external`: Prevents accessing native functions
     - `(*`: Blocks comments
     - `match`: Blocks `match` expressions; this blocks the `match`-based type safety hole which was the intended bug in the SECCON 2020 problem
-    - `read`, `#`, `[`, `{{%`, `{<`: I'm not completely sure why these are banned
+    - `read`, `#`, `[`, `{%`, `{<`: I'm not completely sure why these are banned
 
 ## The intentional bug
 
@@ -277,3 +279,5 @@ When run, this hands us a shell, from which we can use `ls` and `cat` to get the
 
 Best of all, it works even with `PWN` unset, i.e. without the deliberate bug that was
 introduced for this problem!
+
+{% endraw %}
