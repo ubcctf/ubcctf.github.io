@@ -38,7 +38,7 @@ is as follows:
     - `external`: Prevents accessing native functions
     - `(*`: Blocks comments
     - `match`: Blocks `match` expressions; this blocks the `match`-based type safety hole which was the intended bug in the SECCON 2020 problem
-    - `read`, `#`, `[`, `{%`, `{<`: I'm not completely sure why these are banned
+    - `read`, `#`, `[`, `{{%`, `{<`: I'm not completely sure why these are banned
 
 ## The intentional bug
 
