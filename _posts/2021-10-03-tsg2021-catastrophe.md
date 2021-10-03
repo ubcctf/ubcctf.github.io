@@ -126,7 +126,7 @@ way to implement this buggy function. We can use the implicit pattern matching
 syntax instead, which looks like this:
 
 ```ocaml
-function foo
+let foo = function
   | Some x -> 0
   | _ -> 1
 ```
