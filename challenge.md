@@ -16,10 +16,6 @@ x86 binary
 
 # Pwn
 
-```
-nc 152.67.233.218 6969
-```
-
 - [Source exe](https://drive.google.com/file/d/15mBjhZ2czhF4d0cTBkW4ZAHd5_lVp4pw/view?usp=sharing)
 
 - [Source code](https://drive.google.com/file/d/1op6YplcAflHZzy3bIugVVoJJOachG4fd/view?usp=sharing)
@@ -32,12 +28,6 @@ Stack exchange says everyone uses AES-GCM, but I don't need the tag so I'll just
 - [secret.enc](/assets/challenges/beginner-crypto/secret.enc)
 
 For complete newcomers, I would recommend giving this [companion guide](/2021/08/beginner-crypto/) a read, it covers some background and gives you the gist of how this challenge is solved
-
-# Web
-
-Are you admin?
-
-[Steal our secrets](http://152.67.233.218:1337)
 
 # Forensics
 
