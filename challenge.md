@@ -8,7 +8,7 @@ Maple Bacon Beginner Practice
 
 **NOTE**: All flags will begin with either the prefix `maple{` or `flag{`.
 
-**NOTE**: These are practice challenges and are not in any way related to mapleCTF!
+**NOTE**: These are **practice** challenges and are **not part of mapleCTF**! However they are good practice for challenges you might see during the competition
 
 # Reversing
 
