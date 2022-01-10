@@ -3,7 +3,12 @@ layout: challenge
 title: Challenges | CTF @ UBC 
 ---
 
+Maple Bacon Beginner Practice
+---
+
 **NOTE**: All flags will begin with either the prefix `maple{` or `flag{`.
+
+**NOTE**: These are practice challenges and are not in any way related to mapleCTF!
 
 # Reversing
 
