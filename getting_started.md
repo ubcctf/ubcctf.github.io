@@ -25,8 +25,8 @@ Most problems in CTFs involve developing a good understanding for the functional
 The above practice resources are mostly focused on Linux-based systems and x86 assembly. There are other resources that focus on other systems such as Windows or Android, but aside from the listed practice resources the next best way to get good is to participate in actual CTFs so you can experience the wide variety of problems CTFs have to offer. You can find some problems and writeups to learn from by also going to [CTFtime](https://ctftime.org/), which is the most popular site for keeping up with all things CTF.
 
 There are several tools that get used a lot for Linux-based pwn/reversing challenges. You'll need to learn to use more tools as you encounter new CTF problems, so providing an exhaustive list wouldn't be of much aid. Some of the ones you'll definitely need are as follows:
-- a debugger ([GDB](https://www.gnu.org/software/gdb/) + an extension like [gef](https://gef.readthedocs.io/en/master/)
-- a disassembler/decompiler ([Ghidra](https://ghidra-sre.org/)
+- a debugger ([GDB](https://www.gnu.org/software/gdb/) + an extension like [gef](https://gef.readthedocs.io/en/master/))
+- a disassembler/decompiler ([Ghidra](https://ghidra-sre.org/) or [IDA](https://hex-rays.com/ida-free/))
 - [pwntools](http://docs.pwntools.com/en/stable/) for quickly writing exploit scripts
 
 ## Cryptography
