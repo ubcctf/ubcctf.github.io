@@ -211,7 +211,8 @@ As a first step, we searched the address on Etherscan.io, which yielded no resul
 Clicking on the [earliest transaction](https://ropsten.etherscan.io/tx/0xca78d2d51101fda93f3f8c62f4349dd23a7e5692cef667ab834c3611601f068f), we can find the input data of the transaction. If we convert the input data provided into UTF-8 text, we can trivially find the flag
 
 ![EthScan2](/assets/images/utctf2022/Miscs/ethscan2.png)
-utflag{Did_Y0u_USe_Re3nTrancY?}
+
+`utflag{Did_Y0u_USe_Re3nTrancY?}`
 
 No we did not, UTCTF. No we did not.
 
