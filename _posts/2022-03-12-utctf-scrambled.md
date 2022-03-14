@@ -6,23 +6,26 @@ author: dontmindme
 
 # Scrambled - A Sonnet by DontMindMe
 
-There was a keyboard which had caps mixed up
-A flag hidden among the scrambled text
-Such we turn to frequency to cleanup 
-words to find the real flag, to not be vexed
+There was a keyboard which had caps mixed up    
+A flag hidden among the scrambled text    
+Such we turn to frequency to cleanup     
+words to find the real flag, to not be vexed    
 
-We start by claiming that backspace is R
-And write some code to see the text unfurled
-Say "a" is Shift and "g" the whitespace char
-Two once-used chars must be the brackets curled
 
-The flag must be then final string observed
-"utflag" follows, then small tweaks are made
-To see the final script we used preserved
-Look to the end, see how we made the grade
+We start by claiming that backspace is R    
+And write some code to see the text unfurled    
+Say "a" is Shift and "g" the whitespace char    
+Two once-used chars must be the brackets curled    
 
-And while we reach the challenge terminus
-We witness true love lost to nervousness
+
+The flag must be then final string observed    
+"utflag" follows, then small tweaks are made    
+To see the final script we used preserved    
+Look to the end, see how we made the grade    
+
+
+And while we reach the challenge terminus    
+We witness true love lost to nervousness    
 
 ## Solve Script
 
