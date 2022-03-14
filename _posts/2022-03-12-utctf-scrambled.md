@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[UTCTF 2022] Scrambled"
-author: dontmindme
+author: Dontmindme
 ---
 
 # Scrambled - A Sonnet by DontMindMe
