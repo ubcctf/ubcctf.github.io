@@ -18,12 +18,12 @@ Emails should not be hardcoded into public repositories
 
 For this challenge, we are tasked to OSINT a user named “eddking6” and answer the following five questions in a phishing email to him:
 
-The name of his dog? 
-His favourite video game? 
-His alma mater? 
-His Role at his company? 
-His favorite[^1] food? 
-His Email?
+The name of his dog?    
+His favourite video game?     
+His alma mater?    
+His Role at his company?    
+His favorite[^1] food?    
+His Email?    
 
 ## Solution
 
