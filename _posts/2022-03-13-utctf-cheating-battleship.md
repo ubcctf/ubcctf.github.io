@@ -11,30 +11,12 @@ The client sends a packet to the server right as you place your last ship. This 
 
 # Premise
 The objective of this challenge is to beat the AI in the children's game Battleship. However, if you play the game normally you will soon discover that the AI is a dirty cheater with an aimbot. It will be impossible to win given these circumstances.
-| ![battleship.png](/assets/images/utctf2022/Battleship/battleship.png) |
-|:--:|
-| <b>The AI is cheating and has 100% accuracy.</b>|
+![battleship.png](/assets/images/utctf2022/Battleship/battleship.png)
 
 # Approach #1: Reverse the JS
 The biggest hint here from the organizers is that this challenge was categorized as networking so the first thing I did was capture some of the traffic. From there, we can see that the client is using a WebScocket to communicate with the server. Now that we have the packets that are being sent,  we tried to reverse the source code on the client side to see if we could get a better understanding of the packet structure.
 
 The issue is, the JS code is over 100KB and is heavily obfuscated. Furthermore, there are multiple debugger checks built into the code. Jason actually has some experience reversing obfuscated JS so he volunteered to try to reverse this mess. I on the other hand do not want to even look at this thing for another second so I moved on. 
-
-Here is a snippet of the JS code:
-```Javascript
-(function (saralee, pamilla) {
-  const lakhi = saralee();
-  while (!![]) {
-    try {
-      const deontee = parseInt(tinashe(959, "zzP[")) / 1 * (-parseInt(tinashe(1587, "03Wo")) / 2) + parseInt(tinashe(1830, "OvRH")) / 3 + -parseInt(tinashe(1393, "Hsix")) / 4 * (parseInt(tinashe(1129, "Hsix")) / 5) + parseInt(tinashe(327, "(HuH")) / 6 + -parseInt(tinashe(583, "8Q]R")) / 7 * (-parseInt(tinashe(1574, "$Xi%")) / 8) + -parseInt(tinashe(307, "uXdQ")) / 9 + -parseInt(tinashe(960, "bsQF")) / 10 * (-parseInt(tinashe(572, "2MM%")) / 11);
-      if (deontee === pamilla) break; else lakhi.push(lakhi.shift());
-    } catch (samrawit) {
-      lakhi.push(lakhi.shift());
-    }
-  }
-}(jerrye, 120320));
-...
-```
 
 # Approach #2: Packet Analysis
 Like I said before, the biggest hint from the organizers was that this challenge was categorized under networking. Therefore, I decided to analyze the packets a bit more in depth. I captured the traffic a couple of times while playing the game and determined the following timings:
