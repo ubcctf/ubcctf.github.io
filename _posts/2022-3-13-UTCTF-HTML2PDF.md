@@ -1,13 +1,26 @@
 ---
 layout: post
-title: "[UTCTF 2022] HTML2PDF & Sigma!"
+title: "[UTCTF 2022] HTML2PDF & Sigma"
 author: Vie
 ---
 
+- [HTML2PDF](#html2pdf)
+  - [TL;DR](#tldr)
+  - [All is XSS in the web](#all-is-xss-in-the-web)
+  - [Solution](#solution)
+- [Sigma](#sigma)
+  - [TL;DR](#tldr-1)
+  - [Literally what did I just say about XSS](#literally-what-did-i-just-say-about-xss)
+  - [Oh boy, I hope you like wasm](#oh-boy-i-hope-you-like-wasm)
+  - [Solution](#solution-1)
+
 # HTML2PDF
 
-## Problem Description
+## Problem description
 > My friend bet me I couldn't pwn this site. Can you help me break in?
+
+## TL;DR
+[LFI with XSS](https://book.hacktricks.xyz/pentesting-web/xss-cross-site-scripting/server-side-xss-dynamic-pdf)
 
 ## All is XSS in the web
 Before we do anything, notice the `/admin` endpoint which looks for a username and password. Would be nice to try and access that, hey? 
@@ -17,6 +30,8 @@ Back to the PDF maker: You can specify a `src` attribute in an img tag (or any t
 Search online for any vulnerabilities or potential flaws with wkhtmltopdf and you'll see 2 avenues: SSRF to access the AWS meta-data service (rabbit hole), and server-side XSS for LFI. 
 
 I'm going to skip over the time spent on attempting to gain control of the AWS EC2 which was a red herring. The TL;DR of the vulnerabilities associated with wkhtmltopdf is its ability to execute arbitrary code, likely stemming from a legacy version of [webkit](https://blogs.gnome.org/mcatanzaro/2016/02/01/on-webkit-security-updates/). Remembering the `/admin` endpoint, it would be nice to see if there were any usernames or passwords to look out for that was in a file, and steal it through the execution of said JS code. Since we have JS execution, why not have wkhtmltopdf visit local files for us? 
+
+## Solution
 
 So, execute a server-side XSS which will grab the `etc/shadow` file - good to know we have some nice permissions to be able to access it. The output will be presented in the PDF.
 
@@ -42,7 +57,10 @@ The username is now known: WeakPasswordAdmin. Now, we simply need to bruteforce 
 
 > Our new image processing tool runs completely in your browser! Right now we only support one image effect and image format though. Note: this challenge is also a reversing challenge.
 
-## Why is there pwn in my web
+## TL;DR
+Overflow in wasm's stack buffer between 3M and 4M RGBA bytes to spill into an eval'd JS string, overwriting it with our own XSS payload. 
+
+## Literally what did I just say about XSS
 
 We're given source - poke around and notice the `report.js` file which is a simple puppeteer bot that has the flag stored in their cookie. Okay, XSS, got it. 
 
@@ -84,6 +102,8 @@ So if we want to steal the cookie when the bot looks at our picture, we have to 
 
 ## Oh boy, I hope you like wasm
 
+TODO: flesh this part out
+
 The wasm file is the logic behind the pixel color inversion. After 10 mins of reinstalling Ghidra, we can observe the output of decompiling the wasm.
 
 We can also observe and debug the behaviour of the wasm file using the dev console in the browser.
@@ -92,6 +112,8 @@ We can also observe and debug the behaviour of the wasm file using the dev conso
 A 3M byte stack buffer is set, with size checks expecting a max of 1000x1000 RGB triples. However, the logic supports RGBA (RGB Alpha) - meaning that the max buffer size is an additional 1M to accomodate the opacity bytes, totaling to 4M. If we give the program an image that is over 3M RGBA bytes but less than 4M, we trigger an overflow whilst never triggering the size checks.
 
 When an overflow occurs, the extra bytes end up overwriting the string `draw_buf(%u, %u, %u)` which is the name of an actual function defined in `index.js`. The original logic would have eval'ed that string as JavaScript code, effectively calling that function in a JS context, in the wasm. However, overflowing into it will change the string of what gets interpreted as JS code. Sounds like just what we need then!
+
+## Solution
 
 The attack flow is now clear: we just need need to create an image which, when decoded, is a little over 3M bytes and overflow the allocated buffer. The remaining bytes that spill into the string `draw_buf` will be a string that represents JS code. Therefore, when the logic evals it, it doesn't eval `draw_buf()`, it evals our XSS payload instead. 
 
