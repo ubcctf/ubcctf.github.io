@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[UTCTF 2022] All Misc Challenges"
-author: dontmindme
+author: Dontmindme
 ---
 
 # All Misc Challenges
@@ -84,7 +84,7 @@ And your email is blobcorpciso@gmail.com
 Can I have a flag?
 ```
 
-```utflag{osint_is_fun}```
+`utflag{osint_is_fun}`
 
 # Public Panic I
 
@@ -106,7 +106,7 @@ https://twitter.com/WadeColdwater/status/1501031410244669446
 
 Looks like Wade here needs to review his Information Security training. Don’t skip those mandatory videos folks!
 
-```Utflag{situational_awareness_is_key}```
+`Utflag{situational_awareness_is_key}`
 
 # Public Panic II
 
@@ -177,11 +177,11 @@ for i in names:
 
 And then used [Hydra](https://github.com/vanhauser-thc/thc-hydra ) to test them against the port. 
 
-```hydra -L usernames.txt -p defaultpw5678! -u  -s 8622  misc2.utctf.live ssh```
+`hydra -L usernames.txt -p defaultpw5678! -u  -s 8622  misc2.utctf.live ssh`
 
-Turns out, the username is ```cshackleford```, and the flag is in a txt file.
+Turns out, the username is `cshackleford`, and the flag is in a txt file.
 
-```utflag{convension_knowledge_for_the_win}```
+`utflag{convension_knowledge_for_the_win}`
 
 # The Grumpy Genie:
 

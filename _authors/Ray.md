@@ -2,7 +2,7 @@
 short_name: Dontmindme
 name: Ray
 position: Misc
-website: github.com/rayhua12
+website: https://github.com/rayhua12
 website_title: remindme! 30 days setup proper website
 layout: author
 ---
