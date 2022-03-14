@@ -16,7 +16,7 @@ Emails should not be hardcoded into public repositories
 
 ## Challenge Description
 
-For this challenge, we are tasked to OSINT a user named “eddking6” and answer the following five questions in a phishing email to him:
+For this challenge, we are tasked to OSINT a user named “eddking6” and to answer the following five questions in a phishing email sent to him:
 
 The name of his dog?    
 His favourite video game?     
@@ -27,11 +27,11 @@ His Email?
 
 ## Solution
 
-A basic search of major social media accounts yields two accounts immediately
-https://twitter.com/eddking6
-https://github.com/eddking6
+A basic search of major social media accounts yields two accounts immediately:   
+https://twitter.com/eddking6   
+https://github.com/eddking6   
 
-From these accounts, we can immediately know that his favourite video game is FactorIO, his favourite food is Cacio e Pepe (Cheese and Pepper), and he is a CISO at his company, which appears to be Blob Corp. Three down… three to go
+From these accounts, we can immediately discern that his favourite video game is Factorio, his favourite food is Cacio e Pepe (Cheese and Pepper), and he is a CISO at Blob Corp. Three down… three to go
 
 At this point, we can take a closer look at his github account. He has a Go script to send email reminders to himself to feed his dog, Spot, and [has hardcoded his email in the repo](https://github.com/eddking6/DogFeedScheduler/blob/e76f938adc53997b4ed9769e2b1e103793f0b4ea/quickstart.go#L15).
 
@@ -60,12 +60,12 @@ That’s two more questions answered. Finally, after checking other social media
 
 With this, all six questions were answered:
 
-The name of his dog: **Spot**
-His favourite video game: **Factorio**
-His alma mater: **Texas A&M**
-His Role at his company: **CISO**
-His favorite food: **Cacio e Pepe**
-His Email: **blobcorpciso@gmail.com**
+The name of his dog: **Spot**    
+His favourite video game: **Factorio**    
+His alma mater: **Texas A&M**    
+His Role at his company: **CISO**    
+His favorite food: **Cacio e Pepe**    
+His Email: **blobcorpciso@gmail.com**    
 
 Now, all that’s left is to send him a phishing email and get Mr. King to hand over a flag
 
@@ -77,7 +77,7 @@ It’s me, your old friend! You know I am your old friend because I know that
 Your dog’s name is Spot
 Your favourite video game is Factorio
 Your alma mater is Texas A&M
-You are a CISO
+You are a CISO for Blob Corp
 Your favourite food is Cacio e Pepe
 And your email is blobcorpciso@gmail.com
 
@@ -187,13 +187,13 @@ Turns out, the username is ```cshackleford```, and the flag is in a txt file.
 
 ## Moral of the Challenge: 
 
-just look the flag up lol
+sometimes, you can just look the flag up
 
 ## Challenge Description:
 
 We are provided a pastebin link https://pastebin.com/T7r9vFvg which contained a smart contract, and an address on what appears to be the ETH blockchain 0x867D66C78235CD6c989FbFA34606FcfF637fB613,and tasked with finding a flag. 
 
-# Solution
+## Solution
 
 We *could* have examined the pastebin code for vulnerabilities. 
 
@@ -203,11 +203,14 @@ We *could* have spent hours trying to figure this out.
 
 Instead, one of our team members decided to spend 30 seconds on this challenge by just looking the flag up. 
 
-# Solution
-As a first step, we searched the address on Etherscan.io, which yielded no results. However, the search did tell us that it was on the Ropsten test network, which gave us some information on the contract
+## Looking it up
+As a first step, we searched the address on Etherscan.io, which yielded no results. However, the search did tell us that it was on the Ropsten test network, which gave us some information on the contract:
+
+![EthScan1](/assets/images/utctf2022/Miscs/ethscan1.png)
 
 Clicking on the [earliest transaction](https://ropsten.etherscan.io/tx/0xca78d2d51101fda93f3f8c62f4349dd23a7e5692cef667ab834c3611601f068f), we can find the input data of the transaction. If we convert the input data provided into UTF-8 text, we can trivially find the flag
 
+![EthScan2](/assets/images/utctf2022/Miscs/ethscan2.png)
 utflag{Did_Y0u_USe_Re3nTrancY?}
 
 No we did not, UTCTF. No we did not.
