@@ -106,15 +106,29 @@ TODO: flesh this part out
 
 The wasm file is the logic behind the pixel color inversion. After 10 mins of reinstalling Ghidra, we can observe the output of decompiling the wasm.
 
-We can also observe and debug the behaviour of the wasm file using the dev console in the browser.
+First, observe the `a.out.js` files accompanying the wasm. More specifically, observe this function: 
 
+```js
+  function _emscripten_run_script(ptr) {
+      eval(UTF8ToString(ptr));
+    }
+```
+A call to eval on some sort of variable which is, presumably, a string from a UTF8 variable. The `UTF8ToString` function itself calls `UTF8ArrayToString`, which has an interesting if statement:
+
+```js
+//@UTF8ArrayToString()
+if (endPtr - idx > 16 && heap.subarray && UTF8Decoder) {
+    return UTF8Decoder.decode(heap.subarray(idx, endPtr));
+  } else {
+    ...
+```
 
 A 3M byte stack buffer is set, with size checks expecting a max of 1000x1000 RGB triples. However, the logic supports RGBA (RGB Alpha) - meaning that the max buffer size is an additional 1M to accomodate the opacity bytes, totaling to 4M. If we give the program an image that is over 3M RGBA bytes but less than 4M, we trigger an overflow whilst never triggering the size checks.
 
-When an overflow occurs, the extra bytes end up overwriting the string `draw_buf(%u, %u, %u)` which is the name of an actual function defined in `index.js`. The original logic would have eval'ed that string as JavaScript code, effectively calling that function in a JS context, in the wasm. However, overflowing into it will change the string of what gets interpreted as JS code. Sounds like just what we need then!
+When an overflow occurs, the extra bytes end up overwriting the string `draw_buf(%u, %u, %u)` which is the name of an actual function defined in `index.js`. The original logic would have passed that string to `_emscripten_run_script`, eval'ing it as JavaScript code. However, overflowing into it will change the string of what gets interpreted as JS code. Sounds like just what we need then!
 
 ## Solution
 
-The attack flow is now clear: we just need need to create an image which, when decoded, is a little over 3M bytes and overflow the allocated buffer. The remaining bytes that spill into the string `draw_buf` will be a string that represents JS code. Therefore, when the logic evals it, it doesn't eval `draw_buf()`, it evals our XSS payload instead. 
+The attack flow is now clear: we just need need to create an image which, when decoded, is a little over 3M bytes and overflow the allocated buffer. The remaining bytes that spill into the string `draw_buf` will be a string that represents JS code. Therefore, when the logic passes it to `_emscripten_run_script()`, it doesn't eval `draw_buf()`, it evals our XSS payload instead. 
 
 But, wouldn't our image fail the `10kb` limit on the bodyparser? Well, since the wasm was decoding the png, it would compress down all bytes that were just 0xFF. So the overflow would trigger but the finished png would be under 10kb. 
