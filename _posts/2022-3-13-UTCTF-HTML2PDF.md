@@ -123,6 +123,8 @@ if (endPtr - idx > 16 && heap.subarray && UTF8Decoder) {
     ...
 ```
 
+TODO: stop being afraid of ghidra and  add stuff here
+
 A 3M byte stack buffer is set, with size checks expecting a max of 1000x1000 RGB triples. However, the logic supports RGBA (RGB Alpha) - meaning that the max buffer size is an additional 1M to accomodate the opacity bytes, totaling to 4M. If we give the program an image that is over 3M RGBA bytes but less than 4M, we trigger an overflow whilst never triggering the size checks.
 
 When an overflow occurs, the extra bytes end up overwriting the string `draw_buf(%u, %u, %u)` which is the name of an actual function defined in `index.js`. The original logic would have passed that string to `_emscripten_run_script`, eval'ing it as JavaScript code. However, overflowing into it will change the string of what gets interpreted as JS code. Sounds like just what we need then!
