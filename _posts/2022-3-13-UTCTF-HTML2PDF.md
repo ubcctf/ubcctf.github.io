@@ -53,6 +53,8 @@ The username is now known: WeakPasswordAdmin. Now, we simply need to bruteforce 
 
 # Sigma
 
+Co-Authored by [RobertXiao](https://www.robertxiao.ca/)
+
 ## Challenge description
 
 > Our new image processing tool runs completely in your browser! Right now we only support one image effect and image format though. Note: this challenge is also a reversing challenge.
