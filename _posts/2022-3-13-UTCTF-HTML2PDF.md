@@ -100,7 +100,7 @@ app.use(bodyParser.urlencoded({limit: '10kb', extended: true}));
 
 So if we want to steal the cookie when the bot looks at our picture, we have to hide our request in the bytes of the image. But wait - the hidden JS probably won't be interpreted as code, so even if we do stego JS into our picture, how will we know it'll execute? 
 
-## Reversing the Wasm
+## Oh boy, I hope you like wasm
 
 If an image is provided for inversion, `index.js` passes the raw binary data to `draw_u8a`, which allocates a block of memory inside the Wasm module using `malloc`, writes the raw PNG data there, and then calls the Wasm `draw_img` function.
 
