@@ -8,11 +8,10 @@ author: zhed
 
 ## tl;dr
 
-Break a **scheme for generating a shared secret** with a cryptosystem relating to some sort of
+Break a [Diffie-Hellman](https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange) like scheme for generating a shared secret with a cryptosystem relating to some sort of
 [discrete fourier transform (DFT)](https://en.wikipedia.org/wiki/Discrete_Fourier_transform).
-The solution described here involves **NOT reversing the values of the keys** as probably intended
-(which can be done with linear algebra),
-but instead exploits the **group properties of a cyclic array under convolution modulo a prime**.
+The solution described here involves 
+exploiting the **group properties of a cyclic array under convolution modulo a prime**.
 
 ## Description
 
@@ -72,6 +71,8 @@ In summary the code does the following:
 Through some magic math voodoo, somehow calling the function 
 `compute_arr` on the other person's public key and their own 
 modified secret key, they end up with the same shared secret.
+You can see the parallels of this with [Diffie-Hellman](https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange) 
+which also compute a shared secret in the same way.
 
 The provided code above prints the shared secret key between Alice and Bob. 
 Inspecting the `output.txt` file we see:
@@ -166,10 +167,9 @@ True
 
 This means that to compute their shared secret, they are essentially **concatenating their 
 secret keys and removing the same number of elements.** 
-So if we could recover their secret keys, we'd be done, as we could do this ourselves.
-I'm sure because of this structure you could recover the secret keys directly
-(and after the CTF I saw people using linear algebra to do so),
-  but I took a different and weirder route.
+So if we could recover their secret keys, we'd be done (I believe it should be possible to 
+do so because of the connection to DFTS, but I haven't spent the time to think about
+it yet)
 Because I know this has something to do with DFTS, concatenation of the lists 
 (or more precisely pointwise addition of the multiplicities of the elements) 
 is something done in the *Fourier transform* space,
@@ -203,14 +203,19 @@ assert(compute_arr(compute_public_key(A_sk), B_sk) == conv_arr(compute_public_ke
    Technically I haven't shown that this is a group yet, since its not clear that these inverses 
    exists.
    But things are working modulo a prime $MOD = 10^9+7$, so there's strong reason
-   to believe that applying the group operation to a single (non-identity) element 
+   to believe that applying the group operation to a single element 
    enough times it will be cyclic.
 
    Now I have no idea how to compute the inverse,
    so I made it a goal to compute the inverse of `compute_public_key([3])` which I will denote by
    $\mathcal{T}([3])$.
    If we knew the **order** of the elements in the group,
-   we could compute inverses, say if the order were $m$ so $\mathcal{T}([3])^m = \mathcal{T}([3])$ then $\mathcal{T}([3])^{m-2}$ would be an inverse.
+   we could compute inverses. 
+   To see why, let's denote the order by $m$ so 
+
+$$\mathcal{T}([3])^m = \mathcal{T}([3]).$$
+
+   Then $\mathcal{T}([3])^{m-2}$ would be an inverse.
    Since operations are done modulo $MOD$, it stands to reason that $MOD$ would be a good guess of 
    an order of an element. 
    To verify this guess I would need to take a lot of convolutions (which would be too slow), but 
@@ -233,7 +238,7 @@ def compute_pow(sk, t):
 
   Unfortunately it turned out that $MOD$ was not the order. 
 
-  ```python
+```python
 >>> compute_public_key([3])
 [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 >>> compute_pow([3], MOD)
@@ -246,13 +251,22 @@ However, $\mathcal{T}([3])$ looked a lot like $\mathcal{T}([24])$.
 >>> compute_public_key([24]) == compute_pow([3], MOD)
 True
 ```
-This leads me to conjecture that $\mathcal{T}([k])^{MOD} = \mathcal{T}([8k])$, which I test on some 
-more values and seems to work.
-But the array is cyclic mod $N = 111$ so if repeat this $\phi(N) = 72$ more times we should get
-back to itself! 
+This leads me to conjecture that
+
+$$\mathcal{T}([k])^{MOD} = \mathcal{T}([8k]).$$ 
+
+I do some testing and this statement seems to be true.
+Next I observe that as the array is cyclic mod $N = 111$ so for some value $h$,
+
+$$\mathcal{T}([k])^{MOD^h} = \mathcal{T}([(8hk\;\text{mod}\;111)]).$$ 
+
+Choosing $h = \phi(N) = 72$ we should get what we want!
+
+$$\mathcal{T}([k])^{MOD^{72}} = \mathcal{T}([k]).$$ 
+
 It takes a few seconds to run and verify this, but it works!
 ```python
->>> compute_public_key([3]) == compute_pow([3], MOD**72)
+>>>  compute_pow([3], MOD**72) == compute_public_key([3])
 True
 ```
 This means we can find inverses now!
@@ -277,9 +291,11 @@ of a length $N$ array in python.
 
 Why does this work? Well mostly because of the 
 [shift theorem and circular convolution theorem](https://en.wikipedia.org/wiki/Discrete_Fourier_transform#Shift_theorem), `compute_arr` adds to the array 
-a phase shifted copy of itself.
+a phase shifted copy of itself. 
+On top of this convolution naturally forms a group operation, 
+   so it magically lends itself to this group structure.
 I didn't really think too hard about why these things work, and mostly just made good guesses.
-I'll work out the math some other day.
+I'll work out the math some other day (including as to whether directly recovering the private keys is possible)
 
 ## Solve script
 
