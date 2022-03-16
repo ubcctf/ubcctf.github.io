@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[UTCTF 2022] AAAAAAAAAAAAAAAA"
-author: Dieter
+author: frehlid
 ---
 
 # AAAAAAAAAAAAAAAA

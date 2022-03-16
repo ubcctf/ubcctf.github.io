@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[UTCTF 2022] Baby Shark"
-author: Dieter
+author: frehlid
 ---
 
 # Baby Shark
