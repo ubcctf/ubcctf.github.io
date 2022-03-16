@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[UTCTF] AAAAAAAAAAAAAAAA"
+title: "[UTCTF 2022] AAAAAAAAAAAAAAAA"
 author: Dieter
 ---
 

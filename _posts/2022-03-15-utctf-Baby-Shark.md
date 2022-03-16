@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[UTCTF] Baby Shark"
+title: "[UTCTF 2022] Baby Shark"
 author: Dieter
 ---
 
@@ -19,7 +19,7 @@ To do so, we can utilize a program called Wireshark, as the challenge name allud
 
 ![wireshark-output.png](/assets/images/utctf2022/Baby-Shark/wireshark-output.png)
 
-The pcap file stores lots of information, much of which is outside the scope of the challenge. A keen eyed viewer might notice that line number 7 contains a GET request for “flag.png”. Clearly, this is what we’re after. To view the image, simply go to file → export objects → HTTP. This will allow you to export the captured HTTP data. Wireshark will automatically read detect that the file is a PNG, and export it as such. 
+The pcap file stores lots of information, much of which is outside the scope of the challenge. A keen eyed viewer might notice that line number 7 contains a GET request for “flag.png”. This is what we’re after. To view the image, simply go to file → export objects → HTTP. This will allow you to export the captured HTTP data. Wireshark will automatically read detect that the file is a PNG, and export it as such. 
 
 Opening the PNG, we get our flag!
 
