@@ -235,8 +235,8 @@ requests.post(input_url, json=[[json.loads(r.text)['waitingFor']['availableSpace
 ```
 
 The important part of replicating preludes worked, though, so I got through all
-256 games with losing once. At some point the sunk-cost fallacy kicked in, and I
-stoppped thinking about improving my methodology.
+256 games without losing once. At some point the sunk-cost fallacy kicked in,
+and I stoppped thinking about improving my methodology.
 
 After the 256th win, the "continue" button becomes a "get flag" button:
 
