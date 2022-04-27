@@ -16,6 +16,11 @@ author: desp
 >[slowreader](https://utctf.live/files/c7cecaa846d5e7641afcd8d62c91bb93/slowreader)
 <br><br>
 
+ - Solves: 22
+ - Points: 991/1000
+ - Category: Reversing
+<br><br>
+
 ## TL;DR
 Sometimes brute reversing things is not the way to go, especially when they are heavily guarded - there usually are smarter ways to trick the programs, such as proxying dynamically linked libraries.
 <br><br><br>
@@ -164,7 +169,7 @@ $ ./lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 --library-path ./lib/x86_64-linux-
 [f7f32149] write(1, "This is not the needle you are l"..., 57This is not the needle you are looking for (move along).
 ) = 57
 ```
-With an overly long command, we can finally strace reliably - but where did the `clock_gettime` calls go? `-f` should've handled threading, and the program ain't calling any threading functions to begin with. Guess we are at a dead end again - time to find another path in.
+With an overly long command, we can finally strace reliably - but where did the `clock_gettime` calls go? `-f` should've handled threading, and the program ain't calling any threading functions to begin with. [Upon further reading](https://bugzilla.redhat.com/show_bug.cgi?id=613969), it seems that `clock_gettime` can now be using vDSO instead of syscalls, which strace cannot log. Guess we are at a dead end again - time to find another path in.
 <br><br><br>
 
 
@@ -245,7 +250,7 @@ Which after searching for bytes in IDA, maps to address `E058` before ASLR.
 
 ![morepain.png](/assets/images/utctf2022/ebook-drm/morepain.png)
 
-Seems like `fileno` is returning a null pointer for `stdin` for some reason, with which the next segment of code dereferenced - did stdin get prematurely closed?
+Seems like the program is trying to dereference the return value of `fileno` for some reason, which is not a pointer but an integer representing the file descriptor - why would they do that?
 
 Understanding how this happens is probably as difficult as reversing how `clock_gettime` works itself, not to mention how sporadic this failure is even with slow time multipliers - which means it is time to move onto yet another method to try.
 <br><br><br>
