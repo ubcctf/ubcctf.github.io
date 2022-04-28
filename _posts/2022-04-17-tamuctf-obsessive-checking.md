@@ -1,18 +1,18 @@
 ---
 layout: post
-title: "[TAMUCTF 2022] Obcessive Checking"
+title: "[TAMUCTF 2022] Obsessive Checking"
 author: desp
 ---
 
 ## Challenge
 >Author: `Addison`
 
->Decrypt flag_book.txt.bin using the binary obcessive-checking.
+>Decrypt flag_book.txt.bin using the binary obsessive-checking.
 >I wouldn't try to wait for it though...
 
 >Heavily inspired by UTCTF 2022's "eBook DRM". Use that information as you will... :)
 
->[obcessive-checking.zip]()
+>[obsessive-checking.zip]()
 <br><br>
 
  - Solves: 4 (first blood)
@@ -90,19 +90,19 @@ Looks like debug symbols are also present as it is usually with most rust challe
 ## *Rust*-y reversing skills
 Weirdly enough, searching for anything resembling the panic reason string "suspicious jitter detected" in the ELF yielded no results, so we will have to find another way in. Since the backtrace will most likely prove very useful, let's start with getting the ASLR base address to figure out where each function is at. Looking at where `_start` is, we can get the ASLR offset quite easily:
 
-![getaslr.png](/assets/images/tamuctf2022/obcessive-checking/getaslr.png)
+![getaslr.png](/assets/images/tamuctf2022/obsessive-checking/getaslr.png)
 
 Since there is only 1 `call` in `_start`, the return address is definitely at the `hlt` instruction right after the call; It also lines up with line 21 in the backtrace. With that info, we can easily obtain the offset by calculating `0x55b247782e8e - 0xee8e = 0x55b247774000`.
 
 Now that we have the offset, we can move on to analysing what results in the panic - by looking into the function that calls `core::panicking::panic_display::h86f5ce82e2f50064`. At `1D79A`, which is line 16 from the backtrace with ASLR removed, we see something really interesting:
 
-![suscheck.png](/assets/images/tamuctf2022/obcessive-checking/suscheck.png)
+![suscheck.png](/assets/images/tamuctf2022/obsessive-checking/suscheck.png)
 
 Just as the backtrace suggested, this function indeed triggers a panic, but only when `v479` is set - and it seems to be operating on the result from a call to a function named `sub_timespec`. Hmm, this is starting to feel more and more like the time comparison codes in ebook DRM that detects if there is time manipulation. Upon further inspection, the function indeed subtracts one timespec with another, as the name suggests.
 
 Wait a second, ain't this one of the "obvious places for time comparison" that we struggled to find in ebook DRM? Might as well test our theory out - if that check is purely for panicking, there should be no issues with bypassing that entire code block. With `1D608` `0F 84 EE 00 00 00` -> `90 90 90 90 90 90`, we patch out the `jz` to the panicking block:
 
-![dontpanic.png](/assets/images/tamuctf2022/obcessive-checking/dontpanic.png)
+![dontpanic.png](/assets/images/tamuctf2022/obsessive-checking/dontpanic.png)
 
 Moment of truth - if this doesn't crash even though we cranked the speed multiplier much higher, we should be golden:
 ```
