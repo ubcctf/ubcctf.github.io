@@ -108,7 +108,7 @@ This means we got 2 easier choices than to perform static analysis - either map 
 Since the native lib is just an ELF file, and the `*box` functions don't seem to be calling any JNI methods, it is likely possible to directly call the obfuscation functions on an ARM machine to obtain the results. Just to be safe though, we can directly debug on the phone itself since it is rooted, just like how we would normally debug on Linux, by using the `gdb` provided in Android NDK. Lets get `gdbserver` up and running on the phone:
 ```
 D:\Downloads\linectf2022>adb push ..\android-ndk\prebuilt\android-arm64\gdbserver\gdbserver /data/local/tmp/
-..\android-ndk\prebuilt\android-arm64\gdbserver: 1 file pushed, 0 skipped. 285.0 MB/s (1429848 bytes in 0.005s)
+..\android-ndk\prebuilt\android-arm64\gdbserver\gdbserver: 1 file pushed, 0 skipped. 285.0 MB/s (1429848 bytes in 0.005s)
 
 D:\Downloads\linectf2022>adb forward tcp:1337 tcp:1337
 1337
