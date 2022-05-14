@@ -169,7 +169,7 @@ $ ./lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 --library-path ./lib/x86_64-linux-
 [f7f32149] write(1, "This is not the needle you are l"..., 57This is not the needle you are looking for (move along).
 ) = 57
 ```
-With an overly long command, we can finally strace reliably - but where did the `clock_gettime` calls go? `-f` should've handled threading, and the program ain't calling any threading functions to begin with. [Upon further reading](https://bugzilla.redhat.com/show_bug.cgi?id=613969), it seems that `clock_gettime` can now be using vDSO instead of syscalls, which strace cannot log. Guess we are at a dead end again - time to find another path in.
+With an overly long command, we can finally strace reliably - but where did the `clock_gettime` calls go? `-f` should've handled threading, and the program ain't calling any threading functions to begin with. [Upon further reading](https://bugzilla.redhat.com/show_bug.cgi?id=613969), it seems that `clock_gettime` can now be using vDSO instead of syscalls, which strace cannot log. Guess we are at a dead end - time to find another path in.
 <br><br><br>
 
 
@@ -200,7 +200,7 @@ This is not the needle you are looking for (move along).
 ```
 Oh no - this is a really bad sign that something broke. Under strace, we can get some more info on it:
 ```
-$ FAKETIME='@2000-01-01 11:12:13 x20000' .lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 --library-path ./lib/x86_64-linux-gnu/ /usr/bin/strace -fi ./lib/ld-linux.so.2 --library-path ./lib/i386-linux-gnu/ --preload "./usr/lib/i386-linux-gnu/faketime/libfaketime.so.1" ./slowreader ./haystack.slowreader
+$ FAKETIME='@2000-01-01 11:12:13 x20000' ./lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 --library-path ./lib/x86_64-linux-gnu/ /usr/bin/strace -fi ./lib/ld-linux.so.2 --library-path ./lib/i386-linux-gnu/ --preload "./usr/lib/i386-linux-gnu/faketime/libfaketime.so.1" ./slowreader ./haystack.slowreader
 
 (...)
 
