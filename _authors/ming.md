@@ -1,7 +1,7 @@
 ---
 short_name: disna
 name: Ming C. Jiang
-position: Web and Mobile Application Security, Miscellaneous
+position: Web, Misc
 website: https://github.com/Disnaming
 website_title: Disna's empty GitHub repo
 layout: author

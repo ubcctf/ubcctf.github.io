@@ -1,7 +1,7 @@
 ---
 short_name: Green-Avocado
 name: Jason Ngo
-position: Reverse Engineering, Binary Exploits
+position: Rev, Pwn
 website: https://jasonn.dev
 website_title: jasonn.dev
 layout: author

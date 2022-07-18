@@ -1,9 +1,9 @@
 ---
 short_name: Vie
 name: Vie
-position: Web
+position: Web, Rev
 website: https://jamvie.net/
 website_title: jamvie.net
 layout: author
 ---
-Everything I know about JavaScript I learned against my will
+Team Captain. 3 geese stacked on top of each other in a trench-coat.

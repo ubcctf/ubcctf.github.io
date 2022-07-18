@@ -1,7 +1,7 @@
 ---
 short_name: aynakeya
 name: YiYang Lu
-position: pwn
+position: Pwn
 website: https://www.aynakeya.com/
 website_title: www.aynakeya.com
 layout: author
