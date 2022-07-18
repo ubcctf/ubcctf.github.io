@@ -1,7 +1,7 @@
 ---
 short_name: Filip Kilibarda
 name: Filip Kilibarda
-position: Reverse Engineering, Binary Exploits
+position: Rev, Pwn
 website: https://filipkilibarda.github.io/
 website_title: filipkilibarda.github.io
 layout: author

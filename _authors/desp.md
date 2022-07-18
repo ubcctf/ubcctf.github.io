@@ -1,7 +1,7 @@
 ---
 short_name: desp
 name: desp
-position: Reverse Engineering, Forensics
+position: Rev, Forensics
 website: https://despawningbone.me/
 website_title: despawningbone.me
 layout: author
