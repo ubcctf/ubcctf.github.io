@@ -5,5 +5,6 @@ position: Web, Rev
 website: https://jamvie.net/
 website_title: jamvie.net
 layout: author
+captain: true
 ---
-Team Captain. 3 geese stacked on top of each other in a trench-coat.
+Everything I learned about JS I learned against my will
