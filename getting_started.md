@@ -49,22 +49,22 @@ Some other learning options, extra additions if they fit your learning style bet
 
 ## Web Application Security
 
-Web exploits can be easy to get into, but when considering a "base" foundation to get started, I consider the following as prerequisites:
+Web exploits can be easy to get into, since many straightforward exploits don't require heavy tooling to work out. Consider these as a rough guideline of what to get into to get started into web.
 
 - Knowledge in scripting languages (Python is our favourite)
 - Foundational knowledge in Javascript, PHP and common web frameworks (nodeJS, Flask for Python, etc)
 - Understanding of common web protocols, such as HTTP, IP and DNS.
 - Having an understanding of RESTful APIs, and server-client interactions. 
 
-These are good lessons to develop if you're unsure of where to start for web exploits. Since 90% of the internet runs on Javascript (for some reason), having an understanding of the syntax and conventions in that language will resolve much of the confusion when first starting out. It also goes without saying that knowing the key concepts of the internet from a developer's perspective also helps with web exploits.
+These are good lessons to develop if you're unsure of where to start for web exploits. Since 90% of the internet runs on Javascript, having an understanding of the syntax and conventions in that language will resolve much of the confusion when first starting out. It also goes without saying that knowing the key concepts of the internet from a developer's perspective also helps with web exploits.
+
+It can be argued that web exploits are easy to get into but hard to overcome the learning curves as you gp. Like the other categories, web can build on itself so having a foundation for the basics is crucial - but you need to continue building up. When you move past relatively straightforward bugs like XSS, LFI and SQLi you can gradually move on to complex exploits which may branch out wildly from what you first started out with in this category, such as pop chains or XS-leaks. The best way to learn, realistically, is to try out any CTF and see for yourself what the web challenges may look like.
 
 To get started into web hacking, consider the following resources:
 
 1. [picoCTF](https://picoctf.org/index#picogym): The web problems available on picoCTF are a great way to get started on learning the basics of web security from the ground-up. However, you may notice two things after doing a number of picoCTF web problems: the pico challenges are pretty stacked towards classic/popular web exploits, and they will give a steady stream of hints to help you along. After going through them, it'll be helpful to try out web exploitation in an environment where hints are not as readily available, to intentionally train your recon skills without requiring a guiding hand.  If you do get stuck, by all means ask for help or google the writeups, but going in totally blind is the most effective way to develop your auditing skills, granting you the acumen for identifying other exploits that you will see in other CTFs.
 
 2. [Project Juice Shop](https://owasp.org/www-project-juice-shop/): A big portion of web application security is auditing and recon - many web-based exploits are similar but different and the scope of web exploits is vast. Being able to correctly identify the key symptoms of a specific vulnerability helps in narrowing down what sorts of exploits you should be crafting, and so researching what kind of bug you're up against is half the battle. OWASP Juice Shop is a recommended resource for sandboxing web exploits, and is a good way to strengthen your recon skills to find and identify vulnerabilities.
-
-3. [HackerOne CTF](https://www.hackerone.com/for-hackers/hacker-101): Register for an account on HackerOne and you'll be able to access a practise CTF (and other good resources for learning) that allows you a competition-like environment to learn about web exploits and get into CTF hacking. After spending time with the first 2 resources, consider checking out HackerOne. These challenges will be on a curve higher than the previous, so they're good to test and strengthen your skills further when you've mastered the other 2. The bonus here is that the challenges may contain multiple flags, allowing you to flex your knowledge and chain together multiple exploits. HackerOne also provides hints along the way, given in increments to prevent people spamming the "give hint" button. Besides streamlining the provision of hints, this forces you to rely more closely on your own recon skills and direct your own research. 
 
 Other learning options:
 - [PortSwigger Web Academy](https://portswigger.net/web-security): Provides wiki-like knowledge and labs for all sorts of commonly seen web exploits. Although some labs require the use of Burpsuite Pro, the learning materials are still a good resource to learn new exploits. 
