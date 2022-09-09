@@ -1,7 +1,7 @@
 ---
 short_name: vEvergarden
 name: Kevin Liu
-position: Cryptography
+position: Crypto
 website: https://kevinl10.github.io/
 website_title: kevinl10.github.io
 layout: author

@@ -1,7 +1,7 @@
 ---
 short_name: rctcwyvrn
 name: Arctic
-position: Cryptography
+position: Crypto
 website: https://rctcwyvrn.github.io/
 website_title: rctcwyvrn.github.io
 layout: author

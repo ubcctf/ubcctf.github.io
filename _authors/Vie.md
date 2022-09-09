@@ -1,9 +1,10 @@
 ---
 short_name: Vie
 name: Vie
-position: Web and Mobile Application Security
+position: Web, Rev
 website: https://jamvie.net/
 website_title: jamvie.net
 layout: author
+captain: true
 ---
-Cache poisoner. Unintentionally breaks docker containers in her spare time.
+Everything I learned about JS I learned against my will

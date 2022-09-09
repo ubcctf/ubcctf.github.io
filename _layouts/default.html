@@ -9,6 +9,16 @@
     <meta name="description" property="og:description" content="CTF Team at the University of British Columbia">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Inconsolata:700|Overpass+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+            onload='renderMathInElement(document.body, {delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\(", right: "\\)", display: false},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "$", right: "$", display: false}
+            ]});'>
+    </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180688592-1"></script>
     <script>
@@ -27,6 +37,7 @@
           {% for p in pages %}
           <a href="/{{ p }}"{% if page.name contains p %} class="active"{% endif %}>{{ p }}</a>
           {% endfor %}
+          <a href="https://ctf.maplebacon.org" >maple&nbsp;ctf&nbsp;2022</a>
         </nav>
         <div class="logo">
           <a href="/">

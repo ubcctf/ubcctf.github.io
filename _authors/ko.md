@@ -1,7 +1,7 @@
 ---
 short_name: ko
 name: Tyler
-position: Reverse Engineering, Binary Exploitation
+position: Rev, Pwn
 website: http://brainpain.ca/
 website_title: brainpain.ca
 layout: author

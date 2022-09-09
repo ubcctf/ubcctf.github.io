@@ -1,7 +1,7 @@
 ---
 short_name: Siri
 name: Sarah Bornais
-position: Reverse Engineering
+position: Rev
 website: https://github.com/SarahBornais
 website_title: GitHub
 layout: author
