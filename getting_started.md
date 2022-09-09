@@ -31,21 +31,13 @@ There are several tools that get used a lot for Linux-based pwn/reversing challe
 
 ## Cryptography
 
-1. Work through the Monsanto Cryptopals crypto challenges https://cryptopals.com/
-   - I also have a work-in-progress companion guide, it currently covers up to set 3 [link](https://ubcctf.github.io/2021/01/cryptopals-companion/)
-2. For more guided practice, check out https://cryptohack.org/. It covers topics not covered in cryptopals such as Elliptical curve cryptography 
-2. Dive straight into CTFs
+Check out the Cryptographer's Codex over at [crypto.maplebacon.org](crypto.maplebacon.org), which has a compiled set of challenges, guides, and resources for learning cryptography
 
-Important note: Unlike the other CTF categories, I --do not-- recommend starting with picoCTF for learning cryptography
-   - I find that the sort of “guided challenges with hints” that are in cryptopals and cryptohack are much better for beginners who lack confidence and might not be used to the “thrown into the deep end” style that most CTFs follow (pico does provide hints and such, but in the end it still is a competition)
-   - picoCTF also lacks the “building up” aspect of cryptopals, which steadily works up to the major challenges like the CBC padding oracle
-   - picoCTF also starts you off with a bunch of, to be blunt, boring toy challenges that have nothing to do with the cryptography you’ll see in CTFs
-   - Working through pico after some cryptopals is a great idea
-
-Some other learning options, extra additions if they fit your learning style better:
-- If you like watching lectures, [RPISEC’s lectures seem good](https://www.youtube.com/c/RPISEC_talks/videos)
-- Reading a mathematics or cryptography textbook to learn more about the fundamentals
-- Reading write-ups for past challenges on CTFtime or elsewhere helps get exposed to more types of problems
+TLDR
+- Try out the beginner chals on the site to get a feel for what cryptography is like
+- Do the [cryptopals](https://cryptopals.com/) challenges to get a solid foundation 
+- Alternatively try out [cryptohack](https://cryptohack.org/) or [picoCTF](https://picoctf.org/) more challenges 
+- Dive into CTFs for real!
 
 ## Web Application Security
 
