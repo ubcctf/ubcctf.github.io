@@ -31,7 +31,7 @@ There are several tools that get used a lot for Linux-based pwn/reversing challe
 
 ## Cryptography
 
-Check out the Cryptographer's Codex over at [crypto.maplebacon.org](crypto.maplebacon.org), which has a compiled set of challenges, guides, and resources for learning cryptography
+Check out the Cryptographer's Codex over at [crypto.maplebacon.org](https://crypto.maplebacon.org/), which has a compiled set of challenges, guides, and resources for learning cryptography
 
 TLDR
 - Try out the beginner chals on the site to get a feel for what cryptography is like
