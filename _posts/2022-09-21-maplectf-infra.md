@@ -48,7 +48,7 @@ Outbound data processed by load balancer @ $0.008/GB (effective October 1, 2022,
 
 Our real networking costs was just under $22 ($21.99) with most of the cost being in GCS. Networking is a cost you cannot predict as you generally do not know how much traffic you will generate. Given the relatively low volume of traffic CTF's generate, this did not pose an issue to us. A partial cost breakdown is shown below (only items with non-zero cost are shown).
 
-![GCP Network Costs](assets/gcp-networking-billing.png "GCP Network Costs")
+![GCP Network Costs](/assets/images/maplectf2022/gcp-networking-billing.png "GCP Network Costs")
 
 All prices shown are in USD.
 
@@ -170,7 +170,7 @@ It also served as our dockerd for our Jenkins instance. I didn't want to run doc
 
 The cost for running the bastion and GKE worker nodes came up to be around $140 ($141.73). All of our nodes ran on `E2` instances, reducing cost while providing the required performance.
 
-![GCP Compute Costs](assets/gcp-compute-engine-billing.png "GCP Compute Costs")
+![GCP Compute Costs](/assets/images/maplectf2022/gcp-compute-engine-billing.png "GCP Compute Costs")
 
 All prices shown are in USD.
 
@@ -483,7 +483,7 @@ Kubernetes logs are ephemeral, they will get deleted of a pod gets deleted. Havi
 
 The following example shows me looking at CTFd logs:
 
-![CTFd logs on Kibana](assets/kibana-ctfd-logs.png "CTFd logs on Kibana")
+![CTFd logs on Kibana](/assets/images/maplectf2022/kibana-ctfd-logs.png "CTFd logs on Kibana")
 
 ### Prometheus and Grafana
 
@@ -491,7 +491,7 @@ I also brought up prometheus on the GKE cluster using the [community helm chart]
 
 Grafana is a very useful visualization tool and I find it much more useful when compared to the GKE metrics that are provided.
 
-![Grafana](assets/grafana-global.png "Grafana")
+![Grafana](/assets/images/maplectf2022/grafana-global.png "Grafana")
 
 When you look at Grafana, you see that the CTF was **VERY** overprovisioned in terms of real CPU and memory usage.
 
@@ -518,7 +518,7 @@ GCP Balanced provisioned space (us-west1): $0.1/GB/month * 100GB = $10/month
 
 Running MapleCTF for two days was fairly reasonable. Our total cost came down to $181.33
 
-![Total Cost](assets/maplectf-total-cost.png "Total Cost")
+![Total Cost](/assets/images/maplectf2022/maplectf-total-cost.png "Total Cost")
 
 ## What I would do differently for the next time
 
@@ -528,7 +528,7 @@ We had some downtime on CTFd at the beginning of the CTF due to the underprovisi
 
 Having the challenges be completed very late resulted in no time to test the challenges. Because it was my first time running a fairly big CTF, I did not know what to expect load wise. This resulted in the overprovisioning of resources for the nodes that ran the challenges. I could have reduced the costs by at least 1/3 based on the metrics shown. Look at the following Grafana dashboard to see how badly overprovisioned this CTF was.
 
-![Grafana](assets/grafana-global.png "Grafana")
+![Grafana](/assets/images/maplectf2022/grafana-global.png "Grafana")
 
 At a period of low usage, I had 1 node for CTFd running and 3 nodes for the challenges. Looking back at this, we could have easily ran all of the challenges on less nodes.
 

@@ -1,9 +1,8 @@
 ---
 short_name: b
-name: b
+name: Benson
 position: MapleCTF infra
-website: 
-website_title: 
+website: https://bensonyang.com
+website_title: bensonyang.com
 layout: author
 ---
-
