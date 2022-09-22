@@ -39,14 +39,14 @@ Everything related to the CTF it's own VPC, while other services like our bastio
 
 Having all of our services behind load balancers increased cost, but it was negligible due to the low volume of traffic. Given that there were about 20 hosted challenges, based on GCP load balancer [pricing](https://cloud.google.com/vpc/network-pricing#lb), you can estimate load balancer pricing as follows:
 
-```
+~~~
 First 5 forwarding rules @ $0.025/hour x 5 = $0.125/hour
 Per additional forwarding rule @ $0.01/hour * 15 = $0.15/hour
 Inbound data processed by load balancer @ $0.008/GB (negligible)
 Outbound data processed by load balancer @ $0.008/GB (effective October 1, 2022, irrelevant for us)
-```
+~~~
 
-Our real networking costs was just under $22 ($21.99) with most of the cost being in GCS. Networking is a cost you cannot predict as you generally do not know how much traffic you will generate. Given the relatively low volume of traffic CTF's generate, this did not pose an issue to us. A partial cost breakdown is shown below (only items with non-zero cost are shown).
+Our real networking costs was just under `$22` (`$21.99`) with most of the cost being in GCS. Networking is a cost you cannot predict as you generally do not know how much traffic you will generate. Given the relatively low volume of traffic CTF's generate, this did not pose an issue to us. A partial cost breakdown is shown below (only items with non-zero cost are shown).
 
 ![GCP Network Costs](/assets/images/maplectf2022/gcp-networking-billing.png "GCP Network Costs")
 
@@ -63,17 +63,17 @@ One issue we had was that there were a multitude of updates to our CTFd containe
 **don't make the same mistake I did**
 
 Use this
-```
+~~~
 spec:
   strategy:
     type: RollingUpdate
-```
+~~~
 instead of
-```
+~~~
 spec:
   strategy:
     type: Recreate
-```
+~~~
 
 ## MySQL and Redis
 
@@ -94,7 +94,7 @@ Here is an example challenge deployment:
 <details>
   <summary>Challenge Deployment</summary>
 
-```
+~~~
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -137,7 +137,7 @@ spec:
             limits:
               cpu: "500m"
               memory: "1Gi"
-```
+~~~
 
 </details>
 
@@ -150,13 +150,13 @@ For those who are not aware, you can disable service links and the mounting of t
 
 Disabling these would do no harm in our case, and you can do so by adding the following for a deployment:
 
-```
+~~~
 spec:
   template:
     spec:
       enableServiceLinks: false
       automountServiceAccountToken: false
-```
+~~~
 
 ## Compute Engine
 
@@ -168,7 +168,7 @@ It also served as our dockerd for our Jenkins instance. I didn't want to run doc
 
 ### Costs
 
-The cost for running the bastion and GKE worker nodes came up to be around $140 ($141.73). All of our nodes ran on `E2` instances, reducing cost while providing the required performance.
+The cost for running the bastion and GKE worker nodes came up to be around `$140` (`$141.73`). All of our nodes ran on `E2` instances, reducing cost while providing the required performance.
 
 ![GCP Compute Costs](/assets/images/maplectf2022/gcp-compute-engine-billing.png "GCP Compute Costs")
 
@@ -187,7 +187,7 @@ Here is my action for updating the cluster:
 <details>
   <summary>Update Cluster</summary>
 
-```
+~~~
 name: Update cluster
 
 # Controls when the workflow will run
@@ -348,7 +348,8 @@ jobs:
         run: |
           set -x
           kubectl apply -Rf $GITHUB_WORKSPACE/2022int/kubernetes
-```
+~~~
+
 </details>
 
 ### Jenkins
@@ -359,7 +360,7 @@ I needed to install docker on the image as well as configure the image to use ou
 <details>
   <summary>Dockerfile</summary>
 
-```
+~~~
 FROM jenkins/inbound-agent
 
 USER root
@@ -388,7 +389,7 @@ USER jenkins
 
 # remote docker
 ENV DOCKER_HOST=ssh://jenkins@bastion.internal.ctf.maplebacon.org
-```
+~~~
 
 </details>
 
@@ -403,18 +404,18 @@ I created a custom image for fluentd and configured fluentd to parse and send lo
 <details>
   <summary>Fluentd Dockerfile</summary>
 
-```
+~~~
 FROM bitnami/fluentd
 
 RUN fluent-gem install 'fluent-plugin-parser-cri' --no-document
-```
+~~~
 
 </details>
 
 <details>
   <summary>Fluentd Configmap</summary>
 
-```
+~~~
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -475,7 +476,7 @@ data:
         flush_interval 5s
       </buffer>
     </match>
-```
+~~~
 
 </details>
 
@@ -499,9 +500,9 @@ When you look at Grafana, you see that the CTF was **VERY** overprovisioned in t
 
 I brought up this logging stack because GKE logging is [expensive](https://cloud.google.com/stackdriver/pricing). 
 
-```
+~~~
 Logging ingestion @ $0.50/GiB, with the first 50GiB free.
-```
+~~~
 
 Before disabling GKE logging in testing, I used 21 GB in a few days with minimal traffic! While the price charged also includes their analytics, dashboards, and storage, running my own stack was cheaper.
 
@@ -509,14 +510,14 @@ Storage is typically very expensive on the cloud. Excluding CPU and memory costs
 
 If you look at [disk pricing](https://cloud.google.com/compute/disks-image-pricing#disk), you will see that for 100GB of logs, bringing up your own stack is much cheaper:
 
-```
+~~~
 Cloud Logging: 100GB - 50GB (free) = $0.50/GB * 50GB = $25
 GCP Balanced provisioned space (us-west1): $0.1/GB/month * 100GB = $10/month
-```
+~~~
 
 ## Cost of the CTF
 
-Running MapleCTF for two days was fairly reasonable. Our total cost came down to $181.33
+Running MapleCTF for two days was fairly reasonable. Our total cost came down to `$181.33`
 
 ![Total Cost](/assets/images/maplectf2022/maplectf-total-cost.png "Total Cost")
 
