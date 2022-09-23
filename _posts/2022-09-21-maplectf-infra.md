@@ -91,8 +91,8 @@ Each challenge had it's own horizontal pod autoscaler (HPA). The baseline was se
 
 Here is an example challenge deployment:
 
-<details>
-  <summary>Challenge Deployment</summary>
+<details markdown="block">
+  <summary markdown="span">Challenge Deployment</summary>
 
 ~~~
 apiVersion: apps/v1
@@ -184,8 +184,8 @@ I ran any jobs that would update the infrastructure here instead of on Jenkins b
 
 Here is my action for updating the cluster:
 
-<details>
-  <summary>Update Cluster</summary>
+<details markdown="block">
+  <summary markdown="span">Update Cluster</summary>
 
 ~~~
 name: Update cluster
@@ -357,8 +357,8 @@ I made a Jenkins instance just for this CTF using this [bitnami helm chart](http
 
 I needed to install docker on the image as well as configure the image to use our dockerd instance on the bastion located at `bastion.internal.ctf.maplebacon.org`. The Dockerfile is as follows:
 
-<details>
-  <summary>Dockerfile</summary>
+<details markdown="block">
+  <summary markdown="span">Dockerfile</summary>
 
 ~~~
 FROM jenkins/inbound-agent
@@ -401,8 +401,8 @@ For debugging purposes, I brought up an Elasticsearch, Fluentd, and Kibana (EFK)
 
 I created a custom image for fluentd and configured fluentd to parse and send logs in cri format. My Dockerfile and configuration for Fluentd is as follows:
 
-<details>
-  <summary>Fluentd Dockerfile</summary>
+<details markdown="block">
+  <summary markdown="span">Fluentd Dockerfile</summary>
 
 ~~~
 FROM bitnami/fluentd
@@ -412,8 +412,8 @@ RUN fluent-gem install 'fluent-plugin-parser-cri' --no-document
 
 </details>
 
-<details>
-  <summary>Fluentd Configmap</summary>
+<details markdown="block">
+  <summary markdown="span">Fluentd Configmap</summary>
 
 ~~~
 ---
