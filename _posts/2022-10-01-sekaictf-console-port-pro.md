@@ -17,7 +17,7 @@ it's possible to just solve this manually.
 
 ![ktane on a terminal, hard mode](/assets/images/sekaictf2022/ktane-pro.png)
 
-In the second part, called Console Port Pro (498 points, 7 solves), you get 120 ticks, so around 12 seconds. This is not sufficient for human play, so we'll have to automate it.
+In the second part, called Console Port Pro (498 points, 7 solves), you get 120 ticks, so around 12 seconds. This is not sufficient for human play, so we'll have to automate it. Or do we?
 
 ## Problem Description
 
@@ -157,7 +157,8 @@ we can take as long as we want in solving the bomb. I specifically restarted the
 as the Button module usually requires holding down the button until the time reaches a certain point, which might take
 too long. It only takes a few tries to find a suitable game.
 
-After solving the bomb by hand, we get a flag. Note that the displayed flag was slightly wrong (a space should be a `_`).
+After solving the bomb by hand, we get a flag and first blood too!
+Note that the displayed flag was slightly wrong (a space should be a `_`).
 
 ![ktane on a terminal, solved](/assets/images/sekaictf2022/ktane-solved.png)
 
