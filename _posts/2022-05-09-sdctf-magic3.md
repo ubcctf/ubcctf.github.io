@@ -44,14 +44,14 @@ Don't forget to tick the `Signed jump table elements` - the data at `unk_6084` (
 Nice! It's now showing what all the branches are doing in the decompilation. Ignoring the C++ boilerplates, it looks like aside from case 3 which jumps to `fail()` instantly, all 6 of the rest of the cases set some integer values before calling `magic1`, repeating this process 5 times in total. After poking around for a while, we can already reason about what the program is doing on the high level: 
  - Before main, a static initializer `_GLOBAL__sub_I__Z11magic_wordsB5cxx11` is run by `_libc_csu_init`, which sets `magic_word` to the string `ldr buf`.
  - Once in main, it first calls setup_magic(), which sets up `magic_array` with consecutive integers with `std::iota`, then issues multiple calls to `magic1` with quite a bit of integers passed to it.
- - It then accepts 1 line of input with no length limit that matches any character in `magic_word`, maps the characters to the cases (aside from ` `), and process it by calling `magic1` 5 times with the integer parameters set before each call.
+ - It then accepts 1 line of input with no length limit that matches any character in `magic_word`, maps the characters to the cases (aside from the space), and process it by calling `magic1` 5 times with the integer parameters set before each call.
  - Finally, it calls `test_magic` which iterates over the `magic_array`, printing the flag after asserting that `magic_array` consists of only ascending consecutive integers, just like the original state right after `std::iota`.
 
 The only piece of the *puzzle* left now is to figure out what `magic1` is doing. Turns out, it is also quite straightforward:
 
 ![magic1.png](/assets/images/sdctf2022/magic3/magic1.png)
 
-It loops over the values passed to the function, utilizing the values as indexes to pairwise swap the elements in `magic_array`. Note that it loops the indexes from the bottom up when considering the order shown in the decompilation - this is due to how varargs are handled in C++, where it takes the values furthest from the stack pointer first. Considering how simple this entire program is, why is it called magic, and to the extent of a *cube* even? 
+It loops over the values passed to the function, utilizing the values as indexes to pairwise swap the elements in `magic_array`. Note that it loops the indexes from the bottom up when considering the order shown in the decompilation - this is due to the call to `std::reverse`. Considering how simple this entire program is, why is it called magic, and to the extent of a *cube* even? 
 <br><br>
 
 ## Magic-ematics
@@ -74,12 +74,13 @@ magic = [
 def pairwise(iterable):
     a, b = itertools.tee(iterable)
     next(b, None)
-    return zip(a, b)   
+    return zip(a, b)
 
 def swapall(arr, indexes):
     for i, j in pairwise(indexes[::-1]):  #reverse the indexes as noted in the above section
         arr[i-1], arr[j-1] = arr[j-1], arr[i-1]
 
+# accepts argument as input
 test = sys.argv[1] if len(sys.argv) > 1 else ''
 
 def l(na):
@@ -131,7 +132,7 @@ for c in test:
 
 print(", ".join([str(i+1) + ":" + str(v) for i,v in enumerate(magic)]))
 ```
-With some help of a native debugger and some breakpoints before `test_magic`, we can verify that their output do indeed match. After staring at it for quite a while, it still didn't seem like there is any pattern that we can identify - the values all seem quite arbitrary. Guess we might as well write a brute force script to run in the background while we figure the logic out:
+With some help of a native debugger and some breakpoints before `test_magic`, we can verify that their outputs do indeed match. However, after staring at it for quite a while, it still didn't seem like there is any pattern that we can identify - the values all seem quite arbitrary. Guess we might as well write a brute force script to run in the background while we figure the logic out:
 ```java
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
@@ -146,22 +147,16 @@ public class DeMagic {
     private static ForkJoinPool ex = new ForkJoinPool(28);
 
     private static int[] magic = {
-    40, 25, 29, 46,
-    27, 45, 33, 34,
-    15, 38, 13, 3,
-    12, 18, 11, 47,
-    39, 1, 8, 19,
-    28, 31, 30, 32,
-    0, 20, 23, 35,
-    14, 26, 17, 16,
-    42, 4, 21, 43,
-    9, 10, 41, 24,
-    37, 44, 2, 36,
-    6, 7, 22, 5
+    40, 25, 29, 46, 27, 45, 33, 34,
+    15, 38, 13, 3, 12, 18, 11, 47,
+    39, 1, 8, 19, 28, 31, 30, 32,
+    0, 20, 23, 35, 14, 26, 17, 16,
+    42, 4, 21, 43, 9, 10, 41, 24,
+    37, 44, 2, 36, 6, 7, 22, 5
     };
 
     private static void swapall(int[] arr, int[] indexes) {
-        for(int i = indexes.length - 1; i >= 0; i--) {  //once again, reversed
+        for(int i = indexes.length - 1; i >= 0; i--) {
             int temp = arr[indexes[i]-1];
             arr[indexes[i]-1] = arr[indexes[i+1]-1];
             arr[indexes[i+1]-1] = temp;
@@ -276,7 +271,7 @@ g = nx.Graph()
 def pairwise(iterable):
     a, b = itertools.tee(iterable)
     next(b, None)
-    return zip(a, b)   
+    return zip(a, b)
 
 #patchy way to get individual color codes based on which function called swapall
 ct = {'l': 'r', 'd': 'g', 'r': 'b', 'b': 'yellow', 'u': "purple", 'f': "black"}
