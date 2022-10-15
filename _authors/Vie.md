@@ -5,6 +5,6 @@ position: Web, Rev
 website: https://jamvie.net/
 website_title: jamvie.net
 layout: author
-captain: true
+former_captain: true
 ---
 Everything I learned about JS I learned against my will
