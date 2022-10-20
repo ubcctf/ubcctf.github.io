@@ -1,9 +1,10 @@
 ---
 short_name: vEvergarden
 name: Kevin Liu
-position: Crypto
-website: https://kevinl10.github.io/
-website_title: kevinl10.github.io
+position: Crypto, Misc
+website: https://kevinliu.me
+website_title: kevinliu.me
 layout: author
+captain: true
 ---
-Enjoys guessing crypto papers. Also trying to learn web.
+Cryptography? I only know of crypto(currency).
