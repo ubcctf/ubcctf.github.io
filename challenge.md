@@ -1,5 +1,5 @@
 --- 
-layout: challenge 
+layout: default
 title: Challenges | CTF @ UBC 
 ---
 
@@ -37,5 +37,6 @@ For complete newcomers, I would recommend giving this [companion guide](/2021/08
 # Forensics
 
 There's nothing here... or is there?
+<!-- Hey, you're close! But there's nothing in the HTML comments either... maybe there are other comments you can find? -->
 
 [//]: <> (Nice! flag{M@pl3Syrup} )
