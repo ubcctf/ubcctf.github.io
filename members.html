@@ -32,7 +32,7 @@ title: Members
 
 <ul>
   {% for author in site.authors %}
-  {% if author.captain != true%}
+  {% if author.captain != true and author.former_captain != true %}
   <li>
     <h2><a href="{{ author.url }}">{{ author.name }}</a></h2>
     <h3>{{ author.position }}</h3>
