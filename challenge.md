@@ -6,7 +6,7 @@ title: 1337 Challenges | CTF @ UBC
 # Maple Bacon 1337 Challenges
 ---
 
-**NOTE**: All flags will begin with either the prefix `maple{`. You can find last year's challenges [here](challenge-2021.md).
+**NOTE**: All flags will begin with the prefix `maple{`. You can find last year's challenges [here](challenge-2021.md).
 
 # Miscellaneous - The Return of 110
 
@@ -39,7 +39,7 @@ This guy keeps taunting me for not being able to guess his flag :( Surely there'
 
 ### Resources
 - You likely would want to use a disassembler like [Ghidra](https://github.com/NationalSecurityAgency/ghidra) for your journey.
-- What is a disassembler you might ask? Check out a high level overview of what it does [here]()!
+- What is a disassembler you might ask? Check out a high level overview of what it does [here](/2022/11/reversing-guide/)!
 - To understand how a program works, it would be beneficial to understand how our machines themselves work - for a quick primer, here's a great [blog post](https://0x41.cf/reversing/2021/07/21/reversing-x86-and-c-code-for-beginners.html) by `0x41.cf` that touches on most of the low-level concepts involved!
 
 
@@ -51,7 +51,7 @@ hey everybody!! imade my first website and its AWESOME!!!
 
 if u dig  closely u might even find some secrets...
 
-check it out here: `1337.maplebacon.org:1000`
+check it out here: `1337.maplebacon.org`
 
 ### Files:
 - [app.py](/assets/1337-2022/web/app.py)

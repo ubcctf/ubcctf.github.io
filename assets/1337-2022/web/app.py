@@ -12,7 +12,7 @@ app = Flask(__name__)
 secure_cookie = token_hex(64)
 pages = {}
 
-TEMPLATES = [{'BACKEND':  'django.template.backends.django.DjangoTemplates'}]
+TEMPLATES = [{"BACKEND": "django.template.backends.django.DjangoTemplates"}]
 settings.configure(TEMPLATES=TEMPLATES)
 django.setup()
 
@@ -50,10 +50,9 @@ def generate(count: str) -> str:
     else:
         message = ""
 
-    return Template(template).render(Context({
-        "message": message,
-        "count": mark_safe(count)
-    }))
+    return Template(template).render(
+        Context({"message": message, "count": mark_safe(count)})
+    )
 
 
 @app.route("/")
@@ -61,38 +60,37 @@ def index():
     return send_file("static/index.html")
 
 
-@app.route("/stats")
-def stats():
-    webpage = generate(request.cookies.get('count', 0))
-    unique_id = uuid4()
-    pages[unique_id] = webpage
-    adminbot.visit(f"http://127.0.0.1:31337/view?id={unique_id}", secure_cookie)
-    return pages.get(unique_id)
-
-
 @app.route("/secrets")
 def secrets():
-    if request.cookies.get('secure_cookie') == secure_cookie:
+    if request.cookies.get("secure_cookie") == secure_cookie:
         return send_file("static/secrets.html")
     else:
         return send_file("static/401.html")
 
 
+@app.route("/stats")
+def stats():
+    webpage = generate(request.cookies.get("count", 0))
+    unique_id = str(uuid4())
+    pages[unique_id] = webpage
+    adminbot.visit(f"http://127.0.0.1:31337/view?id={unique_id}", secure_cookie)
+    return webpage
+
+
 @app.route("/view")
 def view_stats_page():
-    if request.cookies.get('secure_cookie') == secure_cookie:
-        unique_id = request.args.get('id', "")
+    if request.cookies.get("secure_cookie") == secure_cookie:
+        unique_id = request.args.get("id", "")
         page = pages.get(unique_id)
         if page:
+            pages[unique_id] = None
             return page
         else:
             return send_file("static/404.html")
-    else:
-        return send_file("static/401.html")
 
 
 @app.errorhandler(404)
-def page_not_found():
+def page_not_found(err):
     return send_file("static/404.html"), 404
 
 

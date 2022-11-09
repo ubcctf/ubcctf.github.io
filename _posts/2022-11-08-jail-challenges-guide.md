@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "1337 Misc Guide - Jail Challenges in CTFs"
+title: "1337 Misc Guide - Jail Challenges"
 author: rctcwyvrn
 ---
 
