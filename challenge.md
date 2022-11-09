@@ -32,6 +32,7 @@ Part 2 will put you in a jail with quite a few restrictions that you'll have to 
 - Part 1: [jail1.rkt](/assets/1337-2022/misc/jail1.rkt)
 - Part 2: [jail2.rkt](/assets/1337-2022/misc/jail2.rkt)
 
+If you have racket installed locally, use `racket -t jail1.rkt` to run the jail locally.  
 
 See [our guide](/2022/11/jail-challenges-guide/) on what "jail challenges" are in CTFs!
 

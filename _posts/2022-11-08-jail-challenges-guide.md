@@ -11,10 +11,11 @@ Jail challenges are a kind of `misc` category challenge in CTFs where the server
 
 Typically in jail challenges the goal is to spawn a shell, ie to convince the jail to let you execute something like `bash` or `sh`.
 
-For example a python jail might call `exec` on your input, but doing `exec("import os; os.system('bash')")` would let you escape into the shell.
-- https://docs.python.org/3/library/functions.html#exec 
-- https://docs.python.org/3/library/os.html#os.system 
+For example a python jail might call `exec` on your input, which would normally restrict you to just running python code. But by running `exec("import os; os.system('bash')")` you could escape into the shell and be completely free to do whatever you want, like find and read the flag file.
 
-Now these examples are for python jails, in this challenge you'll be in a racket jail. Convincing the jail to allow you execute the racket equivalent like `os.system("bash")` will usually require some manipulation of your input in order to work around the blocklist or restrictions put in place by the jail, and it'll be a similar story in this challenge.
+- [https://docs.python.org/3/library/functions.html#exec](https://docs.python.org/3/library/functions.html#exec )
+- [https://docs.python.org/3/library/os.html#os.system](https://docs.python.org/3/library/os.html#os.system)
 
+In this challenge you'll be in a racket jail and you'll have to convince the jail to allow you execute the racket equivalent of `os.system("bash")`. In the first part there will be no restrictions so you can run whatever you'd like, however for the second part the jail will strictly restrict what code you're allowed to execute so you'll have to be more clever to spawn a shell.
 
+Good luck!
