@@ -8,7 +8,9 @@ title: 1337 Challenges | CTF @ UBC
 
 All flags will begin with the prefix `maple{`. You can find last year's challenges [here](challenge-2021.md).
 
-**Note**: Some challenges will require you to connect to a remote server. Netcat (abbreviated as `nc`) is a simple tool installable on Mac/Linux that makes this easy: connect to a server with `nc <ip> <port>`. If you're using Windows, we highly recommend installing [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install) - feel free to ask for help if you're having trouble setting anything up.
+**Note**: Some challenges will require you to connect to a remote server. Netcat (abbreviated as `nc`) is a simple tool installable on Mac/Linux that makes this easy: connect to a server with `nc <ip> <port>`. Netcat is used mainly for remote, text-based connections. For example, entering the command `nc 1337.maplebacon.org 4000` in your terminal will let you interact with the first part of the Miscellaneous challenge.
+
+If you're using Windows, we highly recommend installing [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install) - feel free to ask for help if you're having trouble setting anything up.
 
 These 1337 challenges are designed to be **approachable by beginners** - our goal is to make them slightly challenging, exposing you to new CTF concepts without requiring advanced technical knowledge. Challenges with some harder concepts have additional resources or guides associated with them that explain prerequisite knowledge you may need. **Remember**: if you get stuck, join us in the #1337-challenges channel on our [Discord](https://discord.gg/keeTZsmfVA) to receive hints and share ideas with others!
 
