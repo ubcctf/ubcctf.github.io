@@ -73,8 +73,8 @@ Connect with `nc 1337.maplebacon.org 1337` and provide the payload you designed.
 ### Resources
 - Binary exploitation (or pwn) has quite a bit of similarity with reversing - you might find the resources in the reversing challenge useful too.
 - Here are also some quick tools for prototyping shellcodes:
-  - https://godbolt.org/ for exploring how a function translates into assembly
-  - https://defuse.ca/online-x86-assembler.htm for handwriting assembly into machine code
+  - [godbolt](https://godbolt.org/) for exploring how a function translates into assembly
+  - [defuse online x86 assembler](https://defuse.ca/online-x86-assembler.html) for handwriting assembly into machine code
 - Don't be intimidated! The intended solution is very short and utilizes one specific aspect of low-level computing. You can ignore everything in the `handlefaults` function - they are only here to help the challenge run more smoothly.
 
 
