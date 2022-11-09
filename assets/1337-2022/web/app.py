@@ -1,9 +1,4 @@
-import django
-from django.template import Template, Context
-from django.conf import settings
-from django.utils.safestring import mark_safe
-
-from flask import Flask, request, send_file
+from flask import Flask, request, send_file, render_template_string
 from secrets import token_hex
 from uuid import uuid4
 import adminbot
@@ -11,10 +6,6 @@ import adminbot
 app = Flask(__name__)
 secure_cookie = token_hex(64)
 pages = {}
-
-TEMPLATES = [{"BACKEND": "django.template.backends.django.DjangoTemplates"}]
-settings.configure(TEMPLATES=TEMPLATES)
-django.setup()
 
 template = """
 <!DOCTYPE html>
@@ -26,7 +17,7 @@ template = """
 </head>
 <body>
   <p>{{ message }}</p>
-  <p>u have clicked {{ count }} times!</p>
+  <p>u have clicked {{ count | safe }} times!</p>
 </body>
 </html>
 """
@@ -50,9 +41,7 @@ def generate(count: str) -> str:
     else:
         message = ""
 
-    return Template(template).render(
-        Context({"message": message, "count": mark_safe(count)})
-    )
+    return render_template_string(template, message=message, count=count)
 
 
 @app.route("/")
@@ -85,8 +74,10 @@ def view_stats_page():
         if page:
             pages[unique_id] = None
             return page
-        else:
-            return send_file("static/404.html")
+
+        return send_file("static/404.html")
+
+    return send_file("static/401.html")
 
 
 @app.errorhandler(404)

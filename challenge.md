@@ -43,21 +43,6 @@ This guy keeps taunting me for not being able to guess his flag :( Surely there'
 - What is a disassembler you might ask? Check out a high level overview of what it does [here](/2022/11/reversing-guide/)!
 - To understand how a program works, it would be beneficial to understand how our machines themselves work - for a quick primer, here's a great [blog post](https://0x41.cf/reversing/2021/07/21/reversing-x86-and-c-code-for-beginners.html) by `0x41.cf` that touches on most of the low-level concepts involved!
 
-
-# Web - Cat Clickr
-
-Author: [JJ](/authors/apropos/)
-
-hey everybody!! imade my first website and its AWESOME!!!
-
-if u dig  closely u might even find some secrets...
-
-check it out here: `1337.maplebacon.org`
-
-### Files:
-- [app.py](/assets/1337-2022/web/app.py)
-
-
 # Pwn - X86 Playground
 
 Author: [Desp](/authors/desp/)
@@ -73,9 +58,24 @@ Connect with `nc 1337.maplebacon.org 1337` and provide the payload you designed.
 ### Resources
 - Binary exploitation (or pwn) has quite a bit of similarity with reversing - you might find the resources in the reversing challenge useful too.
 - Here are also some quick tools for prototyping shellcodes:
-  - https://godbolt.org/ for exploring how a function translates into assembly
-  - https://defuse.ca/online-x86-assembler.htm for handwriting assembly into machine code
+  - [godbolt](https://godbolt.org/) for exploring how a function translates into assembly
+  - [defuse online x86 assembler](https://defuse.ca/online-x86-assembler.html) for handwriting assembly into machine code
 - Don't be intimidated! The intended solution is very short and utilizes one specific aspect of low-level computing. You can ignore everything in the `handlefaults` function - they are only here to help the challenge run more smoothly.
+
+
+
+# Web - Cat Clickr
+
+Author: [JJ](/authors/apropos/)
+
+hey everybody!! imade my first website and its AWESOME!!!
+
+if u dig  closely u might even find some secrets...
+
+check it out here: `1337.maplebacon.org`
+
+### Files:
+- [app.py](/assets/1337-2022/web/app.py)
 
 
 # Cryptography - The Matrix Exchange
