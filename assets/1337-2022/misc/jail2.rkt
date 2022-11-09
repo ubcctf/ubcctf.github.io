@@ -20,6 +20,7 @@
 ; - A single character in length 
 ; - A string containing "string" (https://docs.racket-lang.org/reference/strings.html)
 ; - A string containing "quote" (https://docs.racket-lang.org/guide/quote.html https://docs.racket-lang.org/guide/qq.html)
+; Hint: https://cadence.moe/blog/2022-10-17-explaining-lisp-quoting-without-getting-tangled 
 (define (allowed? term)
   (or (string-contains? term "string") 
       (string-contains? term "quote")
@@ -28,7 +29,7 @@
 ; Check that each term follows the requirements
 (define (check term)
   (printf "check: ~a (has-seen-allowed-exception ~a) \n" term has-seen-allowed-exception)
-    (cond
+  (cond
     ; Never allow any strictly forbidden terms
     [(strictly-forbidden? term) #f]
     ; Check if the term is allowed
@@ -58,7 +59,9 @@
       ; Check the given racket expression
       (if (valid stx) 
           ; if it's valid, eval it https://docs.racket-lang.org/guide/eval.html
-          (printf "Result: ~a \n" (eval stx)) 
+          (begin
+            (flush-output)
+            (printf "Result: ~a \n" (eval stx)))
           (printf "Invalid input: ~a \n" stx)))))
 
 (module+ main
