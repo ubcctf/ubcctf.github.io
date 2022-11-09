@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "1337 Reversing Guide - "
-author: Kevin
+title: "1337 Reversing Guide - Introduction"
+author: Kevin Zhang
 hide: "true"
 ---
 
@@ -13,12 +13,12 @@ In the context of software engineering, reverse engineering is the process of ta
 A program is comprised of machine code that in not legible by a human. This is why when you open an `.exe` file in a text editor it just looks like garbage. So the first step in reverse engineering is to turn this machine code into something a person can read. Usually, a disassembler is used to convert machine code into human readable assembly.
 
 ![disassembly.PNG](/assets/images/rev-guide/disassembly.PNG)
-<center> <em>The result of disassembling a program using a disassembler.</em> </center></br>
+<center> <em>The result of disassembling a program using a disassembler.</em> </center>
 
 However, it is still difficult to understand what is going on. Fortunately, we can do better than the disassembly. There are programs called decompilers that will try to decompile the program into C like source code.
 
 ![decompile.PNG](/assets/images/rev-guide/decompile.PNG)
-<center> <em>The result of decompiling a program using a decompiler.</em> </center></br>
+<center> <em>The result of decompiling a program using a decompiler.</em> </center>
 
 ## Disassemblers vs. Decompilers
 

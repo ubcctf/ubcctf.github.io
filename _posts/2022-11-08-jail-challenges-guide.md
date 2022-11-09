@@ -2,6 +2,7 @@
 layout: post
 title: "1337 Misc Guide - Jail Challenges"
 author: rctcwyvrn
+hide: "true"
 ---
 
 ### Jail challenges in CTFs
