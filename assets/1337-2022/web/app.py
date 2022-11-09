@@ -85,8 +85,10 @@ def view_stats_page():
         if page:
             pages[unique_id] = None
             return page
-        else:
-            return send_file("static/404.html")
+
+        return send_file("static/404.html")
+
+    return send_file("static/401.html")
 
 
 @app.errorhandler(404)
