@@ -60,7 +60,7 @@
       (if (valid stx) 
           ; if it's valid, eval it https://docs.racket-lang.org/guide/eval.html
           (begin
-            (flush-output)
+            (flush-output) ; this is just to make sure the previous print statements are flushd to stdout before the eval command runs
             (printf "Result: ~a \n" (eval stx)))
           (printf "Invalid input: ~a \n" stx)))))
 
