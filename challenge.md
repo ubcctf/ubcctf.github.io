@@ -18,6 +18,7 @@ Part 1 will put you in a jail with no restrictions to let you get used to the ba
 
 Part 2 will put you in a jail with quite a few restrictions that you'll have to work around. Connect with `nc 1337.maplebacon.org 4001`.
 
+**Submit the part 1 and part 2 flags together!** For example - if you get `maple{ab` for Part 1 and `cdef}` for Part 2, submit `maple{abcdef}` as one flag.
 
 ### Files:
 - Part 1: [jail1.rkt](/assets/1337-2022/misc/jail1.rkt)
