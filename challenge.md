@@ -1,42 +1,96 @@
 --- 
 layout: default
-title: Challenges | CTF @ UBC 
+title: 1337 Challenges | CTF @ UBC 
 ---
 
-Maple Bacon Beginner Practice
+# Maple Bacon 1337 Challenges
 ---
 
-**NOTE**: All flags will begin with either the prefix `maple{` or `flag{`.
+**NOTE**: All flags will begin with either the prefix `maple{`. You can find last year's challenges [here](challenge-2021.md).
 
-**NOTE**: These are **practice** challenges and are **not part of mapleCTF**! However they are good practice for challenges you might see during the competition
+# Miscellaneous - The Return of 110
 
-# Reversing
+Author: [Arctic](/authors/rctcwyvrn/)
 
-x86 binary
+Hey you. You're finally awake. You were trying to cross into second year, right? Walked right into that ambush, same as us, and that cpen student over there. Damn you Gregor. CPSC 110 was imperative until you came along. Programming was nice and easy.
 
-```
-8b64240844464c614731db4331fd6681ff676c751d31fe81fd541840
-1a7513c1ef106681ff6167750981fe1c1f165475014b31c040cd8090
-```
+Part 1 will put you in a jail with no restrictions to let you get used to the basics. Connect with `nc 1337.maplebacon.org 4000`.
 
-# Pwn
+Part 2 will put you in a jail with quite a few restrictions that you'll have to work around. Connect with `nc 1337.maplebacon.org 4001`.
 
-- [Source exe](https://drive.google.com/file/d/15mBjhZ2czhF4d0cTBkW4ZAHd5_lVp4pw/view?usp=sharing)
 
-- [Source code](https://drive.google.com/file/d/1op6YplcAflHZzy3bIugVVoJJOachG4fd/view?usp=sharing)
+### Files:
+- Part 1: [jail1.rkt](/assets/1337-2022/misc/jail1.rkt)
+- Part 2: [jail2.rkt](/assets/1337-2022/misc/jail2.rkt)
 
-# Crypto
 
-Stack exchange says everyone uses AES-GCM, but I don't need the tag so I'll just use CTR
+See [our guide](/2022/11/jail-challenges-guide/) on what "jail challenges" are in CTFs!
 
-- [gen.py](/assets/challenges/beginner-crypto/gen_no_comments.py)
-- [secret.enc](/assets/challenges/beginner-crypto/secret.enc)
 
-For complete newcomers, I would recommend giving this [companion guide](/2021/08/beginner-crypto/) a read, it covers some background and gives you the gist of how this challenge is solved
 
-# Forensics
+# Reversing - Rando
 
-There's nothing here... or is there?
-<!-- Hey, you're close! But there's nothing in the HTML comments either... maybe there are other comments you can find? -->
+Author: [Desp](/authors/desp/)
 
-[//]: <> (Nice! flag{M@pl3Syrup} )
+This guy keeps taunting me for not being able to guess his flag :( Surely there's a better way to this, right?
+
+### Files:
+- [rando](/assets/1337-2022/rev/rando)
+
+### Resources
+- You likely would want to use a disassembler like [Ghidra](https://github.com/NationalSecurityAgency/ghidra) for your journey.
+- What is a disassembler you might ask? Check out a high level overview of what it does [here]()!
+- To understand how a program works, it would be beneficial to understand how our machines themselves work - for a quick primer, here's a great [blog post](https://0x41.cf/reversing/2021/07/21/reversing-x86-and-c-code-for-beginners.html) by `0x41.cf` that touches on most of the low-level concepts involved!
+
+
+# Web - Cat Clickr
+
+Author: [JJ](/authors/apropos/)
+
+hey everybody!! imade my first website and its AWESOME!!!
+
+if u dig  closely u might even find some secrets...
+
+check it out here: `1337.maplebacon.org:1000`
+
+### Files:
+- [app.py](/assets/1337-2022/web/app.py)
+
+
+# Pwn - X86 Playground
+
+Author: [Desp](/authors/desp/)
+
+Let's see how creative you can be in coming up with shellcodes!
+
+Connect with `nc 1337.maplebacon.org 1337` and provide the payload you designed.
+
+### Files:
+- [playground](/assets/1337-2022/pwn/playground)
+
+
+### Resources
+- Binary exploitation (or pwn) has quite a bit of similarity with reversing - you might find the resources in the reversing challenge useful too.
+- Here are also some quick tools for prototyping shellcodes:
+  - https://godbolt.org/ for exploring how a function translates into assembly
+  - https://defuse.ca/online-x86-assembler.htm for handwriting assembly into machine code
+- Don't be intimidated! The intended solution is very short and utilizes one specific aspect of low-level computing. You can ignore everything in the `handlefaults` function - they are only here to help the challenge run more smoothly.
+
+
+# Cryptography - The Matrix Exchange
+
+Author: [vEvergarden](/authors/vEvergarden/)
+
+Alice and Bob are having a great time exchanging their little secret messages... until they realize they're living in a simulation.
+
+Check out [our guide](/2022/11/diffie-hellman-guide/) for an introduction to Diffie-Hellman Key Exchange and a story of Alice and Bob's adventures!
+
+### Files:
+- [main.py](/assets/1337-2022/crypto/main.py)
+- [output.txt](/assets/1337-2022/crypto/output.txt)
+
+### Resources
+- A [great video](https://www.youtube.com/watch?v=NmM9HA2MQGI) from Computerphile that illustrates the Diffie-Hellman key exchange
+- A more [mathematical approach](https://www.youtube.com/watch?v=Yjrfm_oRO0w), the second part of the series by Computerphile
+
+
