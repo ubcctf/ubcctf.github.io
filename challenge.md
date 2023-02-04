@@ -6,6 +6,9 @@ title: 1337 Challenges | CTF @ UBC
 # Maple Bacon 1337 Challenges
 ---
 
+**Thanks for trying out this year's 1337 challenges! Although the 1337 role is no longer obtainable, you can find all challenge files and resources below.**
+
+
 All flags will begin with the prefix `maple{`. You can find last year's challenges [here](challenge-2021.md).
 
 **Note**: Some challenges will require you to connect to a remote server. Netcat (abbreviated as `nc`) is a simple tool installable on Mac/Linux that makes this easy: connect to a server with `nc <ip> <port>`. Netcat is used mainly for remote, text-based connections. For example, entering the command `nc 1337.maplebacon.org 4000` in your terminal will let you interact with the first part of the Miscellaneous challenge.
