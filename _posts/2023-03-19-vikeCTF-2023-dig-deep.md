@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[vikeCTF 2023] Dig Deep"
-author: "Kevin"
+author: Kevin Zhang
 ---
 
 # Challenge Description
