@@ -16,8 +16,11 @@ That being said, once we're in the competition and racing for flags, we usually 
 Our worldwide ranking and history can be found on [ctftime.org](https://ctftime.org/team/73723).
  
  
-There is no official sign up process. We encourage any fellow **UBC students, faculty or alumni** to join in, no experience required. You can join our weekly meetings, ask questions, and introduce yourself if you wish. You may also join and participate in any CTF that we play together. We announce our plans to participate in upcoming CTFs on discord.
- 
+We encourage any fellow **UBC students, faculty or alumni** to join in, no experience required. You can join our weekly meetings, ask questions, and introduce yourself if you wish. You may also join and participate in any CTF that we play together. We announce our plans to participate in upcoming CTFs on discord.
+
+Additionally, we host a **competitive team** for those who are more experienced with CTFs and looking to dedicate time toward honing their security skills. Check out the [competitive page](/competitive) for more info!
+
+
  
 # Weekly Meetings
 Since the covid-19 quarantine began, we've been holding our weekly meetings virtually.
