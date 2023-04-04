@@ -29,4 +29,6 @@ Although we don't have a minimum "hours/week", **we expect that you**:
 - Actively participate in CTFs at least once every 2-3 weeks
 
 
+**Note: you must be verified in our [Discord server](https://discord.gg/keeTZsmfVA) as a UBC student**
+
 ### <big>Apply here:</big> [https://ubc.ca1.qualtrics.com/jfe/form/SV_eYgWM549uxxoMdM](https://ubc.ca1.qualtrics.com/jfe/form/SV_eYgWM549uxxoMdM)
