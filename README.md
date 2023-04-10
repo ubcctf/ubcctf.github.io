@@ -1,26 +1,29 @@
 # ubcctf.github.io
 
-Source code for the UBC CTF team website.
-
+Source code for Maple Bacon's team website.
 
 ## Build Instructions
 
-Check that you have ruby
-
-```
-ruby -v
-```
-
-Install `bundler`. *We depend on version < 2.0 currently because of our Gemfile.lock. If we switch to > 2.0 then everyone contributing will have to upgrade as well.*
-
-```
-sudo gem install bundler -v '< 2.0'
-```
-
-Install project dependencies locally
+Check that you have Ruby installed and install `bundler`.
 
 ```bash
-cd project_root
+ruby -v
+gem install bundler
+```
+
+Add `gem` binaries to PATH and set GEM_HOME to a writable location.
+
+```bash
+# Linux (in `.bash_profile`):
+export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
+export GEM_HOME="$HOME/.gems"
+```
+
+Clone this repository and install project dependencies locally.
+
+```bash
+git clone https://github.com/ubcctf/ubcctf.github.io
+cd ubcctf.github.io
 bundle install
 bundle exec jekyll <build|serve>
 ```
