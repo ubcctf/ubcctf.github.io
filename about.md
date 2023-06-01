@@ -18,7 +18,7 @@ Our worldwide ranking and history can be found on [ctftime.org](https://ctftime.
  
 We encourage any fellow **UBC students, faculty or alumni** to join in, no experience required. You can join our weekly meetings, ask questions, and introduce yourself if you wish. You may also join and participate in any CTF that we play together. We announce our plans to participate in upcoming CTFs on discord.
 
-Additionally, we host a **competitive team** for those who are more experienced with CTFs and looking to dedicate time toward honing their security skills. Check out the [competitive page](/competitive) for more info!
+Additionally, we host a **competitive team** for those who are more experienced with CTFs and looking to dedicate time toward honing their security skills. Check out the [competitive page](/competitive_team) for more info!
 
 
  

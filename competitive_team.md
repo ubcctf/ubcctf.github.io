@@ -1,3 +1,8 @@
+--- 
+layout: default
+title: Competitive Team
+---
+
 # Competitive Team
 
 
