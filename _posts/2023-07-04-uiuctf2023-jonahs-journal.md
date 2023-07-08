@@ -10,7 +10,7 @@ After dinner, Jonah took notes into an online notebook and pushed his changes th
 # Hint
 forks, trees, pushing, and pulling
 
-# Solution
+# Solution 
 Within the context of the series, this challenge seems to be one where we're given the least information! Just a description and a hint where this Jonah person could have gone anywhere in the world. Given the lack of routes to take here, I opened the hint and decided to go from there. The hint actually proved to be very helpful, and if you're thinking what I'm thinking, there's only one place to go. An online place where we can fork, push, and pull from trees. You guessed it! It's Github.
 
 Okay so what do we do now? The description says he took to the online notebook and *his usernames have been relatively consistent*. That phrase is very important because now we just need to try to find an account similarly named to the twitter account we found in the "What's for Dinner" challenge.
