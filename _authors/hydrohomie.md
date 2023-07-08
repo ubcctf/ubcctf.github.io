@@ -6,4 +6,4 @@ website: https://github.com/Justin-Prasad
 website_title: Justin-Prasad/github.io
 layout: author
 ---
-twitch subscriber. Likes to exploit hardware.
+i love js (pls let my family go)
