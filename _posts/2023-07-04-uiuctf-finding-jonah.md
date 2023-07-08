@@ -15,7 +15,7 @@ what does joy translate to?
 
 ## Solution
 For this challenge in the Jonah series, we were actually given a jpeg file! Here is the picture
-![Finding-Jonah](/assets/images/uiuctf2023/finding-jonah.png)
+![Finding-Jonah](/assets/images/uiuctf2023-osint/finding-jonah.png)
 
 To start this challenge, I did what many would probably do in this situation. I chucked the picture into an online exif tool! 
 
