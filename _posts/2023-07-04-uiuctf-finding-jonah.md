@@ -15,7 +15,7 @@ what does joy translate to?
 
 ## Solution
 For this challenge in the Jonah series, we were actually given a jpeg file! Here is the picture
-![Finding-Jonah](/assets/images/uiuctf2023-osint/finding-jonah.png)
+![Finding-Jonah](/assets/images/uiuc2023-osint/finding-jonah.png)
 
 To start this challenge, I did what many would probably do in this situation. I chucked the picture into an online exif tool! 
 
@@ -29,7 +29,7 @@ So yeah, now that I made the decision to treat it as a geoguesser challenge, the
 ### Step 2
 The next step is to look for any significant landmark in the picture. Seeing as how Chicago is a rather large city, what we need is some sort of identifier that we can use to narrow down the location to some area. In the picture, while kind of blurry I saw a building towards the right with what seems to be a logo. Maybe that's something we can use! 
 
-![Finding-Jonah-Boeing-Logo](/assets/images/uiuctf2023/finding-jonah-boeing-logo.png)
+![Finding-Jonah-Boeing-Logo](/assets/images/uiuc2023-osint/finding-jonah-boeing-logo.png)
 
 It looks like a Boeing logo! That's a pretty notable company... right?
 Now the next step is to actually narrow down the area and to confirm through the use of a lovely developer's tool that I like to call "Google."
