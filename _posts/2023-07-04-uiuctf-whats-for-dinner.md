@@ -20,7 +20,7 @@ To start this challenge, I noticed the description was talking about an Italian 
 
 I got the feeling that since this Jonah Explorer character loves documenting their food, I may as well give the google reviews a try as a first step seeing how accessible it is. This however, proved to be a step in the wrong direction as the google reviews weren't exactly the most active. Feeling a bit stumped, I decided to check a few more review sites deemed as generally popular before I hit this absolute goldmine on Yelp. 
 
-![What's-for-dinner](/assets/images/uiuc2023-osint/what's-for-dinner.png)
+![What's-for-dinner](/assets/images/uiuc2023-osint/whats-for-dinner.png)
 
 This review led me to their twitter page which was in line with the description as it was "... a well-known social network..." and my eyes were blessed with a beautiful flag :,)
 
