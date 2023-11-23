@@ -20,24 +20,36 @@ Before you get started working on CTF problems, there's a minimum subset of tool
 
 ## Binary Exploitation / Reverse Engineering
 
-Most problems in CTFs involve developing a good understanding for the functionality of a target and then finding ways to break the target in unintended ways to get access to the flag. The best way to learn any category in a CTF is to complete more CTF problems, learning about more technologies and principles in the process. A good starting point for binary exploitation (also known as "pwn") and reverse engineering is to complete the starting problems in [picoGym](https://picoctf.org/index.html#picogym). Once you've developed some confidence working on these problems, check out [pwn.college](https://pwn.college) and [ionetgarage](http://io.netgarage.org/) for more intermediate-level content.
+Most problems in CTFs involve developing a good understanding for the functionality of a target and then finding ways to break the target in unintended ways to get access to the flag. The best way to learn any category in a CTF is to complete more CTF problems, learning about more technologies and principles in the process. A good starting point for binary exploitation (also known as "pwn") and reverse engineering is to complete the starting problems in [picoGym](https://picoctf.org/index.html#picogym). Once you've developed some confidence working on these problems, check out the following for more intermediate-level content:
+
+<!-- note: i would appreciate better descriptions of these -->
+
+1. [pwn.college](https://pwn.college): Lectures, readings, and "dojos" (challenges) from Arizona State University (Shellphish) for their various cybersecurity courses.
+
+2. [crackmes.one](https://crackmes.one): A collection of user-submitted reverse engineering problems. Challenges here tend to lean more heavily towards "figure out what you're looking at" than any sort of exploitation. That doesn't mean they're uninteresting! Breaking obfuscated password checks and the like is a staple of challenges in the reverse engineering category.
+
+3. [the nightmare book](https://guyinatuxedo.github.io/): A collection of walkthroughs of solutions to pwn problems of CTFs past. Provides binaries for following along interactively.
+
+4. [ionetgarage](https://io.netgarage.org/): A [wargame](https://en.wikipedia.org/wiki/Wargame_(hacking)) site focused on Unix privilege escalation through binary exploitation. Some other wargame sites are [pwnable.kr](https://pwnable.kr/), [pwnable.tw](https://pwnable.tw), [pwnable.xyz](https://pwnable.xyz)...
+
+5. [how2heap](https://github.com/shellphish/how2heap): _the_ book on heap exploitation. For advanced reading.
 
 The above practice resources are mostly focused on Linux-based systems and x86 assembly. There are other resources that focus on other systems such as Windows or Android, but aside from the listed practice resources the next best way to get good is to participate in actual CTFs so you can experience the wide variety of problems CTFs have to offer. You can find some problems and writeups to learn from by also going to [CTFtime](https://ctftime.org/), which is the most popular site for keeping up with all things CTF.
 
 There are several tools that get used a lot for Linux-based pwn/reversing challenges. You'll need to learn to use more tools as you encounter new CTF problems, so providing an exhaustive list wouldn't be of much aid. Some of the ones you'll definitely need are as follows:
-- a debugger ([GDB](https://www.gnu.org/software/gdb/) + an extension like [gef](https://hugsy.github.io/gef/))
-- a disassembler/decompiler ([Ghidra](https://ghidra-sre.org/) or [IDA](https://hex-rays.com/ida-free/))
-- [pwntools](http://docs.pwntools.com/en/stable/) for quickly writing exploit scripts
+- a debugger ([GDB](https://www.gnu.org/software/gdb/) + an extension like [GEF](https://hugsy.github.io/gef/))
+- a disassembler/decompiler ([Ghidra](https://ghidra-sre.org/) is state of the art & free)
+- Python and [pwntools](http://docs.pwntools.com/en/stable/) for quickly writing exploit scripts
 
 ## Cryptography
 
-Check out the Cryptographer's Codex over at [crypto.maplebacon.org](https://crypto.maplebacon.org/), which has a compiled set of challenges, guides, and resources for learning cryptography
+Check out the Cryptographer's Codex over at [crypto.maplebacon.org](https://crypto.maplebacon.org/), which has a compiled set of challenges, guides, and resources for learning cryptography. <span title="too lazy; didn't click">TL;DC</span>, check out the following resources:
 
-TLDR
-- Try out the beginner chals on the site to get a feel for what cryptography is like
-- Do the [cryptopals](https://cryptopals.com/) challenges to get a solid foundation 
-- Alternatively try out [cryptohack](https://cryptohack.org/) or [picoCTF](https://picoctf.org/) more challenges 
-- Dive into CTFs for real!
+1. [cryptopals](https://cryptopals.com/): eight sets of challenges that provide a solid foundation in cryptography.
+
+2. [cryptohack](https://cryptohack.org/): An ever-growing collection of various cryptography problems. Scale well from introductory to quite challenging.
+
+If you're more of a textbook learner, both _Introduction to Modern Cryptography_ by Katz & Lindell and [_Crypto101_](https://raw.githubusercontent.com/crypto101/crypto101.github.io/master/Crypto101.pdf) by lvh are recommended reads. And once you feel you've got the basics down - there's nothing better than diving into CTFs for real!
 
 ## Web Application Security
 
