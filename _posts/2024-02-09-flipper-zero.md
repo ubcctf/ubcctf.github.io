@@ -3,10 +3,10 @@ layout: post
 title: "Public Safety Canada wants to ban the Flipper Zero: help us stop them"
 date: 2024-02-09T22:19:31-08:00
 author: lf-
-co-authors: Dontmindme
+co-authors: [Dontmindme, argonaut0]
 ---
 
-With contributions from the rest of Maple Bacon
+With contributions from all of Maple Bacon.
 
 ## Background
 
@@ -65,7 +65,7 @@ This ban lets auto manufacturers get away with having bad security while banning
 
 ### This ban will impact Vancouver's role as a technology hub, as well as other Canadian cities
 
-Vancouver is internationally recognized as a place for collaboration on technology and cybersecurity. Pwn2Own, a world-renowned international cybersecurity challenge held annually at the CanSecWest conference in Vancouver for the past 15 years, is one example of how Vancouver plays a leading role in cybersecurity innovation. Banning the Flipper Zero, which is commonly used by attendees at Pwn2Own in Vancouver and by cybersecurity experts in general, will put pressure on this conference and others to leave Canada for the United States, and further accelerate the brain drain of Canadian talent.
+Vancouver is internationally recognized as a place for collaboration on technology and cybersecurity. Pwn2Own, a world-renowned international cybersecurity challenge held annually at the CanSecWest conference in Vancouver for the past 15 years, is just one example of how Vancouver plays a leading role in cybersecurity innovation. Banning the Flipper Zero, which is commonly used by attendees at Pwn2Own in Vancouver and by cybersecurity experts in general, will put pressure on this conference and others to leave Canada for the United States, and further accelerate the brain drain of Canadian talent.
 
 ## Party specific messaging
 
