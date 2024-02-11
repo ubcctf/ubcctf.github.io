@@ -2,8 +2,11 @@
 layout: post
 title: "Public Safety Canada wants to ban the Flipper Zero: help us stop them"
 date: 2024-02-09T22:19:31-08:00
-author: team
+author: lf-
+co-authors: Dontmindme
 ---
+
+With contributions from the rest of Maple Bacon
 
 ## Background
 
@@ -120,8 +123,3 @@ House of Commons<br/>
 Ottawa, Ontario<br/>
 Canada<br/>
 K1A 0A6
-
-## Authors
-
-- [Jade Lovelace](https://jade.fyi)
-- [Ray Hua](https://github.com/rayhua12)
