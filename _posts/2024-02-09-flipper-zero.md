@@ -49,7 +49,7 @@ It is also a key principle in cybersecurity that security by obsurity is not sec
 
 The Flipper Zero is made out of generic chips costing less than $10, which are exactly the same as the ones used in consumer products with wireless functionality, such as smart light bulbs, garage door openers, and possibly even some cars. Criminals can make purpose-built devices that do the same thing for the purposes of stealing insecure cars or committing other crimes, using these same chips in a new design.
 
-It is very easy to build electronics these days, which is fantastic for innovation. But, this also means that if something is insecure and can be exploited with simple hardware, such hardware is cheap to make. We estimate that a custom device with equivalent wireless functionality to the Flipper could be built as a one-off prototype for $150, and less in higher quantities.
+It is very easy to build electronics these days, which is fantastic for innovation. But, this also means that if something is insecure and can be exploited with simple hardware, such hardware is cheap to make. We estimate that a custom device with equivalent wireless functionality to the Flipper could be built as a one-off prototype for less than $150, and less in higher quantities; notably less than the Flipper itself that sells for $200.
 
 The issue with car theft observed is that the cars are insecure. The situation with cars that have this issue is like if they had locks on them that could be opened by a regular screwdriver. We can't ban screwdrivers, the problem here is that the cars' locks should not be possible to open with a screwdriver.
 
@@ -59,13 +59,13 @@ We cannot ban the chips either because they have a huge number of non-malicious 
 
 It will likely be proposed to use the Radiocommunications Act to regulate the chips in the Flipper Zero, otherwise known as software defined radios. SDRs are used in almost every aspect of our daily lives. From phones and drones to industrial control systems and access control systems, it would be impossible to craft amendments to the Radiocommunications Regulations that would stop the sale of malicious products and allow these legitimate products, *because they are one and the same*. 
 
-### It is letting the automakers off the hook while harming the right to repair they have spent decades fighting.
+### It is letting the automakers off the hook for bad security while handing them wins in damaging the right to repair
 
 It is interesting and worth mentioning that this ban lets automakers get away with having bad and cheap security, while banning tools that would allow individuals to repair and modify their vehicles outside of the manufacturer monopoly, something the manufacturers have been fighting for decades. 
 
-### (This might be convincing to Vancouver area MPs?) This Ban will impact Vancouver's role as a technology hub.
+### (For Vancouver MPs) This ban will impact Vancouver's role as a technology hub
 
-Vancouver is recognized as a place for international collaboration on technology and cybersecurity. Pwn2Own, a world-renowned international cybersecurity challenge held at the CanSecWest conference, is one example of why cybersecurity experts around the world know that Vancouver plays and can play a leading role in future cybersecurity innovation. Banning the Flipper Zero, which is commonly used by attendees at Pwn2Own in Vancouver and by cybersecurity experts in general, will undoubtedly cause this 15 year conference to leave Canada for the United States, and further accelerate the brain drain of Canadian and Vancouverite talent, to the US. 
+Vancouver is recognized as a place for international collaboration on technology and cybersecurity. Pwn2Own, a world-renowned international cybersecurity challenge held at the CanSecWest conference, is one example of why cybersecurity experts around the world know that Vancouver plays and can continue to play a leading role in future cybersecurity innovation. Banning the Flipper Zero, which is commonly used by attendees at Pwn2Own in Vancouver and by cybersecurity experts in general, will risk this 15 year conference leaving Canada for the United States, and further accelerate the brain drain of Canadian and Vancouverite talent to the US. 
 
 ## Party specific messaging
 
