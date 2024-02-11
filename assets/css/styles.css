@@ -5,7 +5,7 @@
     --blue: #73ead3;
     --azure: #d2ffff;
     --header-color: #2b2b2b;
-    --background-color: #333333;
+    --background-color: #212121;
     --code-background-color: #272727;
 }
 
@@ -17,7 +17,7 @@ body {
     background-color: var(--background-color);
     font-family: 'Overpass Mono', monospace;
     font-variant-ligatures: none;
-    color: var(--azure);
+    color: #fff;
 }
 
 a {
