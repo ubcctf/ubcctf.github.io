@@ -11,8 +11,8 @@
     <link rel="me" href="https://mastodon.social/@maplebaconctf">
     <link href="https://fonts.googleapis.com/css?family=Inconsolata:700|Overpass+Mono" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
             onload='renderMathInElement(document.body, {delimiters: [
                     {left: "$$", right: "$$", display: true},
                     {left: "\\(", right: "\\)", display: false},
@@ -31,30 +31,7 @@
   </head>
   <body>
     <div id="container">
-
-      <header>
-        <nav>
-          {% assign pages = "about,getting_started,blog,members,competitive_team,challenge" | split: "," %}
-          {% for p in pages %}
-          <a href="/{{ p }}"{% if page.name contains p %} class="active"{% endif %}>{{ p }}</a>
-          {% endfor %}
-          <!-- <a href="https://ctf.maplebacon.org" >maplectf_2023</a> -->
-        </nav>
-        <div class="logo">
-          <a href="/">
-            <img src="/assets/images/logo.svg">
-          </a>
-        </div>
-        <div class="title-container">
-          <div class="title"><a href="/teamname"><span>Maple Bacon</span></a></div>
-          <div class="subtitle">
-            <span>
-              CTF Team at the University of British Columbia
-            </span>
-          </div>
-        </div>
-      </header>
-
+      {% include header.html %}
       <div class="content">
         {{ content }}
       </div>
