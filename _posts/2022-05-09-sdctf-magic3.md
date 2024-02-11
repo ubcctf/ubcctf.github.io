@@ -2,10 +2,8 @@
 layout: post
 title: "[SDCTF 2022] magic^3"
 author: desp
+co-authors: [alueft]
 ---
-
-This writeup is co-authored with [@alueft](../../../authors/alueft).
-<br><br>
 
 ## Challenge
 
@@ -26,7 +24,7 @@ This writeup is co-authored with [@alueft](../../../authors/alueft).
 <br><br><br>
 
 # Part 1: Reversing
-By [desp](../../../authors/desp)
+By [desp](/authors/desp)
 
 ## Magic is but an illusion
 Advanced technology might be indistinguishable from magic on the surface, but as a CTF team, we cannot settle with that notion - time to investigate how magical it truly is! Opening it up in IDA, we are greeted with quite a standard decompilation:
@@ -355,7 +353,7 @@ Staring at the graph also gave me zero inspiration - it is as if the computation
 <br><br><br>
 
 # Part 2: Logic and Rubik's Cube
-By [alueft](../../../authors/alueft)
+By [alueft](/authors/alueft)
 
 I started looking through the challenge and rewriting some of the brute-force code in C++, although I wasn't very optimistic about it running any faster. This was when I noticed multiple things:
 * the above adjacency graph was split into two symmetric-looking subgraphs;

@@ -3,7 +3,6 @@ short_name: rctcwyvrn
 name: Arctic
 position: Crypto
 website: https://rctcwyvrn.github.io/
-website_title: rctcwyvrn.github.io
 layout: author
 ---
 Resident cryptography and compiler witch
