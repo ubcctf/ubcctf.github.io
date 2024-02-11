@@ -7,11 +7,11 @@ title: About | CTF @ UBC
 
 Our team was initially formed by [Robert Xiao](https://www.robertxiao.ca/) in February 2019 shortly after he took his position in the CS department. Robert started playing CTFs during his PhD with the top team PPP. Since then he's competed in many high-tier CTFs including several [DEF CON](https://en.wikipedia.org/wiki/DEF_CON) CTF finals, which is a classic "Attack/Defence" CTF that attracts many of the world's most talented hackers.
 
-Since our team's formation, we've slowly attracted a core group of students and alumni that regularly play in CTF competitions. On average around 2-3 CTFs per month. Our mentality toward the competitions is usually casual, with a focus on learning and having fun, rather than competing. This means that there's <span style="white-space: nowrap">**no obligation**</span> on any of our team members to regularly participate.
+Since our team's formation, we've slowly attracted a core group of students and alumni that regularly play in CTF competitions. We very consistently play in a CTF each weekend, with exceptions around holidays and finals. Our mentality toward the competitions is usually casual, with a focus on learning and having fun, rather than competing. This means that there's **no obligation** on any of our team members to regularly participate.
 
-That being said, once we're in the competition and racing for flags, we usually get pretty into it.
+That being said, once we're in the competition and racing for flags, we get pretty into it.
 
-Our worldwide ranking and history can be found on [ctftime.org](https://ctftime.org/team/73723).
+Our worldwide ranking and history can be found on [ctftime.org](https://ctftime.org/team/73723). Some highlights are having won TamuCTF, b01lers CTF, and Cryptoverse CTF in 2022, winning b01lers CTF again in 2023, and having won DEF CON CTF in 2022 and 2023 in collaboration with [PPP](https://pwning.net/) and [The Duck](https://theori.io/) as the Maple Mallard Magistrates.
 
 We encourage any fellow **UBC students, faculty or alumni** to join in, no experience required. You can join our weekly meetings, ask questions, and introduce yourself if you wish. You may also join and participate in any CTF that we play together. We announce our plans to participate in upcoming CTFs on Discord.
 
@@ -35,9 +35,8 @@ There's no obligation to keep attending meetings or participating in CTFs after 
 # CTF competitions
 
 {% include image.html url="/assets/images/about/tm_finals_2019.jpg" description="Filip, Daniel, Tiger and Samson at the 2019 Trendmicro CTF finals in Tokyo, Japan" class="img-right" %}
-<!-- ![Tiger, Samson, Daniel and Filip at Trendmicro CTF finals in 2019](/assets/images/about/tm_finals_2019.jpg){:.img-right} -->
 
-We regularly participate in CTF competitions all throughout the year. We competed in 20 CTFs in 2019 and 45 in 2020.
+We regularly participate in CTF competitions all throughout the year. We competed in 20 CTFs in 2019, 45 in 2020, 56 in 2021 and 2022, and 40 in 2023.
 
 Once we decide to play in a CTF, there is no obligation to any of our team members that they must play.
 
@@ -127,7 +126,7 @@ Each and every challenge present in this category share a fundamental paradigm -
 
 ## Cryptography
 
-**Cryptography** literally translates to the art of writing ciphers and secret codes. It's because of cryptography that we can send senstive data over the web. In many cases, crypto is the brute powerhouse protecting most of our data online - our passwords, our banking information, anything involving the transmission of sensitive information. However, not everything is without its flaws, and cryptographic-related CTF challenges seek to showcase this - involving the breaking of popular encryption schemes that were not properly implemented.
+**Cryptography** literally translates to the art of writing ciphers and secret codes. It's because of cryptography that we can send sensitive data over the web. In many cases, crypto is the brute powerhouse protecting most of our data online - our passwords, our banking information, anything involving the transmission of sensitive information. However, not everything is without its flaws, and cryptographic-related CTF challenges seek to showcase this - involving the breaking of popular encryption schemes that were not properly implemented.
 
 Cryptography relies on the understanding of its base mathematical principles, which can be rigorous. But don't be daunted by that - many challenges in the crypto category will utilize some piece of flawed logic that you can exploit to crack the encryption scheme wide open. It's a matter of understanding the encryption rules in order to break them.
 
@@ -142,9 +141,9 @@ Forensics is a unique category involving clever manipulation of static file form
 
 
 ## Misc
-Everything not under the 5 categories above will map to the **Misc** category. As such, the miscellaneous category is broad in scope and can touch on many different topics.
+Everything not under the five categories above will map to the **Misc** category. As such, the miscellaneous category is broad in scope and can touch on many different topics.
 
 
 ## What category should I focus on?
 
-Whichever one your heart desires! We don't enforce any policy that would dictate what category you should develop skills in. Some people may find they like cryptography over binary exploits, or reverse engineering over web application security. We encourage everyone to explore and learn what they like, wether that be one or two specific categories, or an overall understanding of all categories.
+Whichever one your heart desires! We don't enforce any policy that would dictate what category you should develop skills in. Some people may find they like cryptography over binary exploits, or reverse engineering over web application security. We encourage everyone to explore and learn what they like, whether that be one or two specific categories, or an overall understanding of all categories.

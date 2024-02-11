@@ -5,9 +5,9 @@ title: Getting Started | CTF @ UBC
 
 # Getting Started
 
-This page is meant as a first steps introduction to get you into your CTF journey. There are many online resources related to CTFs and so this page aims to present an effective approach to improving your CTF skills, while also linking to good resources along the way.
+This page is meant as a first steps introduction to get you into your CTF journey. There are many online resources related to CTFs, and so this page aims to present an effective approach to improving your CTF skills, while also linking to good resources along the way.
 
-The best way to learn is to solve challenges, get stuck, google things, make progress, get stuck again, ask questions, get flag, repeat. You will pick up knowledge, skills and tools along the way.
+The **best way to learn** is to approach challenges, get stuck, google things, make progress, get stuck again, ask questions, get flag, repeat. You will pick up knowledge, skills and tools along the way.
 
 ## What are CTFs?
 
@@ -45,18 +45,18 @@ There are several tools that get used a lot for Linux-based pwn/reversing challe
 
 Check out the Cryptographer's Codex over at [crypto.maplebacon.org](https://crypto.maplebacon.org/), which has a compiled set of challenges, guides, and resources for learning cryptography. <span title="too lazy; didn't click">TL;DC</span>, check out the following resources:
 
-1. [cryptopals](https://cryptopals.com/): eight sets of challenges that provide a solid foundation in cryptography.
+1. [cryptopals](https://cryptopals.com/): Eight sets of challenges that provide a solid foundation in cryptography.
 
 2. [cryptohack](https://cryptohack.org/): An ever-growing collection of various cryptography problems. Scale well from introductory to quite challenging.
 
-If you're more of a textbook learner, both _Introduction to Modern Cryptography_ by Katz & Lindell and [_Crypto101_](https://raw.githubusercontent.com/crypto101/crypto101.github.io/master/Crypto101.pdf) by lvh are recommended reads. And once you feel you've got the basics down - there's nothing better than diving into CTFs for real!
+If you're more of a textbook learner, both [_Introduction to Modern Cryptography_](https://bibrrs.library.ubc.ca/vwebv/holdingsInfo?bibId=219554) by Katz & Lindell and [_Crypto101_](https://raw.githubusercontent.com/crypto101/crypto101.github.io/master/Crypto101.pdf) by lvh are recommended reads. And once you feel you've got the basics down - there's nothing better than diving into CTFs for real!
 
-## Web Application Security
+## Web Security
 
 Web exploits can be easy to get into, since many straightforward exploits don't require heavy tooling to work out. Consider these as a rough guideline of what to get into to get started into web.
 
 - Knowledge in scripting languages (Python is our favourite)
-- Foundational knowledge in Javascript, PHP and common web frameworks (nodeJS, Flask for Python, etc)
+- Foundational knowledge in Javascript, PHP and common web frameworks (NodeJS, Flask for Python, etc)
 - Understanding of common web protocols, such as HTTP, IP and DNS.
 - Having an understanding of RESTful APIs, and server-client interactions.
 
