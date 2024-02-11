@@ -1,7 +1,7 @@
 ---
 short_name: b
 name: Benson
-position: Infra
+position: DevOps
 website: https://bensonyang.com
 layout: author
 emeritus: true

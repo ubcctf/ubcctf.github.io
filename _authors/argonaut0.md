@@ -1,8 +1,8 @@
 ---
 short_name: argonaut0
-name: Jason
-position: Misc, Infra
-website: https://github.com/argonaut0/
+name: Jason Hsu
+position: Infra, Misc
+website: https://deciph.red
 layout: author
 ---
-JSON stands for JaSon Object Notation
+Doctor Help I Think My Brain Runs Kubernetes
