@@ -8,7 +8,6 @@ layout: default
   {% if author %}by <a href="{{ author.url }}">{{ author.name }}</a>{% endif %}{% if page.co-authors %}{% for co-author in page.co-authors %}{% if forloop.last %} and {% else %}, {% endif %}{% assign author = site.authors | where: 'short_name', co-author | first %}<a href="{{ author.url }}">{{ author.name }}</a>{% endfor %}{% endif %}
   <!-- ^^ this jekyll is all on one line so commas format properly -->
 </p>
-
-<br>
-
+<div class="post">
 {{ content }}
+</div>
