@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Public Safety Canada Wants to Ban the Flipper Zero: Help Us Stop Them"
+title: "Public Safety Canada wants to ban the Flipper Zero: help us stop them"
 date: 2024-02-09T22:19:31-08:00
 author: lf-
 co-authors: Dontmindme
@@ -27,25 +27,25 @@ We at Maple Bacon are requesting that you help us write to our representatives t
 [story2]: https://www.cbc.ca/news/canada/montreal/montreal-port-stolen-vehicles-1.6728490
 
 
-## Why is Banning the Flipper Zero a Bad Idea?
+## Why is banning the Flipper Zero a bad idea?
 
 When talking to politicans and officials, it's important to explain, in a short and **non-technical** manner, why banning the Flipper Zero is a bad idea. Here are some ideas of points to bring up.
 
 We request that you don't copy-paste our blog post into letters, but feel free to take information and points in your own writing.
 
-### Banning the Flipper Zero Harms the Right to Repair and Interoperability
+### Banning the Flipper Zero harms the Right to Repair and Interoperability
 
 Part of what the Flipper Zero does is allow individuals to intercept and analyze wireless signals transmitted from any device. This is vital in analyzing the information being sent over wireless signals, which is the first step in creating systems that allow *interoperability* between different electronic devices. It is also vital in analyzing and *repairing* broken systems and devices.
 
-Every single Federal Party has annouced their support for Right to Repair and Interoperability. Bill C-244 (which supports the Right to Repair) and Bill C-294 (which supports Interoperability) both passed the House of Commons *unanimously*. It is important to hold the parties to account on their continued support of these key principles. 
+Every single Federal Party has annouced their support for Right to Repair and Interoperability. Bill C-244 (which supports the Right to Repair) and Bill C-294 (which supports Interoperability) both passed the House of Commons *unanimously*. It is important to hold the parties to account on their continued support of these key principles.
 
-### Banning the Flipper Zero Harms Public Safety and National Security
+### Banning the Flipper Zero harms public safety and national security
 
 The Communication Security Establishment and the Canadian Center for Cybersecurity have both made it clear that Canada has a cybersecurity skills shortage. With foreign threats targeting everything from smart toothbrushes to water systems to our very democracy, Canada needs people with the skills to protect Canadians from cyber threats. However, this ban would take away from students and young people a valuable learning tool for developing the advanced technical skills needed to contribute to Canada's security.
 
 Remember that those engaging in criminal behavior will likely attempt to find ways around this ban, while law-abiding citizens will not. By taking away tools that allow law abiding experts to analyze and investigate devices ranging from cars to industrial control systems, the Government is allowing the "bad guys" to look for holes to exploit without letting the "good guys" do the same in order to fix them. If today's youths are to develop the skills needed to protect Canada's security tomorrow, the harm of this ban cannot be underestimated.
 
-### Banning the Flipper Zero Does Not Help Prevent Car Crimes (or Any Crimes)
+### Banning the Flipper Zero does not help prevent car crimes (or any crimes)
 
 The Flipper Zero is made out of generic chips costing less than $10, which are identical to the ones used in consumer products with wireless functionality such as smart light bulbs, and garage door openers. Criminals can make functionally identical devices using the same components for minimal cost.
 
@@ -55,19 +55,19 @@ The real issue with the current trend of car thefts is that the cars are insecur
 
 We cannot prevent people from building such devices by banning the chips either because they have a huge number of legitimate uses, and doing so would significantly hurt Canadian industry. Commercially availible consumer devices with the chips could equally be reprogrammed to send malicious data; there is no conceivable regulation scheme that would stop these from being used for stealing insecure cars.
 
-### It is Impossible to Craft a Regulation to Ban All SDR-Capable Devices Without Impacting Vital Systems
+### It is impossible to craft a regulation to ban all SDR-capable devices without impacting vital systems
 
-It will likely be proposed to use the Radiocommunications Act to regulate the chips in the Flipper Zero, otherwise known as Software Defined Radios (SDRs). SDRs are used in almost every aspect of our daily lives. From phones and drones to industrial control systems and access control systems, it would be impossible to craft amendments to the Radiocommunications Regulations that would stop the sale of so-called malicious products while allowing legitimate products, *because there is no physical difference between them*. 
+It will likely be proposed to use the Radiocommunications Act to regulate the chips in the Flipper Zero, otherwise known as Software Defined Radios (SDRs). SDRs are used in almost every aspect of our daily lives. From phones and drones to industrial control systems and access control systems, it would be impossible to craft amendments to the Radiocommunications Regulations that would stop the sale of so-called malicious products while allowing legitimate products, *because there is no physical difference between them*.
 
-### It is Letting Automobile Manufacturers Off the Hook while Harming the Right to Repair Movement that they have Spent Decades Fighting
+### It is letting automobile manufacturers off the hook while harming the Right to Repair movement that they have spent decades fighting
 
-This ban lets auto manufacturers get away with having bad security while banning tools that would allow individuals to repair and modify their vehicles outside of the manufacturer monopoly, something the manufacturers have been fighting for decades. 
+This ban lets auto manufacturers get away with having bad security while banning tools that would allow individuals to repair and modify their vehicles outside of the manufacturer monopoly, something the manufacturers have been fighting for decades.
 
-### This Ban will Impact Vancouver's Role as a Technology Hub, as well as other Canadian Cities
+### This ban will impact Vancouver's role as a technology hub, as well as other Canadian cities
 
-Vancouver is internationally recognized as a place for collaboration on technology and cybersecurity. Pwn2Own, a world-renowned international cybersecurity challenge held annually at the CanSecWest conference in Vancouver for the past 15 years, is one example of how Vancouver plays a leading role in cybersecurity innovation. Banning the Flipper Zero, which is commonly used by attendees at Pwn2Own in Vancouver and by cybersecurity experts in general, will put pressure on this conference and others to leave Canada for the United States, and further accelerate the brain drain of Canadian talent. 
+Vancouver is internationally recognized as a place for collaboration on technology and cybersecurity. Pwn2Own, a world-renowned international cybersecurity challenge held annually at the CanSecWest conference in Vancouver for the past 15 years, is one example of how Vancouver plays a leading role in cybersecurity innovation. Banning the Flipper Zero, which is commonly used by attendees at Pwn2Own in Vancouver and by cybersecurity experts in general, will put pressure on this conference and others to leave Canada for the United States, and further accelerate the brain drain of Canadian talent.
 
-## Party Specific Messaging
+## Party specific messaging
 
 Here is some messaging that connects to the platforms and views of each party.
 
@@ -79,7 +79,7 @@ Here is some messaging that connects to the platforms and views of each party.
 
 > Instead of forcing automobile manufacturers to step up and build cars that are actually hard to steal, Liberals would rather follow the lead of the automobile manufacturers and ban a tool that allows ordinary hobbyists analyze and understand the digital components of cars and trucks so they can safely and effectively repair and modify their vehicles, bypassing the manufacturer monopoly.
 
-## How to Send Messages to the Government
+## How to send messages to the Government
 
 The ideal way to send messages to the government is writing letters. They are much harder to ignore and imply more effort. You do not need to be a citizen to send letters to the government. It is possible to email as well.
 
@@ -89,7 +89,7 @@ Recommendation: write a letter that is relevant to multiple MPs and send copies 
 
 *No postage is required to send letters to Parliament.*
 
-### Who to Send Letters To
+### Who to send letters to
 
 - Your local MP. For Vancouver, these are:
     - Vancouver Centre: Hedy Fry (Liberal)
@@ -118,7 +118,7 @@ Recommendation: write a letter that is relevant to multiple MPs and send copies 
 
 [ourcommons]: https://www.ourcommons.ca/members/en
 
-#### Address of any MP in the House of Commons (Free Postage)
+#### Address of any MP in the House of Commons (free postage)
 
 [NAME OF MP]<br/>
 House of Commons<br/>
