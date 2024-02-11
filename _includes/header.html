@@ -1,9 +1,10 @@
 <header>
   <nav>
-    {% assign pages = "about,getting_started,blog,members,competitive_team,challenge" | split: "," %}
-    {% for p in pages %}
-    <a href="/{{ p }}"{% if page.name contains p %} class="active"{% endif %}>{{ p }}</a>
-    {% endfor %}
+    <a href="/about"{% if page.name contains 'about' %} class="active"{% endif %}>About</a>
+    <a href="/getting_started"{% if page.name contains 'getting_started' %} class="active"{% endif %}>Getting Started</a>
+    <a href="/blog"{% if page.name contains 'blog' %} class="active"{% endif %}>Blog</a>
+    <a href="/members"{% if page.name contains 'members' %} class="active"{% endif %}>Members</a>
+    <a href="/challenge"{% if page.name contains 'challenge' %} class="active"{% endif %}>Challenges</a>
     <!-- <a href="https://ctf.maplebacon.org" >maplectf_2023</a> -->
   </nav>
   <div class="logo">
