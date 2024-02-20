@@ -9,13 +9,7 @@ layout: default
 <h2>Posts</h2>
 <ul>
   {% for post in site.posts %}
-    {% if post.co-authors %}
-      {% assign authors = post.co-authors | push: post.author %}
-    {% else %}
-      {% assign authors = post.author %}
-    {% endif %}
-
-    {% if authors contains page.short_name %}
+    {% if post.author == page.short_name or post.co-authors contains page.short_name %}
       <li><a href="{{ post.url }}">{{ post.title }}</a></li>
     {% endif %}
   {% endfor %}
