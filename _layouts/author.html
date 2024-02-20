@@ -15,7 +15,7 @@ layout: default
       {% assign authors = post.author %}
     {% endif %}
 
-    {% if authors contains page.short_name %}
+    {% if authors == page.short_name %}
       <li><a href="{{ post.url }}">{{ post.title }}</a></li>
     {% endif %}
   {% endfor %}
