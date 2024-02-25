@@ -194,8 +194,9 @@ figure {
             margin-right: auto;
             text-align: center;
         }
-        logo {
+        .logo a img {
             margin: 10px auto;
+            width: 20vw;
         }
     }
 }
