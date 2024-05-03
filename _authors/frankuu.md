@@ -1,6 +1,6 @@
 ---
 short_name: frankuu
-name: Frank Yan
+name: frankuu
 position: Misc
 website: https://github.com/frankuyan
 layout: author
