@@ -45,7 +45,7 @@ Lets try to find cues to identify macro details of the location i.e. country, ad
 
 
 
-With the glarring white on red stop octogon being the 'Stop Sign' , we can tell that is based in North America, specifcally in an English speaking territory. Québec, being the uniquely French speaking province in Canada, we can rule out the possibility of it being in Québec.
+With the glarring white on red stop octogon being the 'Stop Sign' , we can tell that is based in North America, specifcally in an English speaking territory. Québec, being the uniquely French speaking province in Canada, have French signages of 'arrêt'. We can rule out the possibility of it being in Québec.
 
 
 
@@ -59,7 +59,7 @@ With the glarring white on red stop octogon being the 'Stop Sign' , we can tell 
 
 
 
-Additoinally, we can see the detailed high-visibility direction signs near the entrance/exit of the parking lot. In North America, as medical centers often span multiple buildings, clear and concise directions are necessary. They are also presented in high contrast colors (blue and white or red and white) for high visibility. Additionally, there are arrows to indicate direction at intersections. 
+Additoinally, we can see the detailed high-visibility direction signs near the entrance/exit of the parking lot. In North America, as medical centers often span multiple buildings, clear and concise directions are necessary. They are also presented in high contrast colors (blue and white or red and white) for high visibility. Additionally, there are arrows to point the way at intersections. 
 
 
 ![image](/assets/images/umdctf2024//image-copy-3.png)
@@ -78,7 +78,7 @@ or
 
 
 
-From this we can conclude that this is located in a fairly largel medical center in the region. Possibly with more than 300+ beds and attached with out-patient, emergency, rehabilitation, and surgical facilities.
+We can conclude that this is located at a fairly largel medical center in the region. Possibly with more than 300+ beds and attached with out-patient, emergency, rehabilitation, and surgical facilities.
 
 
 
@@ -86,7 +86,7 @@ From this we can conclude that this is located in a fairly largel medical center
 
 Now lets look for some other identifiers. 
 
-The newstand by the entrance of the building could provide some insight. Only the **"amp"** is visble in this newspaper or megazine dispenser.
+The newstand by the entrance of the building may provide some insight. Only the **"amp"** is visble in this newspaper or megazine dispenser.
 
 
 
@@ -160,7 +160,7 @@ Heading over on [WebMD](https://doctor.webmd.com/practice/baptist-health-eye-and
 
 
 
-We took the name 'best' doctor literally, as initially tried to submit the flag  with the names of the highest rated doctors, such as as ```UMDCTF{Christian_Cardell_Hester}```. It was not until after nearly 15 minutes of bruting through all of the doctors names that we realized the zero star rated "Dr. Sean Adonis Atreides."
+We took the name 'best' doctor literally, as we initially tried to submit the flags containing the names of the highest rated doctors, such as as ```UMDCTF{Christian_Cardell_Hester}```. It was not until after nearly 15 minutes of bruting through all of the doctors names that we realized the zero star rated "Dr. Sean Adonis Atreides."
 
 ```UMDCTF{Sean_Adonis_Atreides}``` unfortunately was not his full name. We scrambled to find the full name of the doctor, and going on Oklahoman Board of Medical Licensure and Supervision, we found that his full name is "Sean Paul Adonis Atreides".
 

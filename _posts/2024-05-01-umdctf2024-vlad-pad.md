@@ -34,7 +34,7 @@ Paul Atreides gets a message delivered by ornithopter late at night from Chani a
 
 We are given a Google Street View of a location. This time, we are looking for an IT company near by. 
 
-We can determine that on location is located in a English speaking developing country, based on the tropical architecture and the rental signs.  Broadly speaking, this narrows to India, Philippines, Malaysia. 
+We can determine that it is located in a English speaking developing country, based on the tropical architecture and the rental signs.  Broadly speaking, this narrows to India, Philippines, Malaysia. 
 
 As the people in the images look Southeast Asian, we can rule out India. Although the Northeastern Indian states (Assam, Manipur, etc) have a similar demographic, the architecture is not similar to the one in the image. 
 
