@@ -40,8 +40,7 @@ The challenge performs RSA with complex integers (Gaussian Integers: $\mathbb{Z}
 $\mathbb{Z}$. A Complex integer is a complex number $a + bi$ such that $a, b \in \mathbb{Z}$. 
 
 Fortunately, the logic behind the algorithm, Complex-RSA (CRSA), remains fairly familiar with a few caveats:
-- Since there's no real notion of a prime over the Complex Plane, we instead say that a Gaussian integer $w$ is prime if
-  and only if its norm is prime.
+- We say that a Gaussian integer $w$ is prime if its norm is prime.
     - "What's a norm?" In this case, consider a norm to be defined as $Re(w)^2 + Im(w)^2$. (This can be interpreted,
 -   geometrically, as the square of the point's distance from the origin) Once we generate our primes `p` and `q`, the
     rest of the process is the same as regular RSA. (I'm skipping over
@@ -174,6 +173,8 @@ n x n matrix with two exceptions:
 - All the elemwents in our lattice are integers
 - The Span of our vectors refers to just the *integer* linear combinations. (Instead of real coefficients for matrices).
 
+To clarify: We will exclusively be talking about integer lattices, hereby referred to as just lattices.
+
 Like a matrix, we can put express our polynomial f(Rx) in the form of a row vector. In fact, you've already seen this
 before in the form of our coefficient vectors. 
 
@@ -182,6 +183,7 @@ before in the form of our coefficient vectors.
 
 We can create a matrix using some of our polynomials in $F$ where each row is a polynomial and each column is represents
 the coefficients of a power of $x$. We can create a matrix using the polynomials $g(x) = N$, $f(Rx)$, $[f(Rx)]^2$.
+
 
 ![](/assets/images/sdctf-2024/reallycomplexproblem/3x3_lattice.png) 
 
