@@ -4,7 +4,7 @@ title: "Maple Bacon Beginner crypto"
 author: rctcwyvrn
 hide: "true"
 ---
-Normally beginner cryptography challenges involve simple alphabetic substituion ciphers, which are fine but also completely irrelevant in the modern day. I think that's a shame because there exist easy beginner challenges that are also _breaking real world cryptography_.
+Normally beginner cryptography challenges involve simple alphabetic substitution ciphers, which are fine but also completely irrelevant in the modern day. I think that's a shame because there exist easy beginner challenges that are also _breaking real world cryptography_.
 
 Why is that? Modern cryptography is excellent and extremely secure, however it it has a major flaw.
 
@@ -22,9 +22,9 @@ AES is the [Advanced Encryption Standard](https://en.wikipedia.org/wiki/Advanced
 
 CTR refers to the mode of operation. Most messages are not exactly 16 bytes long, and you want to be able to encrypt variable length messages. Different modes of operation give you ways to deal with variable length messages.
 
-To explain CTR it's best to start with the one time pad. Did you know there exists a cipher that is **impossible** to crack? Not like it will take you a million years but that even given infinite time it is _impossible_ to break. It's called the [one time pad](https://en.wikipedia.org/wiki/One-time_pad) and it's incredibly simple. Just XOR your message with a stream of perfectly random bytes. 
+To explain CTR it's best to start with the one time pad. Did you know there exists a cipher that is **impossible** to crack? Not like it will take you a million years but that even given infinite time it is _impossible_ to break. It's called the [one time pad](https://en.wikipedia.org/wiki/One-time_pad) and it's incredibly simple. Just XOR your message with a stream of perfectly random bytes.
 
-Why it's perfectly secure is actually pretty simple is left as an exercise to the reader but it brings this powerful idea that XOR is actually a very secure way to encrypt your messages, and it's this idea that is crucial for how CTR mode works. There's also a big hint in it's name, one time pad, you can only use this stream of bytes _once_ if you want it to be secure. 
+Why it's perfectly secure is actually pretty simple is left as an exercise to the reader but it brings this powerful idea that XOR is actually a very secure way to encrypt your messages, and it's this idea that is crucial for how CTR mode works. There's also a big hint in it's name, one time pad, you can only use this stream of bytes _once_ if you want it to be secure.
 
 So now lets talk CTR.
 
@@ -42,14 +42,14 @@ Ok so what happens if you use the same nonce and key for multiple messages?
 
 Well AES-CTR will encrypt the same counter with the same key, meaning each message will be encrypted with identical keystreams.
 
-So if we have messages `m1`, `m2`, `m3`, and keystream `K`, the three ciphertexts will be 
+So if we have messages `m1`, `m2`, `m3`, and keystream `K`, the three ciphertexts will be
 - `c1 = m1 XOR K`
 - `c2 = m2 XOR K`
 - `c3 = m3 XOR K`
 
 Well what's the problem? Well consider the first byte of the three ciphertexts.
 
-The first byte of `c1` will be the first byte of `m1` xor'd with the first byte of `K`, and same for `c2` and `c3`. 
+The first byte of `c1` will be the first byte of `m1` xor'd with the first byte of `K`, and same for `c2` and `c3`.
 
 But we know two important pieces of information here
 1. All the messages contain english text
@@ -69,7 +69,7 @@ How do we score english characters? You have two options
 (Note: I tested both, they should both work)
 
 Now you try!
-- [gen.py](/assets/challenges/beginner-crypto/gen.py) was used to encrypt `secret.txt` to generate [secret.enc](/assets/challenges/beginner-crypto/secret.enc)
-- `secret.txt` contains the flag along with enough english text to make this attack feasible 
+- [gen.py](/assets/1337-2021/crypto/gen.py) was used to encrypt `secret.txt` to generate [secret.enc](/assets/1337-2021/crypto/secret.enc)
+- `secret.txt` contains the flag along with enough english text to make this attack feasible
 
 Hint: Beware of uppercase/lowercase!

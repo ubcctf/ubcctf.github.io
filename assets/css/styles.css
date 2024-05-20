@@ -1,0 +1,209 @@
+@import "gruvbox.css";
+
+:root {
+    --red: #ed5454;
+    --blue: #73ead3;
+    --azure: #d2ffff;
+    --header-color: #2b2b2b;
+    --background-color: #212121;
+    --code-background-color: #272727;
+    --text-color: #fff;
+}
+
+html {
+    font-size: 1.25em;
+}
+
+body {
+    background-color: var(--background-color);
+    font-family: 'Cantarell', sans-serif; /*'Comic Mono', 'Lato', 'Noto Sans', 'Helvetica'; */
+    font-variant-ligatures: none;
+    color: var(--text-color);
+}
+
+/* Header text */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lato', 'Noto Sans', sans-serif;
+}
+
+/* Centering and width */
+main {
+    margin: 0 auto;
+    max-width: 40em;
+}
+
+a {
+    color: var(--red);
+    text-decoration: underline;
+    &:hover {
+        /* color: #73ead3; */
+        filter: brightness(240%);
+    }
+}
+
+header a, footer a {
+    text-decoration: none;
+}
+
+h1 {
+    text-align: center;
+}
+
+.post h2 {
+    padding-top: 1em;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-style: none;
+    vertical-align: middle;
+}
+
+blockquote {
+    font-style: italic;
+    border-left: 4px solid #ccc;
+    padding-left: 1em;
+}
+
+p > code, li > code {
+    background: var(--code-background-color);
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: var(--red);
+}
+
+.highlight {
+    overflow-x: scroll;
+    padding: 0 5px;
+}
+
+div.highlight, pre.highlight {
+    overflow-x: auto;
+}
+
+/* Very fancy header css */
+/* todo: simplify */
+header {
+    padding: 20px;
+    margin-bottom: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 0px;
+
+    .logo {
+        grid-column: 1 / 2;
+        grid-row: 1 / 4;
+        display: flex;
+        justify-content: center;
+        img {
+            height: 90px;
+        }
+        margin-top: 0.5em;
+    }
+    .title-container {
+        grid-column: 2 / 6;
+        grid-row: 2 / 4;
+        .title {
+            color: #ed5454;
+            font-size: 1.3rem;
+        }
+        .subtitle {
+            font-size: 1rem;
+        }
+    }
+    nav {
+        grid-column: 2 / 6;
+        grid-row: 1;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        font-size: 0.9rem;
+        a {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+}
+
+/* Centered footer */
+footer {
+    padding-top: 30px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Home page blurb */
+.description {
+    text-align: center;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    grid-column: 1 / 3;
+    h2 {
+        padding-top: 0;
+    }
+}
+
+/* Inline images: for use with {% include image.html %} */
+figure {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom-width: 10px;
+    figcaption {
+        text-align: center;
+        font-style: italic;
+        font-size: 0.85em;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    &.img-right {
+        width: 50%;
+        float: right;
+        margin: 10px 0px 10px 20px;
+    }
+    &.img-left {
+        width: 50%;
+        float: left;
+        margin: 10px 20px 10px 0px;
+    }
+    &.img-top {
+        width: 50%;
+        margin: 10px auto;
+    }
+}
+
+/* Light theme: for those who prefer it (but we default to dark) */
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: var(--text-color);
+        color: var(--background-color);
+    }
+}
+
+/* Media queries: for small screens */
+@media (max-width: 700px) {
+    header {
+        display: flex;
+        flex-direction: column;
+        * {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        .logo a img {
+            margin: 10px auto;
+            width: 20vw;
+        }
+    }
+}
+
+/* Media queries: for mobile viewing */
+@media (max-width: 400px) {
+    body {
+        font-size: 0.75em;
+    }
+}

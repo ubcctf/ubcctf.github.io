@@ -2,7 +2,7 @@
 layout: post
 title: "[SecurinetQuals2K21] kill_shot"
 author: Green-Avocado
-co-author: Kevin Zhang
+co-authors: Kevin Zhang
 ---
 
 # kill_shot

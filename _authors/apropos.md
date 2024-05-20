@@ -1,9 +1,8 @@
 ---
 short_name: apropos
 name: JJ
-position: Web, Forensics, Misc
-website: https://j-james.me
-website_title: j-james.me
+position: Misc, Web, Rev
+website: https://apropos.codes
 layout: author
 ---
 

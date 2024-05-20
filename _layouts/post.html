@@ -3,25 +3,11 @@ layout: default
 ---
 <h1>{{ page.title }}</h1>
 <p>
-    {{ page.date | date_to_string }}
-    by <em>{% assign author = site.authors | where: 'short_name', page.author | first %}</em>
-    {% if author %}
-      - <a href="{{ author.url }}">{{ author.name }}</a>
-    {% endif %}
+  {{ page.date | date_to_string }}
+  {% assign author = site.authors | where: 'short_name', page.author | first %}
+  {% if author %}by <a href="{{ author.url }}">{{ author.name }}</a>{% endif %}{% if page.co-authors %}{% for co-author in page.co-authors %}{% if forloop.last %} and {% else %}, {% endif %}{% assign author = site.authors | where: 'short_name', co-author | first %}<a href="{{ author.url }}">{{ author.name }}</a>{% endfor %}{% endif %}
+  <!-- ^^ this jekyll is all on one line so commas format properly -->
 </p>
-
-<p></p>
-{% if page.co-authors %}
-  {% for co-author in page.co-authors %}
-    {% if forloop.first %}
-      co-authors: {{ co-author }}
-    {% else %}
-      ,{{ co-author }}
-    {% endif %}
-  {% endfor %}
-{% endif %}
-</p>
-
-<br>
-
+<div class="post">
 {{ content }}
+</div>

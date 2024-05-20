@@ -4,22 +4,10 @@ title: Members
 ---
 <h1>Members</h1>
 
+<h2>Active Members</h2>
 <ul>
   {% for author in site.authors %}
-  {% if author.former_captain == true %}
-  <li>
-    <h2><a href="{{ author.url }}">{{ author.name }}</a></h2>
-    <h3>Former Leader</h3>
-    <h3>{{ author.position }}</h3>
-    <p>{{ author.content | markdownify }}</p>
-  </li>
-  {% endif %}
-  {% endfor %}
-</ul>
-
-<ul>
-  {% for author in site.authors %}
-  {% if author.captain == true %}
+  {% if author.captain == true and author.emeritus != true %}
   <li>
     <h2><a href="{{ author.url }}">{{ author.name }}</a></h2>
     <h3>Team Captain</h3>
@@ -28,11 +16,33 @@ title: Members
   </li>
   {% endif %}
   {% endfor %}
+
+  {% for author in site.authors %}
+  {% if author.captain != true and author.emeritus != true %}
+  <li>
+    <h2><a href="{{ author.url }}">{{ author.name }}</a></h2>
+    <h3>{{ author.position }}</h3>
+    <p>{{ author.content | markdownify }}</p>
+  </li>
+  {% endif %}
+  {% endfor %}
 </ul>
 
+<h2>Emeritus</h2>
 <ul>
   {% for author in site.authors %}
-  {% if author.captain != true and author.former_captain != true %}
+  {% if author.captain == true and author.emeritus == true %}
+  <li>
+    <h2><a href="{{ author.url }}">{{ author.name }}</a></h2>
+    <h3>Former Captain</h3>
+    <h3>{{ author.position }}</h3>
+    <p>{{ author.content | markdownify }}</p>
+  </li>
+  {% endif %}
+  {% endfor %}
+
+  {% for author in site.authors %}
+  {% if author.emeritus == true and author.captain != true %}
   <li>
     <h2><a href="{{ author.url }}">{{ author.name }}</a></h2>
     <h3>{{ author.position }}</h3>

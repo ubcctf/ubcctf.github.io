@@ -1,8 +1,8 @@
 ---
 short_name: b
 name: Benson
-position: MapleCTF infra
+position: DevOps
 website: https://bensonyang.com
-website_title: bensonyang.com
 layout: author
+emeritus: true
 ---
