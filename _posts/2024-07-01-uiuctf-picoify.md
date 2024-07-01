@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[UIUCTF 2024] Picoify (100-500)"
+title: "[UIUCTF 2024] Picoify (500)"
 author: Robert Xiao
 ---
 
