@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[nahamconCTF 2024] Helpful Desk"
+title: "[NahamCon CTF 2024] Helpful Desk"
 author: edaigle
 ---
 
