@@ -13,7 +13,6 @@ Developing these skills requires dedicated practice and commitment. For that rea
 ### How it works
 
 Our competitive team focuses on training and achieving high rankings in important and recognized CTFs, such as DEFCON and various qualifying competitions.
-
 1. We play in CTFs weekly or bi-weekly, with a focus on more established competitions.
 2. After the weekend CTF ends, we pick out a few unsolved challenges and work through them in groups over the span of the week. If we didn't play in a live competition that week, we look at reputable CTFs from past years.
 3. During Tuesday meetings, we demo our solutions to these past challenges. This can be a week or two weeks after the CTF, not the Tuesday immediately following.
@@ -35,5 +34,3 @@ Although we don't have a minimum "hours/week", **we expect that you**:
 
 
 **Note: you must be verified in our [Discord server](https://discord.gg/keeTZsmfVA) as a UBC student**
-
-### <big>Apply here:</big> [https://ubc.ca1.qualtrics.com/jfe/form/SV_eYgWM549uxxoMdM](https://ubc.ca1.qualtrics.com/jfe/form/SV_eYgWM549uxxoMdM)
