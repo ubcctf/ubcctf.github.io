@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 2022 1337 Challenges | CTF @ UBC
+title: 2024 1337 Challenges | CTF @ UBC
 ---
 
 # Maple Bacon 1337 Challenges
@@ -74,7 +74,7 @@ my flag got chopped into three pieces and i forgot the password to my web server
 
 ### Files
 
-[leet-web-dist.zip](/assets/web/leet-web-dist.zip)
+[leet-web-dist.zip](/assets/1337-2024/web/leet-web-dist.zip)
 
 ### Resources
 
