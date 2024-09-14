@@ -24,6 +24,8 @@ Good luck!
 
 I found someone trying to counterfeit the maple bacon logo! something looks off, though...
 
+*Hint: if you look hard enough, you might find the original somewhere on this site...*
+
 ### Files
 
 - [bacon.lol](/assets/1337-2024/misc/bacon.lol)
