@@ -6,104 +6,93 @@ title: 2022 1337 Challenges | CTF @ UBC
 # Maple Bacon 1337 Challenges
 ---
 
-**Thanks for trying out this year's 1337 challenges! Although the 1337 role is no longer obtainable, you can find all challenge files and resources below.**
-
-
 All flags will begin with the prefix `maple{`. You can find last year's challenges [here](challenge-2021.md).
 
-**Note**: Some challenges will require you to connect to a remote server. Netcat (abbreviated as `nc`) is a simple tool installable on Mac/Linux that makes this easy: connect to a server with `nc <ip> <port>`. Netcat is used mainly for remote, text-based connections. For example, entering the command `nc 1337.maplebacon.org 4000` in your terminal will let you interact with the first part of the Miscellaneous challenge.
+**Note**: Some challenges will require you to connect to a remote server. Netcat (abbreviated as `nc`) is a simple tool installable on Mac/Linux that makes this easy: connect to a server with `nc <ip> <port>`. Netcat is used mainly for remote, text-based connections. For example, entering the command `nc 1337.maplebacon.org 1337` in your terminal will let you interact with the first part of the Pwn challenge.
 
 If you're using Windows, we highly recommend installing [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install) - feel free to ask for help if you're having trouble setting anything up.
 
-These 1337 challenges are designed to be **approachable by beginners** - our goal is to make them slightly challenging, exposing you to new CTF concepts without requiring advanced technical knowledge. Challenges with some harder concepts have additional resources or guides associated with them that explain prerequisite knowledge you may need. **Remember**: if you get stuck, join us in the #1337-challenges channel on our [Discord](https://discord.gg/keeTZsmfVA) to receive hints and share ideas with others!
+These 1337 challenges are designed to be **approachable by beginners** - our goal is to make them slightly challenging, exposing you to new CTF concepts without requiring advanced technical knowledge. Challenges with some harder concepts have additional resources or guides associated with them that explain prerequisite knowledge you may need. **Remember**: if you get stuck, join us in the `#1337-challenges` channel on our [Discord](https://discord.gg/keeTZsmfVA) to receive hints and share ideas with others!
 
 Good luck!
 
-# Miscellaneous - The Return of 110
+---
 
-Author: [Arctic](/authors/rctcwyvrn/)
+# Misc - counterfeit
 
-Hey you. You're finally awake. You were trying to cross into second year, right? Walked right into that ambush, same as us, and that cpen student over there. Damn you Gregor. CPSC 110 was imperative until you came along. Programming was nice and easy.
+**Author:** [Lyndon](/authors/lydxn/)
 
-Part 1 will put you in a jail with no restrictions to let you get used to the basics. Connect with `nc 1337.maplebacon.org 4000`.
+I found someone trying to counterfeit the maple bacon logo! something looks off, though...
 
-Part 2 will put you in a jail with quite a few restrictions that you'll have to work around. Connect with `nc 1337.maplebacon.org 4001`.
+### Files
 
-**Submit the part 1 and part 2 flags together!** For example - if you get `maple{ab` for Part 1 and `cdef}` for Part 2, submit `maple{abcdef}` as one flag.
-
-### Files:
-- Part 1: [jail1.rkt](/assets/1337-2022/misc/jail1.rkt)
-- Part 2: [jail2.rkt](/assets/1337-2022/misc/jail2.rkt)
-
-If you have racket installed locally, use `racket -t jail1.rkt` to run the jail locally.
-
-See [our guide](/2022/11/jail-challenges-guide/) on what "jail challenges" are in CTFs!
-
-
-
-# Reversing - Rando
-
-Author: [Desp](/authors/desp/)
-
-This guy keeps taunting me for not being able to guess his flag :( Surely there's a better way to this, right?
-
-### Files:
-- [rando](/assets/1337-2022/rev/rando)
+- [bacon.lol](/assets/1337-2024/misc/bacon.lol)
 
 ### Resources
-- You likely would want to use a disassembler like [Ghidra](https://github.com/NationalSecurityAgency/ghidra) for your journey.
-- What is a disassembler you might ask? Check out a high level overview of what it does [here](/2022/11/reversing-guide/)!
-- To understand how a program works, it would be beneficial to understand how our machines themselves work - for a quick primer, here's a great [blog post](https://0x41.cf/reversing/2021/07/21/reversing-x86-and-c-code-for-beginners.html) by `0x41.cf` that touches on most of the low-level concepts involved!
 
-# Pwn - X86 Playground
+- See [Stego Tricks](https://book.hacktricks.xyz/crypto-and-stego/stego-tricks) for ways to hide information in data!
 
-Author: [Desp](/authors/desp/)
+---
 
-Let's see how creative you can be in coming up with shellcodes!
+# Rev - What...?
 
-Connect with `nc 1337.maplebacon.org 1337` and provide the payload you designed.
+**Author:** [Aditya Adiraju](/authors/hiswui/)
 
-### Files:
-- [playground](/assets/1337-2022/pwn/playground)
+This is screwing with my head.
 
+```
++[--------->++<]>+.++.--------.+++[++>---<]>.[------>+<]>-.+[->++++++<]>.[--->++<]>-.+++.--------------.-[->+++<]>-.+[--->+<]>+++.-----------.-[->++++<]>+.------------.-[->++++++<]>+.++++.--[----->+<]>.+++.--------------.-[->+++<]>-.-.+++++++++.---------.++..+.--.--[-->+++<]>--.+.[---->+++<]>..[-->+++++<]>.[----->++<]>-.---------.++[->+++<]>.+++++++++.+++.[-->+++++<]>+++.-[--->++<]>-.[--->+<]>---.-[--->++<]>-.+++++.-[->+++++<]>-.---[----->++<]>.+++[->+++<]>++.+++++++++++++.-------.--.--[->+++<]>-.----[->+++<]>.-------.+++++++++.++[++>---<]>.+[--->+<]>+++.---[->+++<]>..-[------>+<]>+.-[->++++++<]>+.-[-->+++<]>+..[->+++++<]>.++++++++...-----.++.-.++..++.-------.++.++++.+.-----..+.+.------.++.++.---..++++++++.---.+++.-----.+++++.--------.++++++.---.+++++..-.-.---.++.--.---.++++++.-------.+++++++.---.+++.------.-.>++++++++++.
+```
 
-### Resources
-- Binary exploitation (or pwn) has quite a bit of similarity with reversing - you might find the resources in the reversing challenge useful too.
-- Here are also some quick tools for prototyping shellcodes:
-  - [godbolt](https://godbolt.org/) for exploring how a function translates into assembly
-  - [defuse online x86 assembler](https://defuse.ca/online-x86-assembler.htm) for handwriting assembly into machine code
-- Don't be intimidated! The intended solution is very short and utilizes one specific aspect of low-level computing. You can ignore everything in the `handlefaults` function - they are only here to help the challenge run more smoothly.
+(Note: wrap the reversed output in `maple{reversed_text_here}`)
 
+---
 
+# Pwn - STOP COPYING ME!
 
-# Web - Cat Clickr
+**Author:** [Aditya Adiraju](/authors/hiswui/)
 
-Author: [JJ](/authors/apropos/)
+My program is hiding a secret from me. However, whenever I ask it a question, it just repeats it back to me :(
 
-hey everybody!! imade my first website and its AWESOME!!!
+Connect to remote using: `nc 1337.maplebacon.org 1337`.
 
-if u dig  closely u might even find some secrets...
+### Files
 
-check it out here: `1337.maplebacon.org`
-
-### Files:
-- [app.py](/assets/1337-2022/web/app.py)
-
-
-# Cryptography - The Matrix Exchange
-
-Author: [vEvergarden](/authors/vEvergarden/)
-
-Alice and Bob are having a great time exchanging their little secret messages... until they realize they're living in a simulation.
-
-Check out [our guide](/2022/11/diffie-hellman-guide/) for an introduction to Diffie-Hellman Key Exchange and a story of Alice and Bob's adventures!
-
-### Files:
-- [main.py](/assets/1337-2022/crypto/main.py)
-- [output.txt](/assets/1337-2022/crypto/output.txt)
+[chal.c](/assets/1337-2024/pwn/chal.c)
 
 ### Resources
-- A [great video](https://www.youtube.com/watch?v=NmM9HA2MQGI) from Computerphile that illustrates the Diffie-Hellman key exchange
-- A more [mathematical approach](https://www.youtube.com/watch?v=Yjrfm_oRO0w), the second part of the series by Computerphile
 
+- [Format specifiers](https://alonza.com.br/format-specifiers-in-c/) are great but I wonder what happens when you misuse them?
 
+---
+
+# Web - baple macon
+
+**Author:** [Ming C. Jiang](/authors/ming/)
+
+my flag got chopped into three pieces and i forgot the password to my web server pls help me retrieve them thx [http://1337.maplebacon.org](http://1337.maplebacon.org)
+
+### Files
+
+[leet-web-dist.zip](/assets/web/leet-web-dist.zip)
+
+### Resources
+
+- [What is a JWT?](https://jwt.io/introduction)
+
+# Crypto - MD5-CBC
+
+**Author:** [Lyndon](/authors/lydxn/)
+
+I just learned about MD5 and CBC today! I wonder what happens when you try and combine
+them. Someone told me my padding method is a little suspicious...
+
+### Files
+
+- [encrypt.py](/assets/1337-2024/crypto/encrypt.py)
+- [output.txt](/assets/1337-2024/crypto/output.txt)
+
+### Resources
+
+- MD5 is a common hash algorithm used in cryptography, see [here](https://www.youtube.com/watch?v=b4b8ktEV4Bg) and [here](https://en.wikipedia.org/wiki/MD5) for more information
+- [Wikipedia article](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_(CBC)) on CBC (cipher block chaining)
