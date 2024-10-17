@@ -2,7 +2,7 @@
 short_name: apropos
 name: JJ
 position: Misc, Web, Rev
-website: https://apropos.codes
+website: https://toki.la
 layout: author
 ---
 
