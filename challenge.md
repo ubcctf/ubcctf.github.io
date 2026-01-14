@@ -1,12 +1,12 @@
 ---
 layout: default
-title: 2024 1337 Challenges | CTF @ UBC
+title: 2026 1337 Challenges | CTF @ UBC
 ---
 
 # Maple Bacon 1337 Challenges
 ---
 
-All flags will begin with the prefix `maple{`. You can find last year's challenges [here](challenge-2021.md).
+All flags will begin with the prefix `maple{`. You can find last year's challenges [here](challenge-2024.md).
 
 **Note**: Some challenges will require you to connect to a remote server. Netcat (abbreviated as `nc`) is a simple tool installable on Mac/Linux that makes this easy: connect to a server with `nc <ip> <port>`. Netcat is used mainly for remote, text-based connections. For example, entering the command `nc 1337.maplebacon.org 1337` in your terminal will let you interact with the first part of the Pwn challenge.
 
@@ -18,83 +18,122 @@ Good luck!
 
 ---
 
-# Misc - counterfeit
+# Misc - backrooms
+
+**Author:** [Aden](/authors/adenc/)
+
+I got lost in the UBC backrooms... can you help me find my way out?
+
+You must find 3 pieces of information:
+1. What building was this image taken in? Format as the name of the building (not including the word "building") in PascalCase.
+2. What room is to the left of the camera? Write only the room number, exactly as printed on the sign.
+3. What room is to the right of the camera? Write only the room number, exactly as printed on the sign.
+
+The flag is in the following format: `maple{answer1_answer2_answer3}`
+
+### Files
+
+- [`backrooms.jpg`](/assets/1337-2026/misc/backrooms.jpg)
+
+---
+
+# Rev - SQL Heavy
+
+**Author:** [Aditya](/authors/hiswui/)
+
+Who said SQL cannot be a programming language?
+
+You can chosoe to run the file with:
+```sh
+$ sqlite3 < chall.sql
+```
+
+This is flag checker challenge. The challenge does not contain the flag, but rather takes a flag as an "input" and tells you whether you have the right flag or not. This challenge does not have a remote server. 
+
+### Files
+
+- [`chall.sql`](/assets/1337-2026/rev/chall.sql)
+
+---
+
+# Pwn - syrup
 
 **Author:** [Lyndon](/authors/lydxn/)
 
-I found someone trying to counterfeit the maple bacon logo! something looks off, though...
+M# pwn - syrup
 
-*Hint: if you look hard enough, you might find the original somewhere on this site...*
+mmm... buffer overflows are tasty
 
-### Files
+Note: there are 4 parts to this challenge. solving each one will give you 1/4 of the flag.
 
-- [bacon.lol](/assets/1337-2024/misc/bacon.lol)
+Remotes:
+- syrup0: `nc 1337.maplebacon.org 1337`
+- syrup1: `nc 1337.maplebacon.org 1338`
+- syrup2: `nc 1337.maplebacon.org 1339`
+- syrup3: `nc 1337.maplebacon.org 1340`
+- syrup4: `nc 1337.maplebacon.org 1341`
 
-### Resources
-
-- See [Stego Tricks](https://book.hacktricks.xyz/crypto-and-stego/stego-tricks) for ways to hide information in data!
-
----
-
-# Rev - What...?
-
-**Author:** [Aditya Adiraju](/authors/hiswui/)
-
-This is screwing with my head.
-
-```
-+[--------->++<]>+.++.--------.+++[++>---<]>.[------>+<]>-.+[->++++++<]>.[--->++<]>-.+++.--------------.-[->+++<]>-.+[--->+<]>+++.-----------.-[->++++<]>+.------------.-[->++++++<]>+.++++.--[----->+<]>.+++.--------------.-[->+++<]>-.-.+++++++++.---------.++..+.--.--[-->+++<]>--.+.[---->+++<]>..[-->+++++<]>.[----->++<]>-.---------.++[->+++<]>.+++++++++.+++.[-->+++++<]>+++.-[--->++<]>-.[--->+<]>---.-[--->++<]>-.+++++.-[->+++++<]>-.---[----->++<]>.+++[->+++<]>++.+++++++++++++.-------.--.--[->+++<]>-.----[->+++<]>.-------.+++++++++.++[++>---<]>.+[--->+<]>+++.---[->+++<]>..-[------>+<]>+.-[->++++++<]>+.-[-->+++<]>+..[->+++++<]>.++++++++...-----.++.-.++..++.-------.++.++++.+.-----..+.+.------.++.++.---..++++++++.---.+++.-----.+++++.--------.++++++.---.+++++..-.-.---.++.--.---.++++++.-------.+++++++.---.+++.------.-.>++++++++++.
-```
-
-(Note: wrap the reversed output in `maple{reversed_text_here}`)
-
----
-
-# Pwn - STOP COPYING ME!
-
-**Author:** [Aditya Adiraju](/authors/hiswui/)
-
-My program is hiding a secret from me. However, whenever I ask it a question, it just repeats it back to me :(
-
-Connect to remote using: `nc 1337.maplebacon.org 1337`.
 
 ### Files
 
-[chal.c](/assets/1337-2024/pwn/chal.c)
+- [`syrup.zip`](/assets/1337-2026/pwn/syrup.zip)
+- [`syrup4.zip`](/assets/1337-2026/pwn/syrup4.zip) (bonus challenge, same libc)
 
 ### Resources
 
-- [Format specifiers](https://alonza.com.br/format-specifiers-in-c/) are great but I wonder what happens when you misuse them?
+- [Buffer overflow](https://ctf101.org/binary-exploitation/buffer-overflow/)
+- [Return-Oriented Programming (ROP)](https://book.jorianwoltjer.com/binary-exploitation/return-oriented-programming-rop)
 
 ---
 
-# Web - baple macon
+# Forensics - maple signals
 
-**Author:** [Ming C. Jiang](/authors/ming/)
+**Author:** [Yana](/authors/yana/)
 
-my flag got chopped into three pieces and i forgot the password to my web server pls help me retrieve them thx [http://1337.maplebacon.org](http://1337.maplebacon.org)
+Hey, I am sending you my new sample. I know you have been waiting for a long time.
+It is not meant to be listened to like a normal track, but you’ll recognize what to do once you open it.
+Everything you need is already inside the sound - nothing extra.
+Handle it the same way we always do.
+
+Let me know when you get the message ;)
+
+**Details:**
+- Genre: experimental
+- Tempo: ~100 BPM
+- Key: doesn’t really matter, u will see it
 
 ### Files
 
-[leet-web-dist.zip](/assets/1337-2024/web/leet-web-dist.zip)
+- [`maple-signals.wav`](/assets/1337-2026/forensics/maple-signals.wav)
+
+
+# Web - pickle-adventure
+
+**Author:** [Aden](/authors/adenc/)
+
+Can you defeat King Pickle and save the world? Or will you take the throne for yourself?
+
+Remote is hosted at [http://leet.maplebacon.org:3000/](http://leet.maplebacon.org:3000/). 
+
+Download the code and run `docker compose up` to test locally first.
+
+### Files
+
+- [`pickle-adventure.zip`](/assets/1337-2026/web/pickle-adventure.zip)
 
 ### Resources
 
-- [What is a JWT?](https://jwt.io/introduction)
+- [Webhook.site](https://webhook.site)
 
-# Crypto - MD5-CBC
+
+# Crypto - leaky-otp
 
 **Author:** [Lyndon](/authors/lydxn/)
 
-I just learned about MD5 and CBC today! I wonder what happens when you try and combine
-them. Someone told me my padding method is a little suspicious...
+XOR encryption is all the craze these days, wonder why no one just uses addition...
+
+Connect to remote using: `nc 1337.maplebacon.org 31337`.
 
 ### Files
 
-- [encrypt.py](/assets/1337-2024/crypto/encrypt.py)
-- [output.txt](/assets/1337-2024/crypto/output.txt)
-
-### Resources
-
-- MD5 is a common hash algorithm used in cryptography, see [here](https://www.youtube.com/watch?v=b4b8ktEV4Bg) and [here](https://en.wikipedia.org/wiki/MD5) for more information
-- [Wikipedia article](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_(CBC)) on CBC (cipher block chaining)
+- [`server.py`](/assets/1337-2026/crypto/server.py)
