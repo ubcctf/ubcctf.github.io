@@ -60,8 +60,6 @@ This is flag checker challenge. The challenge does not contain the flag, but rat
 
 **Author:** [Lyndon](/authors/lydxn/)
 
-M# pwn - syrup
-
 mmm... buffer overflows are tasty
 
 Note: there are 4 parts to this challenge. solving each one will give you 1/4 of the flag.
