@@ -4,5 +4,7 @@ name: Dieter
 position: Misc
 website: https://github.com/frehlid
 layout: author
+emeritus: true
 ---
+
 Have you tried turning it on and off again?

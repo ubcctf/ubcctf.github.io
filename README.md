@@ -37,7 +37,7 @@ project dependencies locally.
 ```bash
 git clone https://github.com/ubcctf/ubcctf.github.io
 cd ubcctf.github.io
-bundle config path 'vendor/bundle' --local
+bundle config set path 'vendor/bundle' --local
 bundle install
 bundle exec jekyll <build|serve>
 ```
@@ -58,17 +58,17 @@ to automatically grab the proper Jekyll.
 
 Create a new file with the following contents at the path `_authors/{short_name}.md`:
 
-* `short_name`: Your alias, must match your author file name. No spaces. This will displayed on blog posts and the article list.
-* `name`: Your name or nickname for the about page.
-* `position`: Categories you play in. Can be any or multiple of the following, comma separated:
-    * Web
-    * Crypto
-    * Misc
-    * Rev
-    * Pwn
-* `website`: Link to your website or a social media account.
-* `website_title`: Pretty name of your website - the content within the \<a> tag.
-* `layout`: must be `author`
+- `short_name`: Your alias, must match your author file name. No spaces. This will displayed on blog posts and the article list.
+- `name`: Your name or nickname for the about page.
+- `position`: Categories you play in. Can be any or multiple of the following, comma separated:
+  - Web
+  - Crypto
+  - Misc
+  - Rev
+  - Pwn
+- `website`: Link to your website or a social media account.
+- `website_title`: Pretty name of your website - the content within the \<a> tag.
+- `layout`: must be `author`
 
 Template:
 
@@ -81,6 +81,7 @@ website: https://www.web.site
 website_title: web.site
 layout: author
 ---
+
 Some description.
 ```
 
@@ -90,9 +91,9 @@ Finally, open a PR.
 
 Create a new file with the following contents at the path `_posts/{yyyy}-{mm}-{dd}-{ctf_name}-{challenge_name}.md`:
 
-* `layout`: must be `author`
-* `title`: Name of your blog post, format is `"[{ctf_name}] {challenge_name}"`
-* `author`: Authors `short_name`. Author must already exist in `_authors/`, see [creating a new author](#creating-a-new-author).
+- `layout`: must be `author`
+- `title`: Name of your blog post, format is `"[{ctf_name}] {challenge_name}"`
+- `author`: Authors `short_name`. Author must already exist in `_authors/`, see [creating a new author](#creating-a-new-author).
 
 Template:
 
@@ -103,7 +104,7 @@ title: "[FakeCTF 2024] Challenge Name"
 author: hackerman
 ---
 
-Post contents support *markdown*!
+Post contents support _markdown_!
 ```
 
 If your post has any assets place them in `assets/` and link the path appropriately in the post contents.

@@ -4,5 +4,7 @@ name: Jason Hsu
 position: Infra, Misc
 website: https://deciph.red
 layout: author
+emeritus: true
 ---
+
 Doctor Help I Think My Brain Runs Kubernetes

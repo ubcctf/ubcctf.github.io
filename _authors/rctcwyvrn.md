@@ -4,7 +4,9 @@ name: Arctic
 position: Crypto
 website: https://rctcwyvrn.github.io/
 layout: author
+emeritus: true
 ---
+
 Resident cryptography and compiler witch
 
 Also cat

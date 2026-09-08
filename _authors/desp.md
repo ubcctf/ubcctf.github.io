@@ -4,5 +4,7 @@ name: desp
 position: Rev, Forensics
 website: https://despawningbone.me/
 layout: author
+emeritus: true
 ---
+
 Routinely spends way too much time trying to flip a few bits.

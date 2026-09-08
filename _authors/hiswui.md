@@ -1,7 +1,7 @@
 ---
 short_name: hiswui
 name: Aditya Adiraju
-position: Misc, Crypto
+position: Infra, Rev, Crypto
 website: https://github.com/aditya-adiraju
 layout: author
 ---

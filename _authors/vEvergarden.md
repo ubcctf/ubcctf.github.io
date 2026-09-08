@@ -5,5 +5,7 @@ position: Crypto, Misc
 website: https://kevinliu.me
 layout: author
 captain: true
+emeritus: true
 ---
+
 Cryptography? I only know of crypto(currency).
